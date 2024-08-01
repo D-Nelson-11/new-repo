@@ -9,8 +9,8 @@ function App() {
     <Routes>
       <Route element={<Nav/>}>
         <Route path="/" element={<IndexAR />} />
-        <Route path="/new-rep/AnalisisDeRed" element={<IndexAR />} />
-        <Route path="/new-rep/Personas" element={<IndexP />} />
+        <Route path="/new-repo/AnalisisDeRed" element={<IndexAR />} />
+        <Route path="/new-repo/Personas" element={<IndexP />} />
       </Route>
     </Routes>
   );
