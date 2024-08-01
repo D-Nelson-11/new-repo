@@ -98,7 +98,7 @@ function Cronometro() {
             if (aceptar){
               const resp = await axios.post('https://analisisderedapi.vesta-accelerate.com/api/CronometroCrudApi/Create',textAreaValue)
               if (resp.data.IsValid){
-                alert('enviado correctamente')
+                alert('enviado correctamentes')
               }
             }
           } catch (error) {
