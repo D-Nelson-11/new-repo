@@ -6,11 +6,11 @@ import IndexP from "./Persona/Index.jsx";
 
 function App() {
   return (
-    <Routes basename="/new-repo">
+    <Routes>
       <Route element={<Nav/>}>
         <Route path="/" element={<IndexAR />} />
-        <Route path="/AnalisisDeRed" element={<IndexAR />} />
-        <Route path="/Personas" element={<IndexP />} />
+        <Route path="/new-rep/AnalisisDeRed" element={<IndexAR />} />
+        <Route path="/new-rep/Personas" element={<IndexP />} />
       </Route>
     </Routes>
   );
