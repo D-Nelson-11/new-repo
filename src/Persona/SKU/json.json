@@ -1,0 +1,72 @@
+[
+  {
+    "SkuId": "",
+    "TipoEmbalajeId": "49ce84ba-3efd-40dc-905b-22cc50ef012e",
+    "UnidadMedida": "Pallet",
+    "UnidadesxEmbalaje": 1,
+    "PesoxPallet": 0,
+    "PesoxEmbalaje": 800,
+    "UnidadesxPallet": 0,
+    "PesoxEmbalajeProducto": 0.8,
+    "Largomm": 1,
+    "Anchomm": 1,
+    "Altomm": 1,
+    "UnidadMedidaId": 44
+  },
+  {
+    "SkuId": "",
+    "TipoEmbalajeId": "c6958aa7-9f7f-426b-aae8-20950b665e14",
+    "UnidadMedida": "Bultos",
+    "UnidadesxEmbalaje": 1,
+    "PesoxPallet": 0,
+    "PesoxEmbalaje": 800,
+    "UnidadesxPallet": 0,
+    "PesoxEmbalajeProducto": 0.8,
+    "Largomm": 1,
+    "Anchomm": 1,
+    "Altomm": 1,
+    "UnidadMedidaId": 44
+  },
+  {
+    "SkuId": "",
+    "TipoEmbalajeId": "4300448F-7EAC-4CB6-A54F-1DC21B800F2C",
+    "UnidadMedida": "Cajas",
+    "UnidadesxEmbalaje": 1,
+    "PesoxPallet": 0,
+    "PesoxEmbalaje": 0,
+    "UnidadesxPallet": 0,
+    "PesoxEmbalajeProducto": 0.8,
+    "Largomm": 0,
+    "Anchomm": 0,
+    "Altomm": 0,
+    "UnidadMedidaId": 1
+  },
+  {
+    "SkuId": "",
+    "TipoEmbalajeId": "",
+    "UnidadMedida": "Bolsas",
+    "UnidadesxEmbalaje": 0,
+    "PesoxPallet": 24.5,
+    "PesoxEmbalaje": 0,
+    "UnidadesxPallet": 0,
+    "PesoxEmbalajeProducto": 0.8,
+    "Largomm": 0,
+    "Anchomm": 0,
+    "Altomm": 0,
+    "UnidadMedidaId": 1
+  },
+  {
+    "SkuId": "",
+    "TipoEmbalajeId": "d25d5f79-feb1-40da-ba74-1da1b67333cd",
+    "UnidadMedida": "Laminas",
+    "UnidadesxEmbalaje": 1,
+    "PesoxPallet": 0,
+    "PesoxEmbalaje": 800,
+    "UnidadesxPallet": 0,
+    "PesoxEmbalajeProducto": 0.8,
+    "Largomm": 1,
+    "Anchomm": 1,
+    "Altomm": 1,
+    "UnidadMedidaId": 44
+  }
+]
