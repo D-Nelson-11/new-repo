@@ -20,8 +20,8 @@ function BarraNavegacion() {
         <Container>
           {/* <Navbar.Brand href="#home">Navbar</Navbar.Brand> */}
           <Nav className="me-auto">
-            <Nav.Link href="/new-repo/Personas">Personas</Nav.Link>
-            <Nav.Link href="/new-repo/AnalisisDeRed">Analisis de red</Nav.Link>
+            <Nav.Link href="/new-repo/#/Personas">Personas</Nav.Link>
+            <Nav.Link href="/new-repo/#/AnalisisDeRed">Analisis de red</Nav.Link>
             <Nav.Link href="">CFO</Nav.Link>
             <Nav.Link onClick={() => setLgShow(true)}>Ajustar Textos</Nav.Link>
           </Nav>
