@@ -8,9 +8,9 @@ function App() {
   return (
     <Routes>
       <Route element={<Nav/>}>
-        <Route path="/#/" element={<IndexAR />} />
-        <Route path="/#/AnalisisDeRed" element={<IndexAR />} />
-        <Route path="/#/Personas" element={<IndexP />} />
+        <Route path="/" element={<IndexAR />} />
+        <Route path="/AnalisisDeRed" element={<IndexAR />} />
+        <Route path="/Personas" element={<IndexP />} />
       </Route>
     </Routes>
   );
