@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://d-nelson-11.github.io/new-repo/",
+  "homepage": "https://d-nelson-11.github.io/new-repo/#",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
