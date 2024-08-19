@@ -20,6 +20,9 @@ export default function Sku() {
   let [btnForm2, setbBtnForm2] = useState();
   let [btnForm3, setbBtnForm3] = useState();
   let [btnForm4, setbBtnForm4] = useState();
+  const [skuCliente,setSkuCliente] = useState("");
+  const [skuProveedor,setSkuProveedor] = useState("");
+
 
   const handleTextAreaChange = (event) => {
     setTextArea(event.target.value);
@@ -33,6 +36,7 @@ export default function Sku() {
     setTextArea("");
     setDescripcion("");
     setCodigo("");
+    setCategoriaVestaId("")
   };
 
   return (
@@ -46,19 +50,31 @@ export default function Sku() {
               } else {
                 if (stage == '1') {
                   const aceptar = confirm(
-                    "¿seguro perrin?, la solicitud se va a hacer en PRODUCCION"
+                    "¿Realizar acción en PRODUCCION?"
                   );
                   if (aceptar){
-                    const resp = await axios.post('https://personasapi.vesta-accelerate.com/api/SkuInboundCliente/Create',values);
-                    console.log(resp);
+                    try {
+                      const resp = await axios.post('https://personasapi.vesta-accelerate.com/api/SkuInboundCliente/Create',values);
+                      setSkuCliente(resp.data.Message.Id);
+                      form4.setValue('SkuInboundClienteId',resp.data.Message.Id);
+                    } catch (error) {
+                      alert(error.response.data);
+                    }
                   }
                 }else{
                   const aceptar = confirm(
-                    "¿seguro perrin?, la solicitud se va a hacer en STAGE"
+                    "¿Realizar acción en STAGE"
                   );
                   if (aceptar){
-                    const resp = await axios.post('https://personasws.vestadev-accelerate.com/api/SkuInboundCliente/Create',values);
-                    console.log(resp);
+                    try {
+                      const resp = await axios.post('https://personasws.vestadev-accelerate.com/api/SkuInboundCliente/Create',values);
+                      setSkuCliente(resp.data.Message.Id);
+                      form4.setValue('SkuInboundClienteId',resp.data.Message.Id);
+                    } catch (error) {
+                      alert(JSON.stringify(error.response.data));
+                      console.log(error)
+                    }
+                    
                   }
                 }
               }
@@ -180,11 +196,39 @@ export default function Sku() {
         {/***************************SKU PROVEEDOR***************************************/}
         <div className="m-1 p-2 border border-1 rounded-2">
           <Form
-            onSubmit={form2.handleSubmit((values) => {
+            onSubmit={form2.handleSubmit(async(values) => {
               if (btnForm2 === 0) {
                 setTextArea(JSON.stringify(values, null, 2));
               } else {
-                alert("simon");
+                if (stage == '1') {
+                  const aceptar = confirm(
+                    "¿Realizar acción en  PRODUCCION?"
+                  );
+                  if (aceptar){
+                    try {
+                      const resp = await axios.post('https://personasapi.vesta-accelerate.com/api/SkuProveedor/Create',values);
+                      setSkuProveedor(resp.data.Message.Id);
+                      form4.setValue('SkuProveedorId',resp.data.Message.Id);
+                      form3.setValue('SkuId',resp.data.Message.Id)
+                    } catch (error) {
+                      alert(error);
+                    }
+                  }
+                }else{
+                  const aceptar = confirm(
+                    "¿Realizar acción en STAGE?"
+                  );
+                  if (aceptar){
+                    try {
+                      const resp = await axios.post('https://personasws.vestadev-accelerate.com/api/SkuProveedor/Create',values);
+                      setSkuProveedor(resp.data.Message.Id);
+                      form4.setValue('SkuProveedorId',resp.data.Message.Id);
+                      form3.setValue('SkuId',resp.data.Message.Id)
+                    } catch (error) {
+                      alert(error);
+                    }
+                  }
+                }
               }
             })}>
             <h5>2. SKU PROVEEDOR</h5>
@@ -324,7 +368,7 @@ export default function Sku() {
           className="m-1 p-2 border border-1 rounded-2"
           style={{ width: "35%" }}>
           <Form
-            onSubmit={form3.handleSubmit((values) => {
+            onSubmit={form3.handleSubmit(async(values) => {
               if (btnForm3 === 0) {
                 if (values.tipoEmbalaje == 1) {
                   const updatedJsonTipoEmbalaje = { ...jsonTipoEmbalaje[0] };
@@ -347,8 +391,22 @@ export default function Sku() {
                   updatedJsonTipoEmbalaje.SkuId = values.SkuId;
                   setTextArea(JSON.stringify(updatedJsonTipoEmbalaje, null, 2));
                 }
-              } else {
-                alert("simon");
+              }  else {
+                if (stage == '1') {
+                  const aceptar = confirm(
+                    "¿Realizar acción en  PRODUCCION?"
+                  );
+                  if (aceptar){
+                    try {
+                      const resp = await axios.post('https://personasapi.vesta-accelerate.com/api/SkuTipoEmbalaje/Create',textArea);
+                      alert('peticion hecha')
+                      console.log(resp)
+                    } catch (error) {
+                      alert(error);
+                      console.log(error)
+                    }
+                  }
+                }
               }
             })}>
             <h5>2. SKU TIPO EMBALAJE</h5>
@@ -361,6 +419,7 @@ export default function Sku() {
                   placeholder=""
                   size="sm"
                   {...form3.register("SkuId", { required: true })}
+                  value={skuProveedor}
                 />
               </Col>
               <Col>
@@ -421,11 +480,26 @@ export default function Sku() {
           style={{ width: "60%" }}>
           <h5>4. SKU CLIENTE-PROVEEDOR</h5>
           <Form
-            onSubmit={form4.handleSubmit((values) => {
+            onSubmit={form4.handleSubmit(async(values) => {
               if (btnForm4 === 0) {
                 setTextArea(JSON.stringify(values, null, 2));
-              } else {
-                alert("simon");
+              }else {
+                if (stage == '1') {
+                  const aceptar = confirm(
+                    "¿Realizar acción en  PRODUCCION?"
+                  );
+                  if (aceptar){
+                    try {
+                      const resp = await axios.post('https://personasapi.vesta-accelerate.com/api/SkuInboundClienteSkuProveedor/Create',values);
+                      console.log(resp);
+                      alert('peticion hecha')
+                    } catch (error) {
+                      alert(error);
+                      console.log(resp);
+
+                    }
+                  }
+                }
               }
             })}>
             <Row>
@@ -437,6 +511,7 @@ export default function Sku() {
                   placeholder=""
                   size="sm"
                   {...form4.register("SkuInboundClienteId", { required: true })}
+                  value={skuCliente}
                 />
               </Col>
               <Col>
@@ -447,6 +522,7 @@ export default function Sku() {
                   placeholder=""
                   size="sm"
                   {...form4.register("SkuProveedorId", { required: true })}
+                  value={skuProveedor}
                 />
               </Col>
             </Row>
@@ -497,9 +573,8 @@ export default function Sku() {
             onChange={(e) => {
               setStage(e.target.value);
             }}>
-            <option>Selecciona</option>
-            <option value="1">Produccion</option>
             <option value="0">Stage</option>
+            <option value="1">Produccion</option>
           </Form.Select>
         </div>
         <div style={{ width: "100%", height: "90%" }} className="">

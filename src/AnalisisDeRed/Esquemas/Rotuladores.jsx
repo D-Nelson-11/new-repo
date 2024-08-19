@@ -11,8 +11,7 @@ function Rotuladores() {
     const value = e.target.value;
     if (value === "1") {
       setOpcionRotuladores([
-        "Revisión",
-        "Liberación Post Revisión",
+        ["Revisión", "Liberación Post Revisión"],
         {
           EsquemaId: "string",
           Rotuladores: ["string"],
@@ -59,7 +58,7 @@ function Rotuladores() {
             <Form.Select
               aria-label="Default select example"
               {...register("esquemaNombre", { required: true })}>
-              {opcionRotuladores.map((element, i) => {
+              {opcionRotuladores[0].map((element, i) => {
                 return (
                   <option value={{}} key={i}>
                     {element}

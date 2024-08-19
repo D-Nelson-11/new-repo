@@ -4,6 +4,8 @@ import { Form, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import infoCronometro from "./Cronometro.json";
 import axios from '../../api/axios'
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 function Cronometro() {
   const { handleSubmit, register, setValue } = useForm();
@@ -39,6 +41,24 @@ function Cronometro() {
 //       console.log(element.IdProveedor);
 //     });
 //   }, []);
+
+
+const exportToExcel = (data) => {
+  // Transformar el arreglo en un formato que pueda ser interpretado como una columna
+  const dataInColumns = data.map(item => [item]);
+
+  // Crear una nueva hoja de trabajo
+  const worksheet = XLSX.utils.aoa_to_sheet(dataInColumns);
+  
+  // Crear un nuevo libro de trabajo y agregar la hoja de trabajo
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Datos");
+
+  // Generar un archivo Excel y guardarlo
+  const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  const blob = new Blob([excelBuffer], { type: "application/octet-stream" });
+  saveAs(blob, 'datos.xlsx');
+};
 
   return (
     <div className="d-flex w-100 justify-content-between">
@@ -96,10 +116,11 @@ function Cronometro() {
           try {
             const aceptar = confirm('¿Enviar la petición?')
             if (aceptar){
-              const resp = await axios.post('https://analisisderedapi.vesta-accelerate.com/api/CronometroCrudApi/Create',textAreaValue)
-              if (resp.data.IsValid){
-                alert('enviado correctamentes')
-              }
+              const resp = await axios.get('http://torrecontrolws.grupovesta.net/api/HotTeamServiceApi/GetSitios',textAreaValue)
+              let datos = resp.data.map((item)=>{return item.SitioId})
+              exportToExcel(datos)
+
+
             }
           } catch (error) {
             alert(error)
