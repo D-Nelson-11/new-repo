@@ -1,18 +1,6 @@
 {
   "Esquemas": [
     {
-      "EsquemaId": "BE237A0F-39AE-4AA2-A54A-164158601631",
-      "SitioPorRutaId": "1EC069FC-89C1-4E3C-8C11-24C13F0B36CB",
-      "Orden": 1,
-      "ClienteId": "8092E57D-03A5-44D3-B271-0F27EBF3D818",
-      "ClienteNombre": "CORPORACION DINANT SA DE CV",
-      "Descripcion": "Inicio de Tramitador ",
-      "Requerido": true,
-      "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-      "EsquemaTramitador": true,
-      "TipoEventoId": ""
-    },
-    {
       "EsquemaId": "4D708BF5-9D3E-48E9-AB7C-14F5B438B360",
       "SitioPorRutaId": "1EC069FC-89C1-4E3C-8C11-24C13F0B36CB",
       "Orden": 2,
@@ -86,3 +74,4 @@
     }
   ]
 }
+
