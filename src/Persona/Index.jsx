@@ -2,6 +2,7 @@ import React from "react";
 import Cardss from "../components/Cardss";
 import { Container } from "react-bootstrap";
 import Sku from "./SKU/Sku";
+import Intransit from "./Intransit/Intransit";
 
 function Index() {
   return (

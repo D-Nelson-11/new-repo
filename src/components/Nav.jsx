@@ -20,56 +20,10 @@ function BarraNavegacion() {
         <Container>
           {/* <Navbar.Brand href="#home">Navbar</Navbar.Brand> */}
           <Nav className="me-auto">
-            <Nav.Link href="/new-repo/#/Personas">Personas</Nav.Link>
             <Nav.Link href="/new-repo/#/AnalisisDeRed">Analisis de red</Nav.Link>
-            <Nav.Link href="">CFO</Nav.Link>
-            <Nav.Link onClick={() => setLgShow(true)}>Ajustar Textos</Nav.Link>
+            <Nav.Link href="/new-repo/#/Intransit">Intransit</Nav.Link>
+            <Nav.Link href="/new-repo/#/Matriz">Matriz</Nav.Link>
           </Nav>
-
-          <Modal
-            size="lg"
-            show={lgShow}
-            onHide={() => setLgShow(false)}
-            aria-labelledby="example-modal-sizes-title-lg">
-            <Modal.Header closeButton />
-            <Modal.Body
-              className="d-flex justify-content-between"
-              style={{ height: "400px" }}>
-              <div className="w-50 m-1">
-                <Form
-                  className="h-100"
-                  onSubmit={handleSubmit((values) => {
-                    let array = values.cadena.split(" ");
-                    let perro = array.map((element, i) => {
-                      if (i == array.length - 1) {
-                        return (element = `'${element}'`);
-                      }
-                      return (element = `'${element}',`);
-                    });
-                    let stringArreglado = "";
-
-                    for (let i = 0; i < perro.length; i++) {
-                      stringArreglado += perro[i];
-                    }
-                    setTextArea(stringArreglado);
-                  })}>
-                  <textarea
-                    name=""
-                    style={{ width: "100%", height: "90%" }}
-                    {...register("cadena", { required: true })}></textarea>
-                  <Button className="w-100" variant="success" type="submit">
-                    Generar
-                  </Button>
-                </Form>
-              </div>
-              <div className="w-50 m-1">
-                <textarea
-                  style={{ width: "100%", height: "90%" }}
-                  value={textArea}
-                  onChange={handleTextAreaChange}></textarea>
-              </div>
-            </Modal.Body>
-          </Modal>
         </Container>
       </Navbar>
       <Outlet />
