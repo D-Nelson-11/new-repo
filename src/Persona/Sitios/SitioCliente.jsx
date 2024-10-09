@@ -2,7 +2,6 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "../../api/axios";
-import { datos } from "../../../../server/helper";
 
 function SitioCliente() {
   const { handleSubmit, register } = useForm();
