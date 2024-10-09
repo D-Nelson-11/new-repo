@@ -16,8 +16,10 @@ function Intransit() {
   const { handleSubmit, register, setValue } = useForm();
   let [textAreaValue, setTextAreaValue] = useState("");
   let [stage, setStage] = useState(0);
+  let [disabled , setDisabled] = useState(false);
 
   const onSubmit = async (values) => {
+    setDisabled(true);
     let IdsTipoRelacion = [];
     let IdsPersonasColab = [];
     let index = 0;
@@ -167,6 +169,7 @@ function Intransit() {
     }
     console.log('PASO 5 DE 5 EXITOSO ✔');
     setTextAreaValue("TODO CHEQUE CHELE ✔");
+    setDisabled(false);
   };
 
   return (
@@ -269,7 +272,7 @@ function Intransit() {
               </Form.Group>
             </Col>
           </Row>
-          <Button type="submit" className="w-100">
+          <Button type="submit" className="w-100" disabled={disabled}>
             Generar
           </Button>
         </Form>

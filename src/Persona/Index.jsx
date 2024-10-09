@@ -1,13 +1,12 @@
 import React from "react";
 import Cardss from "../components/Cardss";
 import { Container } from "react-bootstrap";
-import Sku from "./SKU/Sku";
-import Intransit from "./Intransit/Intransit";
+import SitioCliente from "./Sitios/SitioCliente";
 
 function Index() {
   return (
     <Container className="mt-5 d-flex">
-      <Cardss subModulo={"SKU"} Contenido={<Sku/>} Nombre="Crear" />
+      <Cardss subModulo={"Sitio Cliente Vesta"} Contenido={<SitioCliente/>} Nombre="Crear" />
     </Container>
   );
 }

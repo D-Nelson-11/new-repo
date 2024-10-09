@@ -5,6 +5,8 @@ import IndexAR from "./AnalisisDeRed/Index";
 import IndexP from "./Persona/Index.jsx";
 import Intransit from "./Persona/Intransit/Intransit.jsx";
 import Matriz from "./Matriz/Matriz.jsx";
+import Skus from "./Sku/Skus.jsx";
+import Sku from './Persona/SKU/Sku.jsx'
 
 function App() {
   return (
@@ -15,7 +17,8 @@ function App() {
         <Route path="/Personas" element={<IndexP />} />
         <Route path="/Intransit" element={<Intransit />} />
         <Route path="/Matriz" element={<Matriz />} />
-
+        <Route path="/Sku" element={<Sku />} />
+        {/* <Route path="/Skus" element={<Skus />} /> */}
       </Route>
     </Routes>
   );
