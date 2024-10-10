@@ -157,6 +157,16 @@ export default function Sku() {
                   }}
                 />
               </Col>
+              <Col>
+                <label htmlFor="" style={{ fontSize: "13px" }}>
+                  Presentacion
+                </label>
+                <Form.Control
+                  placeholder=""
+                  size="sm"
+                  {...form1.register("Presentacion")}
+                />
+              </Col>
             </Row>
             <Row>
               <Col className="d-flex justify-content-between">
