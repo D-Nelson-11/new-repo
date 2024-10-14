@@ -9,6 +9,8 @@ function SitioCliente() {
   const [tipoDeSitio, setTipoDeSitio] = useState([]);
   const [ciudades, setCiudades] = useState([]);
   const [loading, setLoading] = useState(true); // Estado de carga
+  const [tipoSitio, setTipoSitio] = useState(1);
+  let parsedResp = {};
 
   useEffect(() => {
     async function ObtenerDatos() {
@@ -38,44 +40,94 @@ function SitioCliente() {
   }, []); // Ejecutar solo una vez al montar el componente
 
   const onSubmit = async (data) => {
-    try {
-      let json = {
-        "Nombre": data.Nombre,
-        "Direccion": data.Direccion,
-        "Codigo": data.Codigo,
-        "PaisId": data.PaisId.split(',')[0],
-        "PaisDescripcion": data.PaisId.split(',')[1],
-        "CiudadId": data.CiudadId.split(',')[0],  
-        "CiudadDescripcion": data.CiudadId.split(',')[1],
-        "CoordenadaX": data.CoordenadaX,
-        "CoordenadaY": data.CoordenadaY,
-        "PersonaJuridicaClienteId": data.PersonaJuridicaClienteId,
-        "TipoDeSitioId": data.TipoDeSitioId.split(',')[0],
-        "TipoDeSitioDescripcion":  data.TipoDeSitioId.split(',')[1],
-        "TipoPersonaDestino": "3"
-      } 
-      console.log(json);
-      const resp = await axios.post("https://personasapi.vesta-accelerate.com/api/SitioClienteServiceApi/Create",json);
-      let parsedResp = JSON.parse(resp.data.Message);
-
-      let JsonSitioAr = {
-        "CoordenadaX": data.CoordenadaX,
-        "CoordenadaY": data.CoordenadaY,
-        "Nombre": data.Nombre,
-        "TipoSitioId": "string",
-        "SitioPersonaId": parsedResp.Id,
-        "CreatedBy": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-        "ClienteId": datos.PersonaJuridicaClienteId,
-        "ClienteNombre": "string",
-        "PaisId": datos.PaisId.split(',')[0],
-        "PaisNombre": datos.PaisId.split(',')[1],
-        "Url": "modelologisticoderedope.vesta-accelerate.com",
-        "SitioCodigo": data.Codigo,
-        "UsuarioAsignadoId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A"
+      if (tipoSitio == 1) {
+        try {
+          let json = {
+            Nombre: data.Nombre,
+            Direccion: data.Direccion,
+            Codigo: data.Codigo,
+            PaisId: data.PaisId.split(",")[0],
+            PaisDescripcion: data.PaisId.split(",")[1],
+            CiudadId: data.CiudadId.split(",")[0],
+            CiudadDescripcion: data.CiudadId.split(",")[1],
+            CoordenadaX: data.CoordenadaX,
+            CoordenadaY: data.CoordenadaY,
+            PersonaJuridicaClienteId: data.PersonaJuridicaClienteId,
+            TipoDeSitioId: data.TipoDeSitioId.split(",")[0],
+            TipoDeSitioDescripcion: data.TipoDeSitioId.split(",")[1],
+            TipoPersonaDestino: "3",
+          };
+          const resp = await axios.post("https://personasapi.vesta-accelerate.com/api/SitioClienteServiceApi/Create",json);
+          parsedResp = JSON.parse(resp.data.Message);
+          alert("Sitio cliente creado correctamente");
+        } catch (error) {
+          alert (error);
+        }
+      }else if (tipoSitio == 2) {
+        try {
+          let json = {
+            Nombre: data.Nombre,
+            Direccion: data.Direccion,
+            Codigo: data.Codigo,
+            PaisId: data.PaisId.split(",")[0],
+            PaisDescripcion: data.PaisId.split(",")[1],
+            CiudadId: data.CiudadId.split(",")[0],
+            CiudadDescripcion: data.CiudadId.split(",")[1],
+            CoordenadaX: data.CoordenadaX,
+            CoordenadaY: data.CoordenadaY,
+            PersonaProveedorId: data.PersonaProveedorId,
+            TipoDeSitioId: data.TipoDeSitioId.split(",")[0],
+            TipoDeSitioDescripcion: data.TipoDeSitioId.split(",")[1],
+            TipoPersonaDestino: "3",
+          };
+          console.log(json);  
+          const resp = await axios.post("https://personasapi.vesta-accelerate.com/api/SitioPersonaProveedorApi/Create",json);
+          parsedResp = JSON.parse(resp.data.Message);
+          alert("Sitio Proveedor creado correctamente");
+        } catch (error) {
+          alert (error);
+        }
+      }else{
+        try {
+          let json = {
+            Nombre: data.Nombre,
+            Direccion: data.Direccion,
+            Codigo: data.Codigo,
+            PaisId: data.PaisId.split(",")[0],
+            PaisDescripcion: data.PaisId.split(",")[1],
+            CiudadId: data.CiudadId.split(",")[0],
+            CiudadDescripcion: data.CiudadId.split(",")[1],
+            CoordenadaX: data.CoordenadaX,
+            CoordenadaY: data.CoordenadaY,
+            PersonaJuridicaVestaId: "30d1014c-d443-42ee-8015-005fb0d9fa00",
+            TipoDeSitioId: data.TipoDeSitioId.split(",")[0],
+            TipoDeSitioDescripcion: data.TipoDeSitioId.split(",")[1],
+            TipoPersonaDestino: "2",
+          };
+          console.log(json);  
+          const resp = await axios.post("https://personasapi.vesta-accelerate.com/api/SitioVestaServiceApi/Create",json);
+          parsedResp = JSON.parse(resp.data.Message);
+          alert("Sitio vesta creado correctamente");
+        } catch (error) {
+          alert (error);
+        }
       }
-    } catch (error) {
-      console.log(error);
-    }
+
+      // let JsonSitioAr = {
+      //   CoordenadaX: data.CoordenadaX,
+      //   CoordenadaY: data.CoordenadaY,
+      //   Nombre: data.Nombre,
+      //   TipoSitioId: "string",
+      //   SitioPersonaId: parsedResp.Id,
+      //   CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+      //   ClienteId: datos.PersonaJuridicaClienteId,
+      //   ClienteNombre: "string",
+      //   PaisId: datos.PaisId.split(",")[0],
+      //   PaisNombre: datos.PaisId.split(",")[1],
+      //   Url: "modelologisticoderedope.vesta-accelerate.com",
+      //   SitioCodigo: data.Codigo,
+      //   UsuarioAsignadoId: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+      // };
   };
 
   if (loading) {
@@ -86,7 +138,21 @@ function SitioCliente() {
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Row>
         <Col>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Tipo de Sitio</Form.Label>
+            <Form.Select onChange={(e)=>setTipoSitio(e.target.value)} >
+              <option value="">Seleccione</option>
+              <option value={1}>Cliente de vesta</option>
+              <option value={2}>Proveedor del cliente de vesta</option>
+              <option value={3}>Sitio de vesta</option>
+            </Form.Select>
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+        {tipoSitio == 1 && (
+          <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>ClienteId</Form.Label>
             <Form.Control
               type="text"
@@ -94,6 +160,20 @@ function SitioCliente() {
               {...register("PersonaJuridicaClienteId")}
             />
           </Form.Group>
+        )}
+        {tipoSitio == 2 && (
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>PersonaProveedorId</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="PersonaProveedorId"
+            {...register("PersonaProveedorId")}
+          />
+        </Form.Group>
+        )}
+         {tipoSitio == 3 && (
+         null
+        )}
         </Col>
       </Row>
       <Row>

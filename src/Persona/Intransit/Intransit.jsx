@@ -114,6 +114,7 @@ function Intransit() {
       pnc.GrupoPersonaNombre = values.GrupoPersonaNombre;
       pnc.SitioProveedorId = values.SitioPersonaProveedorId;
       pnc.NombreUsuario = pnc.Nombre + ` ${values.nombreProveedor}`; //inventar
+      pnc.Nombre = (pnc.Nombre + ` ${values.nombreProveedor}`).toUpperCase();
       if (stage == 0) {
         try {
           resp = await axios.post("https://personasws.vestadev-accelerate.com/api/PersonaNaturalColaboradorApi/Create",pnc);
