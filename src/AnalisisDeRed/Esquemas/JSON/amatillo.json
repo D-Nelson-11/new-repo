@@ -1,18 +1,6 @@
 {
   "Esquemas": [
     {
-      "EsquemaId": "4D708BF5-9D3E-48E9-AB7C-14F5B438B360",
-      "SitioPorRutaId": "",
-      "Orden": 1,
-      "ClienteId": "8092E57D-03A5-44D3-B271-0F27EBF3D818",
-      "ClienteNombre": "CORPORACION DINANT SA DE CV",
-      "Descripcion": "Presentación",
-      "Requerido": true,
-      "UsuarioId": " cf458fe5-2384-4199-a6a1-23a2078e51aa",
-      "EsquemaTramitador": false,
-      "TipoEventoId": ""
-    },
-    {
       "EsquemaId": "BE237A0F-39AE-4AA2-A54A-164158601631",
       "SitioPorRutaId": "",
       "Orden": 1,
@@ -25,9 +13,21 @@
       "TipoEventoId": ""
     },
     {
-      "EsquemaId": "D95046C5-F686-4395-87CC-14F5B68FEDBE",
+      "EsquemaId": "4D708BF5-9D3E-48E9-AB7C-14F5B438B360",
       "SitioPorRutaId": "",
       "Orden": 2,
+      "ClienteId": "8092E57D-03A5-44D3-B271-0F27EBF3D818",
+      "ClienteNombre": "CORPORACION DINANT SA DE CV",
+      "Descripcion":"Presentación",
+      "Requerido": true,
+      "UsuarioId": " cf458fe5-2384-4199-a6a1-23a2078e51aa",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "D95046C5-F686-4395-87CC-14F5B68FEDBE",
+      "SitioPorRutaId": "",
+      "Orden": 3,
       "ClienteId": "8092E57D-03A5-44D3-B271-0F27EBF3D818",
       "ClienteNombre": "CORPORACION DINANT SA DE CV",
       "Descripcion": "Revisión",
@@ -37,21 +37,45 @@
       "TipoEventoId": ""
     },
     {
-      "EsquemaId": "1b894327-01de-4f3d-abb5-1641544d66e0",
+      "EsquemaId": "694153C9-869E-4127-AE18-220714274189",
       "SitioPorRutaId": "",
-      "Orden": 3,
+      "Orden": 4,
       "ClienteId": "8092E57D-03A5-44D3-B271-0F27EBF3D818",
       "ClienteNombre": "CORPORACION DINANT SA DE CV",
-      "Descripcion": "Liberación",
-      "Requerido": true,
+      "Descripcion": "Diagnóstico de Plaga",
+      "Requerido": false,
       "UsuarioId": " cf458fe5-2384-4199-a6a1-23a2078e51aa",
       "EsquemaTramitador": false,
       "TipoEventoId": ""
     },
     {
-      "EsquemaId": "ac1b37af-7b96-4deb-bcfe-2207157ea847",
+      "EsquemaId": "E8011FF9-F253-4831-BD72-22096517CBB0",
       "SitioPorRutaId": "",
-      "Orden": 4,
+      "Orden": 5,
+      "ClienteId": "8092E57D-03A5-44D3-B271-0F27EBF3D818",
+      "ClienteNombre": "CORPORACION DINANT SA DE CV",
+      "Descripcion": "Fumigación",
+      "Requerido": false,
+      "UsuarioId": " cf458fe5-2384-4199-a6a1-23a2078e51aa",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "1B894327-01DE-4F3D-ABB5-1641544D66E0",
+      "SitioPorRutaId": "",
+      "Orden": 6,
+      "ClienteId": "8092E57D-03A5-44D3-B271-0F27EBF3D818",
+      "ClienteNombre": "CORPORACION DINANT SA DE CV",
+      "Descripcion": "Liberación post Revisión",
+      "Requerido": false,
+      "UsuarioId": " cf458fe5-2384-4199-a6a1-23a2078e51aa",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "ADD1E48B-03C6-44FB-9E9A-14F5BDA29BBE",
+      "SitioPorRutaId": "",
+      "Orden": 7,
       "ClienteId": "8092E57D-03A5-44D3-B271-0F27EBF3D818",
       "ClienteNombre": "CORPORACION DINANT SA DE CV",
       "Descripcion": "Despacho",

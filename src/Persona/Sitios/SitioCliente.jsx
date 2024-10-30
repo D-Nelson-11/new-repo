@@ -87,7 +87,7 @@ function SitioCliente() {
         } catch (error) {
           alert (error);
         }
-      }else{
+      }else if (tipoSitio == 3) {
         try {
           let json = {
             Nombre: data.Nombre,
@@ -111,6 +111,31 @@ function SitioCliente() {
         } catch (error) {
           alert (error);
         }
+      }else{
+        try {
+          let json = {
+            Nombre: data.Nombre,
+            Direccion: data.Direccion,
+            Codigo: data.Codigo,
+            PaisId: data.PaisId.split(",")[0],
+            PaisDescripcion: data.PaisId.split(",")[1],
+            CiudadId: data.CiudadId.split(",")[0],
+            CiudadDescripcion: data.CiudadId.split(",")[1],
+            CoordenadaX: data.CoordenadaX,
+            CoordenadaY: data.CoordenadaY,
+            PersonaClienteId: data.PersonaClienteId,
+            TipoDeSitioId: data.TipoDeSitioId.split(",")[0],
+            TipoDeSitioDescripcion: data.TipoDeSitioId.split(",")[1],
+            TipoPersonaDestino: "8",
+          };
+          console.log(json);  
+          const resp = await axios.post("https://personasapi.vesta-accelerate.com/api/SitioPersonaClienteApi/Create",json);
+          parsedResp = JSON.parse(resp.data.Message);
+          alert("Sitio cliente de cliente creado correctamente");
+        } catch (error) {
+          alert (error);
+        }
+
       }
 
       // let JsonSitioAr = {
@@ -145,6 +170,7 @@ function SitioCliente() {
               <option value={1}>Cliente de vesta</option>
               <option value={2}>Proveedor del cliente de vesta</option>
               <option value={3}>Sitio de vesta</option>
+              <option value={4}>Sitio cliente de cliente</option>
             </Form.Select>
           </Form.Group>
         </Col>
@@ -173,6 +199,16 @@ function SitioCliente() {
         )}
          {tipoSitio == 3 && (
          null
+        )}
+        {tipoSitio == 4 && (
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>PersonaClienteId</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="PersonaClienteId"
+              {...register("PersonaClienteId")}
+            />
+          </Form.Group>
         )}
         </Col>
       </Row>

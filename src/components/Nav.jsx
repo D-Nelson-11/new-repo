@@ -24,7 +24,7 @@ function BarraNavegacion() {
             <Nav.Link href="/new-repo/#/Intransit">Intransit</Nav.Link>
             <Nav.Link href="/new-repo/#/Matriz">Matriz</Nav.Link>
             <Nav.Link href="/new-repo/#/Sku">Skus</Nav.Link>
-            <Nav.Link href="/new-repo/#/Personas">Personas</Nav.Link>
+            <Nav.Link href="/new-repo/#/Personas">Sitios</Nav.Link>
 
           </Nav>
         </Container>
