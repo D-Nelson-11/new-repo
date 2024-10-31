@@ -75,6 +75,50 @@ export let PersonaNaturalColaborador = [
     SitioProveedorId: "",
     NombreUsuario: "",
   },
+  {
+    Nombre: "SOLICITANTE-ADUANA",
+    IdFiscal: "",
+    TipoIdFiscalId: "30D1014C-D443-42EE-8015-005FB0D9FA00",
+    TipoIdFiscalDescripcion: "RTN",
+    GrupoPersonaId: "",
+    GrupoPersonaNombre: "",
+    Apellido: "Solicitante",
+    SitioProveedorId: "",
+    NombreUsuario: "",
+  },
+  {
+    Nombre: "COORDINADOR-ADUANA",
+    IdFiscal: "",
+    TipoIdFiscalId: "30D1014C-D443-42EE-8015-005FB0D9FA00",
+    TipoIdFiscalDescripcion: "RTN",
+    GrupoPersonaId: "",
+    GrupoPersonaNombre: "",
+    Apellido: "Coordinador",
+    SitioProveedorId: "",
+    NombreUsuario: "",
+  },
+  {
+    Nombre: "DESPACHADOR-ADUANA",
+    IdFiscal: "",
+    TipoIdFiscalId: "30D1014C-D443-42EE-8015-005FB0D9FA00",
+    TipoIdFiscalDescripcion: "RTN",
+    GrupoPersonaId: "",
+    GrupoPersonaNombre: "",
+    Apellido: "Despachador",
+    SitioProveedorId: "",
+    NombreUsuario: "",
+  },
+  {
+    Nombre: "MOTORISTA-ADUANA",
+    IdFiscal: "",
+    TipoIdFiscalId: "30D1014C-D443-42EE-8015-005FB0D9FA00",
+    TipoIdFiscalDescripcion: "RTN",
+    GrupoPersonaId: "",
+    GrupoPersonaNombre: "",
+    Apellido: "Motorista",
+    SitioProveedorId: "",
+    NombreUsuario: "",
+  }
 ];
 
 export let RelacionService = [
@@ -108,6 +152,30 @@ export let RelacionService = [
     PersonaId: "",
     RolRelacionId: "719ede3d-b4cb-4d2a-83e1-192a9af17e41",
   },
+  {
+    CatalogoRelacionPersonaId: "",
+    CatalogoRelacionTipoRelacionId: "",
+    PersonaId: "",
+    RolRelacionId: "719ede3d-b4cb-4d2a-83e1-192a9af17e41",
+  },
+  {
+    CatalogoRelacionPersonaId: "",
+    CatalogoRelacionTipoRelacionId: "",
+    PersonaId: "",
+    RolRelacionId: "719ede3d-b4cb-4d2a-83e1-192a9af17e41",
+  },
+  {
+    CatalogoRelacionPersonaId: "",
+    CatalogoRelacionTipoRelacionId: "",
+    PersonaId: "",
+    RolRelacionId: "719ede3d-b4cb-4d2a-83e1-192a9af17e41",
+  },
+  {
+    CatalogoRelacionPersonaId: "",
+    CatalogoRelacionTipoRelacionId: "",
+    PersonaId: "",
+    RolRelacionId: "719ede3d-b4cb-4d2a-83e1-192a9af17e41",
+  }
 ];
 
 export let ClienteProveedor = {
