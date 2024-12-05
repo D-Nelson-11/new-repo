@@ -86,8 +86,9 @@ function PruebaRutas() {
             return;
           }
           if (data[i][6] === "CORTE") { // si hay corte en el tercer sitio
-              nombreRuta += "/" + data[i + 2][6];
-              sitiosAnalisis.push(data[i + 4][6]);
+              nombreRuta += "/" + data[i + 2][6]; // se agrega el nombre de sitio del corte
+              sitiosAnalisis.push(data[i + 4][6]); // se agrega el id de analisis del corte
+
               nombreRuta += "/" +  data[i + 2][8]; // despues del corte tiene que haber un sitio, entonces se agrega
               nombreRutaHija = data[i + 2][6];
               nombreRutaHija += "/" + data[i + 2][8];
@@ -96,8 +97,8 @@ function PruebaRutas() {
               sitiosAnalisisHija.push(data[i + 4][8]);
               //agrego a la ruta hija el segmento del corte y el segmento del sitio siguiente
               segmentosRutaHija.push(data[i + 5][6]);
-              if (data[i+2][10] !== undefined) { // si hay un cuarto sitio, después puedo poner mas sitios
-                nombreRuta += "/" + data[i + 2][8];
+              if (data[i+2][10] !== undefined) { // si hay un quinto sitio, después puedo poner mas sitios
+                nombreRuta += "/" + data[i + 2][10];
                 nombreRutaHija += "/" + data[i + 2][10];
                 sitiosAnalisisHija.push(data[i + 4][10]);
                 segmentosRutaHija.push(data[i + 5][10]);
@@ -105,11 +106,15 @@ function PruebaRutas() {
           }
 
           if (data[i][8] === "CORTE") { // si hay corte
-            nombreRuta += "/" + data[i + 2][8];
-            sitiosAnalisis.push(data[i + 4][8]);
-            nombreRuta += "/" + data[i + 2][10];
-            nombreRutaHija = data[i + 2][8];
-            nombreRutaHija += "/" + data[i + 2][10];
+            nombreRuta += "/" + data[i + 2][6]; // se agrega el nombre de sitio antes del corte
+            sitiosAnalisis.push(data[i + 4][6]); // se agrega el id de analisis antes del corte
+            segmentos.push(data[i + 5][6]); // se agrega el segmento antes del corte
+            
+            nombreRuta += "/" + data[i + 2][8]; // se agrega el nombre de sitio del corte
+            sitiosAnalisis.push(data[i + 4][8]); // se agrega el id de analisis del corte
+            nombreRuta += "/" + data[i + 2][10]; // se agrega el nombre de sitio del siguiente corte
+            nombreRutaHija = data[i + 2][8]; // se agrega el nombre de sitio del corte al nombre de la ruta hija
+            nombreRutaHija += "/" + data[i + 2][10]; // se agrega el nombre de sitio del siguiente corte
 
             //agrego a la ruta hija el id analisis del corte y el id analisis del sitio siguiente
             sitiosAnalisisHija.push(data[i + 4][8]);
@@ -118,7 +123,7 @@ function PruebaRutas() {
             //agrego a la ruta hija el segmento del corte y el segmento del sitio siguiente
             segmentosRutaHija.push(data[i + 5][8]);
             if (data[i+2][12] !== undefined) { // si hay un quinto sitio, después puedo poner mas sitios
-              nombreRuta += "/" + data[i + 2][10];
+              nombreRuta += "/" + data[i + 2][12];
               nombreRutaHija += "/" + data[i + 2][12];
               sitiosAnalisisHija.push(data[i + 4][12]);
               segmentosRutaHija.push(data[i + 5][12]);
