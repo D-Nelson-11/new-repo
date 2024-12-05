@@ -75,7 +75,7 @@ function SitioAnalisis() {
           <Row>
             <Col className="col-9">
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>SitioPersonaId</Form.Label>
+                <Form.Label>SitioPersonaProveedorId</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="SitioPersonaId"

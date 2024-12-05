@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import * as XLSX from "xlsx";
-import { sitios } from "./json";
+import { regimenes } from "./json";
 
 function PruebaRutas() {
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
     const rutasJson = [];
+    let nombreRegimen = "";
+    let posicionRegimen;
 
     reader.onload = (event) => {
       const arrayBuffer = event.target.result;
@@ -26,6 +28,34 @@ function PruebaRutas() {
         let jsonRutasSimples = {};
 
         if (data[i][2] === "SIMPLE") {
+          //buscar el regimen en el segundo sitio
+          if (data[i][4] !==undefined){
+            regimenes.find((regimen) => {
+              if (regimen.codigo == data[i][4]) {
+                nombreRegimen = regimen.codigo + "/" + regimen.descripcion;
+                posicionRegimen = 1;
+              }
+            });
+          }
+          //buscar el regimen en el tercer sitio
+          if (data[i][6] !==undefined){
+            regimenes.find((regimen) => {
+              if (regimen.codigo == data[i][6]) {
+                nombreRegimen = regimen.codigo + "/" + regimen.descripcion;
+                posicionRegimen = 2;
+
+              }
+            });
+          }
+          //buscar el regimen en el cuarto sitio
+          if (data[i][8] !==undefined){
+            regimenes.find((regimen) => {
+              if (regimen.codigo == data[i][8]) {
+                nombreRegimen = regimen.codigo + "/" + regimen.descripcion;
+                posicionRegimen = 3;
+              }
+            });
+          }
           nombreRuta = data[i + 2][2] + "/" + data[i + 2][4]; //i+2 es la fila donde estan los nombres de los sitios
           sitiosAnalisis.push(data[i + 4][2], data[i + 4][4]); //i+4 es la fila donde estan los ids de analisis de red
           segmentos.push(data[i + 5][2], data[i + 5][4]); // i+5 es la fila donde estan los ids de segmentos
@@ -54,9 +84,9 @@ function PruebaRutas() {
           }
           jsonRutasSimples.TipoDeclaracionId = 6;
           jsonRutasSimples.NombreRuta = nombreRuta;
-          jsonRutasSimples.Sitios = sitiosAnalisis.map((sitio) => ({
+          jsonRutasSimples.Sitios = sitiosAnalisis.map((sitio, index) => ({
             Id: sitio,
-            Regimen: "N/A",
+            Regimen: index == posicionRegimen ? nombreRegimen : "N/A",
             DuracionEntrada: 0,
             DuracionSalida: 0,
             SitioJump: false,
@@ -109,7 +139,7 @@ function PruebaRutas() {
             nombreRuta += "/" + data[i + 2][6]; // se agrega el nombre de sitio antes del corte
             sitiosAnalisis.push(data[i + 4][6]); // se agrega el id de analisis antes del corte
             segmentos.push(data[i + 5][6]); // se agrega el segmento antes del corte
-            
+
             nombreRuta += "/" + data[i + 2][8]; // se agrega el nombre de sitio del corte
             sitiosAnalisis.push(data[i + 4][8]); // se agrega el id de analisis del corte
             nombreRuta += "/" + data[i + 2][10]; // se agrega el nombre de sitio del siguiente corte
