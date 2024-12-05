@@ -137,22 +137,6 @@ function SitioCliente() {
         }
 
       }
-
-      // let JsonSitioAr = {
-      //   CoordenadaX: data.CoordenadaX,
-      //   CoordenadaY: data.CoordenadaY,
-      //   Nombre: data.Nombre,
-      //   TipoSitioId: "string",
-      //   SitioPersonaId: parsedResp.Id,
-      //   CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-      //   ClienteId: datos.PersonaJuridicaClienteId,
-      //   ClienteNombre: "string",
-      //   PaisId: datos.PaisId.split(",")[0],
-      //   PaisNombre: datos.PaisId.split(",")[1],
-      //   Url: "modelologisticoderedope.vesta-accelerate.com",
-      //   SitioCodigo: data.Codigo,
-      //   UsuarioAsignadoId: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-      // };
   };
 
   if (loading) {
@@ -235,6 +219,7 @@ function SitioCliente() {
         </Col>
       </Row>
       <Row>
+        {tipoSitio != 3 && (
         <Col>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Codigo</Form.Label>
@@ -245,6 +230,7 @@ function SitioCliente() {
             />
           </Form.Group>
         </Col>
+        )}
         <Col>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Pais</Form.Label>

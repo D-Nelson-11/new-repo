@@ -119,8 +119,6 @@ const exportToExcel = (data) => {
               const resp = await axios.get('http://torrecontrolws.grupovesta.net/api/HotTeamServiceApi/GetSitios',textAreaValue)
               let datos = resp.data.map((item)=>{return item.SitioId})
               exportToExcel(datos)
-
-
             }
           } catch (error) {
             alert(error)
