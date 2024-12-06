@@ -95,7 +95,6 @@ function Matriz() {
             </Col>
             <Col>
               <Button
-                type="submit"
                 className="w-100"
                 onClick={() => {
                   setValue("data", "[]");
