@@ -1,6 +1,6 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { set, useForm } from "react-hook-form";
+import { useState, useEffect } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import axios from "../../api/axios";
 import SkuJson from "./json.json";
@@ -20,9 +20,38 @@ export default function Sku() {
   let [btnForm2, setbBtnForm2] = useState();
   let [btnForm3, setbBtnForm3] = useState();
   let [btnForm4, setbBtnForm4] = useState();
-  const [skuCliente,setSkuCliente] = useState("");
-  const [skuProveedor,setSkuProveedor] = useState("");
+  const [skuCliente, setSkuCliente] = useState("");
+  const [skuProveedor, setSkuProveedor] = useState("");
+  const [clientes, setClientes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [categorias, setCategorias] = useState([]);
 
+  useEffect(() => {
+    async function ObtenerDatos() {
+      try {
+        const resp2 = await axios.get(
+          "https://personasapi.vesta-accelerate.com/api/PersonaClienteServiceApi/GetAllClientes"
+        );
+        setClientes(
+          resp2.data
+            .map((cliente) => ({
+              Id: cliente.Id,
+              Nombre: cliente.Nombre,
+            }))
+            .sort((a, b) => a.Nombre.localeCompare(b.Nombre)) // Ordenar alfabéticamente
+        );
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    }
+    ObtenerDatos();
+  }, []);
+
+  if (loading) {
+    return <div>Calmate, estoy cargando los clientes...</div>;
+  }
 
   const handleTextAreaChange = (event) => {
     setTextArea(event.target.value);
@@ -36,7 +65,7 @@ export default function Sku() {
     setTextArea("");
     setDescripcion("");
     setCodigo("");
-    setCategoriaVestaId("")
+    setCategoriaVestaId("");
   };
 
   return (
@@ -44,68 +73,89 @@ export default function Sku() {
       <div style={{ width: "60%" }} className="d-flex flex-wrap">
         <div className="m-1 p-2 border border-1 rounded-2 ">
           <Form
-            onSubmit={form1.handleSubmit(async(values) => {
+            onSubmit={form1.handleSubmit(async (values) => {
               if (btnForm1 === 0) {
-                setTextArea(JSON.stringify(values, null, 2));
+                setTextArea(
+                  JSON.stringify(
+                    {
+                      ...values,
+                      PersonaJuridicaClienteId:
+                        values.PersonaJuridicaClienteId.split(",")[0],
+                      PersonaJuridicaClienteNombre:
+                        values.PersonaJuridicaClienteId.split(",")[1],
+                      CategoriaVestaId: values.CategoriaVestaId.split(",")[0],
+                      Categoria: values.CategoriaVestaId.split(",")[1],
+                    },
+                    null,
+                    2
+                  )
+                );
               } else {
-                if (stage == '1') {
-                  const aceptar = confirm(
-                    "¿Realizar acción en PRODUCCION?"
-                  );
-                  if (aceptar){
+                if (stage == "1") {
+                  const aceptar = confirm("¿Realizar acción en PRODUCCION?");
+                  if (aceptar) {
                     try {
-                      const resp = await axios.post('https://personasapi.vesta-accelerate.com/api/SkuInboundCliente/Create',values);
+                      const resp = await axios.post(
+                        "https://personasapi.vesta-accelerate.com/api/SkuInboundCliente/Create",
+                        values
+                      );
                       setSkuCliente(resp.data.Message.Id);
-                      form4.setValue('SkuInboundClienteId',resp.data.Message.Id);
+                      form4.setValue(
+                        "SkuInboundClienteId",
+                        resp.data.Message.Id
+                      );
                     } catch (error) {
                       alert(error.response.data);
                     }
                   }
-                }else{
-                  const aceptar = confirm(
-                    "¿Realizar acción en STAGE"
-                  );
-                  if (aceptar){
+                } else {
+                  const aceptar = confirm("¿Realizar acción en STAGE");
+                  if (aceptar) {
                     try {
-                      const resp = await axios.post('https://personasws.vestadev-accelerate.com/api/SkuInboundCliente/Create',values);
+                      const resp = await axios.post(
+                        "https://personasws.vestadev-accelerate.com/api/SkuInboundCliente/Create",
+                        values
+                      );
                       setSkuCliente(resp.data.Message.Id);
-                      form4.setValue('SkuInboundClienteId',resp.data.Message.Id);
+                      form4.setValue(
+                        "SkuInboundClienteId",
+                        resp.data.Message.Id
+                      );
                     } catch (error) {
                       alert(JSON.stringify(error.response.data));
-                      console.log(error)
+                      console.log(error);
                     }
-                    
                   }
                 }
               }
             })}>
             <h5>1. SKU CLIENTE</h5>
             <Row>
-              <Col lg={4}>
+              <Col className="col-4">
                 <label htmlFor="" style={{ fontSize: "13px" }}>
-                  PersonaJuridicaClienteId
+                  Cliente
                 </label>
-                <Form.Control
-                  placeholder=""
-                  size="sm"
-                  {...form1.register("PersonaJuridicaClienteId", {
-                    required: true,
-                  })}
-                />
+                <Form.Select
+                  {...form1.register("PersonaJuridicaClienteId")}
+                  onChange={async (e) => {
+                    setCategorias([]);
+                    const resp = await axios.get(
+                      `https://personasapi.vesta-accelerate.com/api/CategoriaVesta/LoadSkuXcategoriaVestaId/${
+                        e.target.value.split(",")[0]
+                      }`
+                    );
+                    setCategorias(resp.data);
+                  }}>
+                  {clientes.map((cliente) => (
+                    <option
+                      key={cliente.Id}
+                      value={[cliente.Id, cliente.Nombre]}>
+                      {cliente.Nombre}
+                    </option>
+                  ))}
+                </Form.Select>
               </Col>
-              <Col lg={4}>
-                <label htmlFor="" style={{ fontSize: "13px" }}>
-                  PersonaJuridicaClienteNombre
-                </label>
-                <Form.Control
-                  placeholder=""
-                  size="sm"
-                  {...form1.register("PersonaJuridicaClienteNombre", {
-                    required: true,
-                  })}
-                />
-              </Col>
-              <Col lg={4}>
+              <Col className="col-4">
                 <label htmlFor="" style={{ fontSize: "13px" }}>
                   Descripcion
                 </label>
@@ -119,7 +169,7 @@ export default function Sku() {
                   }}
                 />
               </Col>
-              <Col>
+              <Col className="col-4">
                 <label htmlFor="" style={{ fontSize: "13px" }}>
                   Codigo
                 </label>
@@ -133,29 +183,23 @@ export default function Sku() {
                   }}
                 />
               </Col>
-              <Col>
+              <Col className="col-4">
                 <label htmlFor="" style={{ fontSize: "13px" }}>
-                  Categoria
+                  CategoriaVesta
                 </label>
-                <Form.Control
-                  placeholder=""
-                  size="sm"
-                  {...form1.register("Categoria", { required: true })}
-                />
-              </Col>
-              <Col>
-                <label htmlFor="" style={{ fontSize: "13px" }}>
-                  CategoriaVestaId
-                </label>
-                <Form.Control
-                  placeholder=""
-                  size="sm"
-                  {...form1.register("CategoriaVestaId", { required: true })}
-                  onChange={(e) => {
-                    setCategoriaVestaId(e.target.value);
-                    form2.setValue("CategoriaVestaId", e.target.value);
-                  }}
-                />
+                <Form.Select {...form1.register("CategoriaVestaId")} onChange={(e)=>{
+                        setCategoriaVestaId(e.target.value.split(",")[0]);
+                        form2.setValue("CategoriaVestaId", e.target.value.split(",")[0]);
+                }}>
+                  {categorias.length > 0 &&
+                    categorias.map((categoria) => (
+                      <option
+                        key={categoria.Id}
+                        value={[categoria.Id, categoria.Descripcion]}>
+                        {categoria.Descripcion}
+                      </option>
+                    ))}
+                </Form.Select>
               </Col>
               <Col>
                 <label htmlFor="" style={{ fontSize: "13px" }}>
@@ -206,34 +250,36 @@ export default function Sku() {
         {/***************************SKU PROVEEDOR***************************************/}
         <div className="m-1 p-2 border border-1 rounded-2">
           <Form
-            onSubmit={form2.handleSubmit(async(values) => {
+            onSubmit={form2.handleSubmit(async (values) => {
               if (btnForm2 === 0) {
                 setTextArea(JSON.stringify(values, null, 2));
               } else {
-                if (stage == '1') {
-                  const aceptar = confirm(
-                    "¿Realizar acción en  PRODUCCION?"
-                  );
-                  if (aceptar){
+                if (stage == "1") {
+                  const aceptar = confirm("¿Realizar acción en  PRODUCCION?");
+                  if (aceptar) {
                     try {
-                      const resp = await axios.post('https://personasapi.vesta-accelerate.com/api/SkuProveedor/Create',values);
+                      const resp = await axios.post(
+                        "https://personasapi.vesta-accelerate.com/api/SkuProveedor/Create",
+                        values
+                      );
                       setSkuProveedor(resp.data.Message.Id);
-                      form4.setValue('SkuProveedorId',resp.data.Message.Id);
-                      form3.setValue('SkuId',resp.data.Message.Id)
+                      form4.setValue("SkuProveedorId", resp.data.Message.Id);
+                      form3.setValue("SkuId", resp.data.Message.Id);
                     } catch (error) {
                       alert(error);
                     }
                   }
-                }else{
-                  const aceptar = confirm(
-                    "¿Realizar acción en STAGE?"
-                  );
-                  if (aceptar){
+                } else {
+                  const aceptar = confirm("¿Realizar acción en STAGE?");
+                  if (aceptar) {
                     try {
-                      const resp = await axios.post('https://personasws.vestadev-accelerate.com/api/SkuProveedor/Create',values);
+                      const resp = await axios.post(
+                        "https://personasws.vestadev-accelerate.com/api/SkuProveedor/Create",
+                        values
+                      );
                       setSkuProveedor(resp.data.Message.Id);
-                      form4.setValue('SkuProveedorId',resp.data.Message.Id);
-                      form3.setValue('SkuId',resp.data.Message.Id)
+                      form4.setValue("SkuProveedorId", resp.data.Message.Id);
+                      form3.setValue("SkuId", resp.data.Message.Id);
                     } catch (error) {
                       alert(error);
                     }
@@ -378,7 +424,7 @@ export default function Sku() {
           className="m-1 p-2 border border-1 rounded-2"
           style={{ width: "35%" }}>
           <Form
-            onSubmit={form3.handleSubmit(async(values) => {
+            onSubmit={form3.handleSubmit(async (values) => {
               if (btnForm3 === 0) {
                 if (values.tipoEmbalaje == 1) {
                   const updatedJsonTipoEmbalaje = { ...jsonTipoEmbalaje[0] };
@@ -401,19 +447,20 @@ export default function Sku() {
                   updatedJsonTipoEmbalaje.SkuId = values.SkuId;
                   setTextArea(JSON.stringify(updatedJsonTipoEmbalaje, null, 2));
                 }
-              }  else {
-                if (stage == '1') {
-                  const aceptar = confirm(
-                    "¿Realizar acción en  PRODUCCION?"
-                  );
-                  if (aceptar){
+              } else {
+                if (stage == "1") {
+                  const aceptar = confirm("¿Realizar acción en  PRODUCCION?");
+                  if (aceptar) {
                     try {
-                      const resp = await axios.post('https://personasapi.vesta-accelerate.com/api/SkuTipoEmbalaje/Create',textArea);
-                      alert('peticion hecha')
-                      console.log(resp)
+                      const resp = await axios.post(
+                        "https://personasapi.vesta-accelerate.com/api/SkuTipoEmbalaje/Create",
+                        textArea
+                      );
+                      alert("peticion hecha");
+                      console.log(resp);
                     } catch (error) {
                       alert(error);
-                      console.log(error)
+                      console.log(error);
                     }
                   }
                 }
@@ -490,23 +537,23 @@ export default function Sku() {
           style={{ width: "60%" }}>
           <h5>4. SKU CLIENTE-PROVEEDOR</h5>
           <Form
-            onSubmit={form4.handleSubmit(async(values) => {
+            onSubmit={form4.handleSubmit(async (values) => {
               if (btnForm4 === 0) {
                 setTextArea(JSON.stringify(values, null, 2));
-              }else {
-                if (stage == '1') {
-                  const aceptar = confirm(
-                    "¿Realizar acción en  PRODUCCION?"
-                  );
-                  if (aceptar){
+              } else {
+                if (stage == "1") {
+                  const aceptar = confirm("¿Realizar acción en  PRODUCCION?");
+                  if (aceptar) {
                     try {
-                      const resp = await axios.post('https://personasapi.vesta-accelerate.com/api/SkuInboundClienteSkuProveedor/Create',values);
+                      const resp = await axios.post(
+                        "https://personasapi.vesta-accelerate.com/api/SkuInboundClienteSkuProveedor/Create",
+                        values
+                      );
                       console.log(resp);
-                      alert('peticion hecha')
+                      alert("peticion hecha");
                     } catch (error) {
                       alert(error);
                       console.log(resp);
-
                     }
                   }
                 }

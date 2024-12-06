@@ -19,7 +19,14 @@ function SitioAnalisis() {
           {}
         );
         const resp2 = await axios.get('https://personasapi.vesta-accelerate.com/api/PersonaClienteServiceApi/GetAllClientes');
-        setClientes(resp2.data.map((cliente) => ({ Id: cliente.Id, Nombre: cliente.Nombre })));
+        setClientes(
+          resp2.data
+            .map((cliente) => ({
+              Id: cliente.Id,
+              Nombre: cliente.Nombre,
+            }))
+            .sort((a, b) => a.Nombre.localeCompare(b.Nombre)) // Ordenar alfabéticamente
+        );
         setTipoDeSitio(resp.data.Message);
         setLoading(false);
       } catch (error) {
