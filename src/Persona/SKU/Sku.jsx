@@ -96,9 +96,7 @@ export default function Sku() {
                   if (aceptar) {
                     try {
                       const resp = await axios.post(
-                        "https://personasapi.vesta-accelerate.com/api/SkuInboundCliente/Create",
-                        values
-                      );
+                        "https://personasapi.vesta-accelerate.com/api/SkuInboundCliente/Create",textArea);
                       setSkuCliente(resp.data.Message.Id);
                       form4.setValue(
                         "SkuInboundClienteId",
