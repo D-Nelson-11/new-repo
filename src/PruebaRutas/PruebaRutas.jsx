@@ -95,14 +95,12 @@ function PruebaRutas() {
             Id: segmento,
             Orden: index + 1,
           }));
-          jsonRutasSimples.RutaCompuesta = [null];
+          jsonRutasSimples.RutaCompuesta = [];
           jsonRutasSimples.CreatedBy = data[2][0]; // fila 3 columna A
           jsonRutasSimples.ClienteId = data[0][1]; // fila 1 columna B
           jsonRutasSimples.ClienteNombre = data[1][1]; // fila 2 columna B
           jsonRutasSimples.Doccertificado = true;
           jsonRutasSimples.AforoRuta = true;
-          jsonRutasSimples.TotalGalones = 0;
-          jsonRutasSimples.PorcentajeDesviacion = 0;
           jsonRutasSimples.Clasificacion = "string";
 
           rutasJson.push(jsonRutasSimples);
@@ -188,14 +186,12 @@ function PruebaRutas() {
                 Id: segmento,
                 Orden: index + 1,
               })),
-              RutaCompuesta: [null],
+              RutaCompuesta: [],
               CreatedBy: data[2][0], // fila 3 columna A
               ClienteId: data[0][1], // fila 1 columna B
               ClienteNombre: data[1][1], // fila 2 columna B
               Doccertificado: true,
               AforoRuta: true,
-              TotalGalones: 0,
-              PorcentajeDesviacion: 0,
               Clasificacion: "string",
             },
           ];
@@ -204,8 +200,6 @@ function PruebaRutas() {
           jsonRutasSimples.ClienteNombre = data[1][1]; // fila 2 columna B
           jsonRutasSimples.Doccertificado = true;
           jsonRutasSimples.AforoRuta = true;
-          jsonRutasSimples.TotalGalones = 0;
-          jsonRutasSimples.PorcentajeDesviacion = 0;
           jsonRutasSimples.Clasificacion = "string";
 
           rutasJson.push(jsonRutasSimples);

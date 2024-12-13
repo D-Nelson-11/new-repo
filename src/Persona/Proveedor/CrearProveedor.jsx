@@ -8,30 +8,73 @@ function CrearProveedor() {
   const [loading, setLoading] = useState(true);
   const [tiposFiscales, setTipoFiscal] = useState([]);
   const [grupoPersona, setGrupoPersona] = useState([]);
+  const [segmento, setSegmento] = useState([]);
 
   let parsedResp = {};
 
   useEffect(() => {
     async function ObtenerDatos() {
       try {
+        const resp = await axios.get(
+          "https://personasapi.vesta-accelerate.com/api/TipoIdFiscalApi/Index"
+        );
+        setTipoFiscal(resp.data);
+        const resp2 = await axios.get(
+          "https://personasapi.vesta-accelerate.com/api/GrupoPersonaCrudApi/Index"
+        );
+        setGrupoPersona(resp2.data);
+        const resp3 = await axios.get(
+          "https://personasapi.vesta-accelerate.com/api/SegmentoCrudApi/Index"
+        );
+        setSegmento(resp3.data);
         setLoading(false); // Mostrar un indicador de carga
       } catch (error) {
         console.error("Error al obtener los datos", error);
         setLoading(false); // Asegurarse de cambiar el estado de carga aunque ocurra un error
       }
     }
-
     ObtenerDatos();
   }, []); // Ejecutar solo una vez al montar el componente
 
-  const onSubmit = async (data) => {};
+  const onSubmit = async (data) => {
+    console.log(data);
+    let json = {
+      Nombre: data.Nombre,
+      IdFiscal:data.IdFiscal,
+      TipoIdFiscalId: data.TipoIdFiscalId.split(",")[0],
+      TipoIdFiscalDescripcion: data.TipoIdFiscalId.split(",")[1],
+      GrupoPersonaId: data.GrupoPersona.split(",")[0],
+      GrupoPersonaNombre: data.GrupoPersona.split(",")[1],
+      PaisId: data.PaisId,
+      PaisDescripcion: data.PaisDescripcion,
+      SegmentoId: data.segmento.split(",")[0],
+      SegmentoNombre: data.segmento.split(",")[1],
+      Referencia: data.Nombre[0] + data.Nombre[1] + data.Nombre[2],
+    };
+    const resp = await axios.post('https://personasapi.vesta-accelerate.com/api/ProveedorServiceApi/Create', json);
+    console.log(resp);
+  };
 
   if (loading) {
     return <div>Cargando...</div>; // Mostrar un indicador de carga
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} className ="m-auto border border-1 p-4 rounded-2 w-75">
+    <Form
+      onSubmit={handleSubmit(onSubmit)}
+      className="m-auto border border-1 p-4 rounded-2 w-75">
+        <Row>
+        <Col>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Id Fiscal</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Id Fiscal"
+              {...register("IdFiscal")}
+            />
+          </Form.Group>
+        </Col>
+        </Row>
       <Row>
         <Col>
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -60,12 +103,10 @@ function CrearProveedor() {
         <Col>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Grupo Persona</Form.Label>
-            <Form.Select {...register("TipoIdFiscalId")}>
-              {grupoPersona.map((grupoPersona) => (
-                <option
-                  key={grupoPersona.Id}
-                  value={[grupoPersona.Id, grupoPersona.Descripcion]}>
-                  {grupoPersona.Descripcion}
+            <Form.Select {...register("GrupoPersona")}>
+              {grupoPersona.map((grupo) => (
+                <option key={grupo.Id} value={[grupo.Id, grupo.Nombre]}>
+                  {grupo.Nombre}
                 </option>
               ))}
             </Form.Select>
@@ -73,12 +114,14 @@ function CrearProveedor() {
         </Col>
         <Col>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Coordenada Y</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Coordenada Y"
-              {...register("CoordenadaY")}
-            />
+            <Form.Label>Segmento</Form.Label>
+            <Form.Select {...register("segmento")}>
+              {segmento.map((seg) => (
+                <option key={seg.Id} value={[seg.Id, seg.Nombre]}>
+                  {seg.Nombre}
+                </option>
+              ))}
+            </Form.Select>
           </Form.Group>
         </Col>
       </Row>
@@ -99,7 +142,7 @@ function CrearProveedor() {
             <Form.Control
               type="text"
               placeholder="PaisId"
-              {...register("Direccion")}
+              {...register("PaisId")}
             />
           </Form.Group>
         </Col>

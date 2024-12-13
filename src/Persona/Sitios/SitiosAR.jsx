@@ -27,7 +27,7 @@ function SitioAnalisis() {
             }))
             .sort((a, b) => a.Nombre.localeCompare(b.Nombre)) // Ordenar alfabéticamente
         );
-        setTipoDeSitio(resp.data.Message);
+        setTipoDeSitio(resp.data.Message.sort((a, b) => a.Nombre.localeCompare(b.Nombre)));
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -155,6 +155,7 @@ function SitioAnalisis() {
                   const confirmar = confirm('¿Está seguro de crear el sitio?');
                   if (!confirmar) return;
                   const resp = await axios.post('https://analisisderedapi.vesta-accelerate.com/api/SitioCrudApi/Create',JSON.parse(getValues('json')));
+                  alert (resp.data.Message.Id); 
                   console.log(resp);  
                   alert('Sitio creado correctamente');
                 } catch (error) {
