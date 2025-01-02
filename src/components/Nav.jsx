@@ -20,11 +20,11 @@ function BarraNavegacion() {
         <Container>
           {/* <Navbar.Brand href="#home">Navbar</Navbar.Brand> */}
           <Nav className="me-auto">
-            <Nav.Link href="/new-repo/#/AnalisisDeRed">Analisis de red</Nav.Link>
-            <Nav.Link href="/new-repo/#/Intransit">Intransit</Nav.Link>
-            <Nav.Link href="/new-repo/#/Matriz">Matriz</Nav.Link>
-            <Nav.Link href="/new-repo/#/Sku">Skus</Nav.Link>
-            <Nav.Link href="/new-repo/#/Personas">Sitios</Nav.Link>
+            <Nav.Link href="/new-repository/#/AnalisisDeRed">Analisis de red</Nav.Link>
+            <Nav.Link href="/new-repository/#/Intransit">Intransit</Nav.Link>
+            <Nav.Link href="/new-repository/#/Matriz">Matriz</Nav.Link>
+            <Nav.Link href="/new-repository/#/Sku">Skus</Nav.Link>
+            <Nav.Link href="/new-repository/#/Personas">Sitios</Nav.Link>
 
           </Nav>
         </Container>
