@@ -91,6 +91,17 @@ function SitioAnalisis() {
               </Form.Group>
             </Col>
             <Col>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Tipo de sitio</Form.Label>
+              <Form.Select {...register("Cliente")}>
+                  <option>Seleccione</option>
+                  <option value="1">Sitio Cliente</option>
+                  <option value="2">Sitio Proveedor</option>
+                  <option value="3">Sitio Vesta</option>
+              </Form.Select>
+              </Form.Group>
+            </Col>
+            <Col>
               <Button
                 style={{
                   marginTop: "30px",

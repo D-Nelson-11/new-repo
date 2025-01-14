@@ -51,8 +51,13 @@ function CrearProveedor() {
       SegmentoNombre: data.segmento.split(",")[1],
       Referencia: data.Nombre[0] + data.Nombre[1] + data.Nombre[2],
     };
-    const resp = await axios.post('https://personasapi.vesta-accelerate.com/api/ProveedorServiceApi/Create', json);
-    console.log(resp);
+    try{
+      const resp = await axios.post('https://personasapi.vesta-accelerate.com/api/ProveedorServiceApi/Create', json);
+      alert("Proveedor creado con éxito");
+      console.log(resp);
+    } catch(error){
+      alert("Error al crear el proveedor");
+      console.error(error);}  
   };
 
   if (loading) {

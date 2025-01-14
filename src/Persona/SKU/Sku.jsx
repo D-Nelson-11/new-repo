@@ -319,7 +319,7 @@ export default function Sku() {
                   value={codigo}
                 />
               </Col>
-              <Col lg={4}>
+              {/* <Col lg={4}>
                 <label htmlFor="" style={{ fontSize: "13px" }}>
                   Marca
                 </label>
@@ -328,8 +328,8 @@ export default function Sku() {
                   size="sm"
                   {...form2.register("Marca")}
                 />
-              </Col>
-              <Col lg={4}>
+              </Col> */}
+              {/* <Col lg={4}>
                 <label htmlFor="" style={{ fontSize: "13px" }}>
                   Composicion
                 </label>
@@ -338,7 +338,7 @@ export default function Sku() {
                   size="sm"
                   {...form2.register("Composicion")}
                 />
-              </Col>
+              </Col> */}
               <Col lg={4}>
                 <label htmlFor="" style={{ fontSize: "13px" }}>
                   CategoriaVestaId
@@ -350,7 +350,7 @@ export default function Sku() {
                   value={categoriaVestaId}
                 />
               </Col>
-              <Col lg={4}>
+              {/* <Col lg={4}>
                 <label htmlFor="" style={{ fontSize: "13px" }}>
                   Caracteristicas
                 </label>
@@ -379,7 +379,7 @@ export default function Sku() {
                   size="sm"
                   {...form2.register("Traduccion")}
                 />
-              </Col>
+              </Col> */}
             </Row>
             <Row>
               <Col className="d-flex justify-content-between">

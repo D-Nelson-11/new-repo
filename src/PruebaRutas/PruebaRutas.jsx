@@ -204,15 +204,7 @@ function PruebaRutas() {
 
           rutasJson.push(jsonRutasSimples);
          
-        } else {
-          alert(
-            "Papa, no estas poniendo si es simple o compuesta en la fila" +
-              (i + 1) +
-              " " +
-              "columna C, arregla esa onda y probá otra vez"
-          );
-          return;
-        }
+        } 
         i += 8;
       }
 
