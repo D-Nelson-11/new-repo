@@ -307,6 +307,9 @@ function Intransit() {
             pnc
           );
         } catch (error) {
+          setDisabled(false);
+          console.log(pnc);
+          console.log(error);
           console.log(
             "no pude hacer el post de PersonaNaturalColaborador: " +
               pnc.Nombre +
@@ -322,6 +325,7 @@ function Intransit() {
             pnc
           );
         } catch (error) {
+          console.log(pnc);
           setDisabled(false);
           console.log(
             "no pude hacer el post de PersonaNaturalColaborador: " +
@@ -329,6 +333,7 @@ function Intransit() {
               " " +
               error
           );
+          console.log(error);
           return;
         }
       }
@@ -340,7 +345,6 @@ function Intransit() {
           "Id:" +
           parsedRespTr.Id
       );
-      setTextAreaValue(`COLABORADOR ${index + 1}/${PersonaNaturalColaborador.length} CREADO`);
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
 
@@ -352,11 +356,13 @@ function Intransit() {
     // //   // --------------------------------RELACIÓN SERVICE PASO 5--------------------------------
     for (let relacion of tipoRuta == 0 ? RelacionService : RelacionServiceCompuesta) {
       if (index == 0) {
+        index++;
         continue;
         // relacion.CatalogoRelacionPersonaId = values.ProveedorId;
         // relacion.CatalogoRelacionTipoRelacionId = values.CatalogoRelacionTipoRelacionId1;
         // relacion.PersonaId = values.ClienteId;
       } else {
+        console.log('vine')
         relacion.CatalogoRelacionPersonaId = values.ProveedorId;
         relacion.PersonaId = IdsPersonasColab[index - 1];
         relacion.CatalogoRelacionTipoRelacionId = values.CatalogoRelacionTipoRelacionId;
@@ -369,6 +375,9 @@ function Intransit() {
             relacion
           );
         } catch (error) {
+          setDisabled(false);
+          console.log(relacion);
+          console.log(error);
           console.log(
             "no pude hacer el post de RelacionService: " +
               (index + 1) +
