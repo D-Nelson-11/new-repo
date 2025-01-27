@@ -31,12 +31,14 @@ function Intransit() {
     if (stage == 0) {
       const conf = confirm("TODO SE HARÁ EN STAGE, ESTAS SEGURO?");
       if (!conf) {
+        setDisabled(false);
         console.log("no voy a hacer nada");
         return;
       }
     } else {
       const conf = confirm("TODO SE HARÁ EN PRODUCCIÓN, ESTAS SEGURO?");
       if (!conf) {
+        setDisabled(false);
         console.log("no voy a hacer nada");
         return;
       }

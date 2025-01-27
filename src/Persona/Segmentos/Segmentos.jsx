@@ -165,7 +165,7 @@ function Segmentos() {
                     console.log(resp);
                     alert("Segmento creado correctamente");
                   } catch (error) {
-                    alert("Error, revisá si los kilometros están bien, o si los sitios peretenecen al cliente seleccionado");
+                    alert("Error, revisá si los kilometros están bien, si los sitios peretenecen al cliente seleccionado o si el segmento ya existe");
                   }
                 }}>
                 Crear

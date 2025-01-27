@@ -258,7 +258,7 @@ export default function Sku() {
                     try {
                       const resp = await axios.post(
                         "https://personasapi.vesta-accelerate.com/api/SkuProveedor/Create",
-                        values
+                        textArea
                       );
                       setSkuProveedor(resp.data.Message.Id);
                       form4.setValue("SkuProveedorId", resp.data.Message.Id);
@@ -273,7 +273,7 @@ export default function Sku() {
                     try {
                       const resp = await axios.post(
                         "https://personasws.vestadev-accelerate.com/api/SkuProveedor/Create",
-                        values
+                        textArea
                       );
                       setSkuProveedor(resp.data.Message.Id);
                       form4.setValue("SkuProveedorId", resp.data.Message.Id);
@@ -545,7 +545,7 @@ export default function Sku() {
                     try {
                       const resp = await axios.post(
                         "https://personasapi.vesta-accelerate.com/api/SkuInboundClienteSkuProveedor/Create",
-                        values
+                        textArea
                       );
                       console.log(resp);
                       alert("peticion hecha");
@@ -566,7 +566,7 @@ export default function Sku() {
                   placeholder=""
                   size="sm"
                   {...form4.register("SkuInboundClienteId", { required: true })}
-                  value={skuCliente}
+                  // value={skuCliente}
                 />
               </Col>
               <Col>
