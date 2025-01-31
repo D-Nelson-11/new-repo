@@ -24,12 +24,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cache APT packages
-        uses: awalsh128/cache-apt-pkgs-action@v1.4.3
-        with:
-          packages: curl tar gzip
-          version: 1.0
-
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
@@ -41,6 +35,9 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Check dist content
+        run: ls -la ./dist
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
