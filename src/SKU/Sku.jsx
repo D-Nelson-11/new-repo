@@ -2,7 +2,7 @@ import React from "react";
 import { set, useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import axios from "../../api/axios";
+import axios from "../api/axios";
 import SkuJson from "./json.json";
 
 export default function Sku() {

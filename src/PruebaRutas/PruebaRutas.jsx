@@ -118,13 +118,13 @@ function PruebaRutas() {
               segmentos.push(data[i + 5][14]);
             }
           }
-          jsonRutasSimples.TipoDeclaracionId = 8;
+          jsonRutasSimples.TipoDeclaracionId = 6;
           jsonRutasSimples.NombreRuta = nombreRuta;
           jsonRutasSimples.Sitios = sitiosAnalisis.map((sitio, index) => ({
             Id: sitio,
             Regimen: index == posicionRegimen ? nombreRegimen : "N/A",
-            DuracionEntrada: 8,
-            DuracionSalida: 8,
+            DuracionEntrada: 36,
+            DuracionSalida: 36,
             SitioJump: false,
           }));
           jsonRutasSimples.Segmentos = segmentos.map((segmento, index) => ({
@@ -137,7 +137,7 @@ function PruebaRutas() {
           jsonRutasSimples.ClienteNombre = data[1][1]; // fila 2 columna B
           jsonRutasSimples.Doccertificado = false;
           jsonRutasSimples.AforoRuta = false;
-          jsonRutasSimples.Clasificacion = "IB/MP-REFRIGERADO";
+          jsonRutasSimples.Clasificacion = "IB/PT";
 
           rutasJson.push(jsonRutasSimples);
         } else if (data[i][2] === "COMPUESTA") {
