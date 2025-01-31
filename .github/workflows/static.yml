@@ -36,7 +36,12 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Check dist folder
+        run: ls -la ./dist
+
+      - name: Install gh-pages
+        run: npm install gh-pages
+
       - name: Deploy to GitHub Pages using gh-pages
         run: |
-          npm install gh-pages
           npm run deploy
