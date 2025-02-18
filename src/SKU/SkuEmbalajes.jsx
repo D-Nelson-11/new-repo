@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "../api/axios";
+import { json } from "../../../server/helper";
 
 function SkuEmbalajes() {
   const { handleSubmit, register, setValue } = useForm();
@@ -11,41 +12,48 @@ function SkuEmbalajes() {
   let [tiposEmbalajes, setTiposEmbalajes] = useState([]);
   let [cantidadIds, setCantidadIds] = useState(0);
 
-  useEffect(() => {
-    const getTiposEmbalajes = async () => {
-      try {
-        const response = await axios.get(
-          "https://personasapi.vesta-accelerate.com/api/TipoEmbalaje/Index"
-        );
-        setTiposEmbalajes(response.data.Message);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getTiposEmbalajes();
-  }, []);
 
   const onSubmit = async (values) => {
-    setCargando(true);
 
+    const formatted = values.data
+    .split("\n")
+    .filter((line) => line.trim() !== "") // Elimina líneas vacías
+    .map((line) => `'${line.trim()}'`) // Envuelve en comillas simples
+    .join(", "); // Une con comas
+
+  setValue("data", formatted); // Actualiza el textarea con los valores formateados
+
+    return;
+
+    let confirmar = confirm("¿Estás seguro de enviar los datos?");
+    if (!confirmar) return;
+    setCargando(true);
     const perro = values.data.split("\n");
 
     for (let id of perro) {
+      let jsonTipoEmbalaje = {
+        SkuId: id,
+        TipoEmbalajeId: values.IdTipoEmbalaje,
+        UnidadMedida: "KILOGRAMOS",
+        UnidadesxEmbalaje: 1,
+        PesoxPallet: 0,
+        PesoxEmbalaje: 0,
+        UnidadesxPallet: 0,
+        PesoxEmbalajeProducto: 0,
+        Largomm: 0,
+        Anchomm: 0,
+        Altomm: 0,
+        UnidadMedidaId: 1,
+      };
       try {
         const response = await axios.post(
-          "https://personasapi.vesta-accelerate.com/api/Embalaje/Create",
-          {
-            IdTipoEmbalaje: values.IdTipoEmbalaje,
-            IdSku: id,
-          }
-        );
-        console.log(response.data);
+          "https://personasapi.vesta-accelerate.com/api/SkuTipoEmbalaje/Create",jsonTipoEmbalaje);
+        console.log(`${id}: ${response.data.IsValid}`);
       } catch (error) {
         console.log(error);
       }
     }
 
-    setTextAreaValue(ids);
     setCargando(false);
   };
 
@@ -58,10 +66,13 @@ function SkuEmbalajes() {
           <Row>
             <Col>
               <Form.Label>Tipo de embalaje</Form.Label>
-              <Form.Select className="mb-2">
-                {tiposEmbalajes.map((tipoEmbalaje) => (
-                  <option value={tipoEmbalaje.Id}>{tipoEmbalaje.Nombre}</option>
-                ))}
+              <Form.Select className="mb-2" {...register("IdTipoEmbalaje", { required: true })}>
+              <option value="">Selecciona</option>
+                  <option value="49ce84ba-3efd-40dc-905b-22cc50ef012e">Pallet</option>
+                  <option value="c6958aa7-9f7f-426b-aae8-20950b665e14">Bulto</option>
+                  <option value="4300448F-7EAC-4CB6-A54F-1DC21B800F2C">Caja</option>
+                  <option value="75bc7cc3-a31e-4760-afaa-17287453e03e">Bolsa</option>
+                  <option value="d25d5f79-feb1-40da-ba74-1da1b67333cd">Lamina</option>
               </Form.Select>
             </Col>
           </Row>
@@ -69,7 +80,12 @@ function SkuEmbalajes() {
           <Row className="d-flex flex-wrap justify-content-between">
             <Col>
               <textarea
-                style={{ width: "100%", height: "400px" }}
+                 style={{
+                  width: "100%",
+                  overflow: "auto", // Permite scroll cuando el contenido es muy grande
+                  height:"auto",
+                  whiteSpace: "nowrap", // Mantiene todo en una línea
+                }}
                 defaultValue=""
                 {...register("data", { required: true })}
                 onChange={(e) => {

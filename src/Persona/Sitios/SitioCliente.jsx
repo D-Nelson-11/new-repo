@@ -78,7 +78,7 @@ function SitioCliente() {
             PersonaProveedorId: data.PersonaProveedorId,
             TipoDeSitioId: data.TipoDeSitioId.split(",")[0],
             TipoDeSitioDescripcion: data.TipoDeSitioId.split(",")[1],
-            TipoPersonaDestino: "3",
+            TipoPersonaDestino: "9",
           };
           console.log(json);  
           const resp = await axios.post("https://personasapi.vesta-accelerate.com/api/SitioPersonaProveedorApi/Create",json);
@@ -144,7 +144,7 @@ function SitioCliente() {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} className="w-100">
       <Row>
         <Col>
           <Form.Group className="mb-3" controlId="formBasicEmail">
