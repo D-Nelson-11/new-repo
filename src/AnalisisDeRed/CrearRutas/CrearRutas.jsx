@@ -60,7 +60,7 @@ function CrearRutas() {
           </Form.Select>
         </div>
         {tipoRuta === "compuesta" && (
-          <div className="d-flex flex-wrap col-3 ms-1 bg-danger">
+          <div className="d-flex flex-wrap col-6 ms-1 bg-danger">
             <label className="align-content-center"># sitios Madre:</label>
             <Form.Control
               type="number"
