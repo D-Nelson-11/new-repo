@@ -12,7 +12,7 @@ function CrearRutas() {
 
   return (
     <Container className="w-100 mt-2" fluid>
-      <Form className="d-flex flex-wrap bg-dark">
+      <Form className="d-flex flex-wrap">
         <div className="mb-3 col-2 h-75">
           <Form.Select
             onChange={() => set}
@@ -60,7 +60,7 @@ function CrearRutas() {
           </Form.Select>
         </div>
         {tipoRuta === "compuesta" && (
-          <div className="d-flex flex-wrap col-6 ms-1 bg-danger">
+          <div className="d-flex flex-wrap col-6 ms-1">
             <label className="align-content-center"># sitios Madre:</label>
             <Form.Control
               type="number"
@@ -91,7 +91,7 @@ function CrearRutas() {
             />
           </div>
         )}
-        <div className="d-flex flex-wrap col-2 bg-warning">
+        <div className="d-flex flex-wrap col-2">
           <Button
             onClick={() => {
               if (form1.getValues("IdCliente") === "") {
