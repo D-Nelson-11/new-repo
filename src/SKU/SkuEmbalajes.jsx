@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "../api/axios";
-import { json } from "../../../server/helper";
 
 function SkuEmbalajes() {
   const { handleSubmit, register, setValue } = useForm();
