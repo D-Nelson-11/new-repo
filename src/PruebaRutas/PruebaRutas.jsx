@@ -226,16 +226,16 @@ function PruebaRutas() {
               CreatedBy: data[2][0], // fila 3 columna A
               ClienteId: data[0][1], // fila 1 columna B
               ClienteNombre: data[1][1], // fila 2 columna B
-              Doccertificado: true,
-              AforoRuta: true,
+              Doccertificado: false,
+              AforoRuta: false,
               Clasificacion: "string",
             },
           ];
           jsonRutasSimples.CreatedBy = data[2][0]; // fila 3 columna A
           jsonRutasSimples.ClienteId = data[0][1]; // fila 1 columna B
           jsonRutasSimples.ClienteNombre = data[1][1]; // fila 2 columna B
-          jsonRutasSimples.Doccertificado = true;
-          jsonRutasSimples.AforoRuta = true;
+          jsonRutasSimples.Doccertificado = false;
+          jsonRutasSimples.AforoRuta = false;
           jsonRutasSimples.Clasificacion = "string";
 
           rutasJson.push(jsonRutasSimples);

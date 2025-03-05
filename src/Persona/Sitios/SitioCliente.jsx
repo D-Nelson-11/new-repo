@@ -68,7 +68,7 @@ function SitioCliente() {
           let json = {
             Nombre: data.Nombre,
             Direccion: data.Direccion,
-            Codigo: data.Codigo,
+            Codigo: data.Nombre[0]+data.Nombre[1]+data.Nombre[2],
             PaisId: data.PaisId.split(",")[0],
             PaisDescripcion: data.PaisId.split(",")[1],
             CiudadId: data.CiudadId.split(",")[0],
@@ -83,6 +83,7 @@ function SitioCliente() {
           console.log(json);  
           const resp = await axios.post("https://personasapi.vesta-accelerate.com/api/SitioPersonaProveedorApi/Create",json);
           parsedResp = JSON.parse(resp.data.Message);
+          console.log(parsedResp);
           alert("Sitio Proveedor creado correctamente");
         } catch (error) {
           alert (error);
@@ -92,7 +93,7 @@ function SitioCliente() {
           let json = {
             Nombre: data.Nombre,
             Direccion: data.Direccion,
-            Codigo: data.Codigo,
+            Codigo: data.Nombre[0]+data.Nombre[1]+data.Nombre[2],
             PaisId: data.PaisId.split(",")[0],
             PaisDescripcion: data.PaisId.split(",")[1],
             CiudadId: data.CiudadId.split(",")[0],
@@ -116,7 +117,7 @@ function SitioCliente() {
           let json = {
             Nombre: data.Nombre,
             Direccion: data.Direccion,
-            Codigo: data.Codigo,
+            Codigo: data.Nombre[0]+data.Nombre[1]+data.Nombre[2],
             PaisId: data.PaisId.split(",")[0],
             PaisDescripcion: data.PaisId.split(",")[1],
             CiudadId: data.CiudadId.split(",")[0],
@@ -219,7 +220,7 @@ function SitioCliente() {
         </Col>
       </Row>
       <Row>
-        {tipoSitio != 3 && (
+        {/* {tipoSitio != 3 && (
         <Col>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Codigo</Form.Label>
@@ -230,7 +231,7 @@ function SitioCliente() {
             />
           </Form.Group>
         </Col>
-        )}
+        )} */}
         <Col>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Pais</Form.Label>

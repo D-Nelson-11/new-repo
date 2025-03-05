@@ -70,8 +70,8 @@ function Segmentos() {
             <Col>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Tipo de segmento</Form.Label>
-                <Form.Select {...register("TipoSegmentoId")}>
-                  <option>Seleccione</option>
+                <Form.Select {...register("TipoSegmentoId",{required:true})}>
+                  <option value="">Seleccione</option>
                   <option value="7a907087-bdb2-4ac9-8e1b-15ca306b99c2">
                     terrestre
                   </option>
@@ -92,7 +92,7 @@ function Segmentos() {
                 <Form.Control
                   type="text"
                   // value={datos[0]?.Nombre}
-                  placeholder="Nombre del sitio"
+                  placeholder="Sitio1Id"
                   {...register("Sitio1Id")}
                 />
               </Form.Group>
@@ -105,7 +105,7 @@ function Segmentos() {
                 <Form.Control
                   type="text"
                   // value={datos[0]?.Nombre}
-                  placeholder="sitio2"
+                  placeholder="Sitio2Id"
                   {...register("Sitio2Id")}
                 />
               </Form.Group>

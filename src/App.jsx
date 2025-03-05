@@ -7,6 +7,7 @@ import Intransit from "./Persona/Intransit/Intransit.jsx";
 import Matriz from "./Matriz/Matriz.jsx";
 import Sku from './SKU/Sku.jsx';
 import IndexSku from "./SKU/IndexSku.jsx";
+import CrearRutas from "./AnalisisDeRed/CrearRutas/CrearRutas.jsx";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/Intransit" element={<Intransit />} />
         <Route path="/Matriz" element={<Matriz />} />
         <Route path="/Sku" element={<IndexSku />} />
+        <Route path="/Rutas" element={<CrearRutas />} />
         {/* <Route path="/Skus" element={<Skus />} /> */}
       </Route>
     </Routes>

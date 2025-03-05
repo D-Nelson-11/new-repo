@@ -9,7 +9,7 @@ function ModalC({ContenidoModal,Nombre}) {
   
     return (
       <>
-        <Button onClick={() => setLgShow(true)}>{Nombre}</Button>
+        <Button onClick={() => setLgShow(true)} style={{backgroundColor:"#4375b4", border:"none", marginLeft:"5px"}}>{Nombre}</Button>
         <Modal
           size="xl"
           show={lgShow}
