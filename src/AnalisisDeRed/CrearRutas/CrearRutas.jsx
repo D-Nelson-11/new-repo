@@ -12,7 +12,7 @@ function CrearRutas() {
 
   return (
     <Container className="w-100 mt-2" fluid>
-      <Form className="d-flex flex-wrap">
+      <Form className="d-flex flex-wrap w-100">
         <div className="mb-3 col-2 h-75">
           <Form.Select
             onChange={() => set}
