@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Segmentos from "../../Persona/Segmentos/Segmentos";
 import { TfiReload } from "react-icons/tfi";
 import { useForm } from "react-hook-form";
+import { FaPlaneDeparture } from "react-icons/fa";
 
 export function RutaSimple({ cantidad, IdCliente }) {
   let [sitiosAduana, setSitiosAduana] = useState([]);
@@ -124,32 +125,29 @@ export function RutaSimple({ cantidad, IdCliente }) {
               NombreRuta: Object.values(datosFormulario.sitio)
                 .map((sitio) => sitio.sitioNombre.toUpperCase())
                 .join("/"),
-              Sitios: 
-                Object.values(datosFormulario.sitio)
-                  .map((sitio, i) => {
-                    return {
-                      Id: sitio.sitioId,
-                      DuracionEntrada: datosFormulario[`HE${i + 1}`],
-                      DuracionSalida: datosFormulario[`HS${i + 1}`],
-                      Regimen: datosFormulario[`Regimen${i + 1}`],
-                      SitioJump: false,
-                    };
-                  }),
-              Segmentos: 
-                Object.values(datosFormulario.sitio)
-                  .filter((sitio, i) => i < Number(cantidad) - 1)
-                  .map((sitio, i) => {
-                    return {
-                      Id: datosFormulario[`segmento${i + 1}`],
-                      Orden: i + 1,
-                    };
-                  }),
-              RutaCompuesta : [],
+              Sitios: Object.values(datosFormulario.sitio).map((sitio, i) => {
+                return {
+                  Id: sitio.sitioId,
+                  DuracionEntrada: datosFormulario[`HE${i + 1}`],
+                  DuracionSalida: datosFormulario[`HS${i + 1}`],
+                  Regimen: datosFormulario[`Regimen${i + 1}`],
+                  SitioJump: false,
+                };
+              }),
+              Segmentos: Object.values(datosFormulario.sitio)
+                .filter((sitio, i) => i < Number(cantidad) - 1)
+                .map((sitio, i) => {
+                  return {
+                    Id: datosFormulario[`segmento${i + 1}`],
+                    Orden: i + 1,
+                  };
+                }),
+              RutaCompuesta: [],
               CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
               ClienteId: IdCliente.split(",")[0],
               ClienteNombre: IdCliente.split(",")[1],
-              Doccertificado: false,
-              AforoRuta: false,
+              Doccertificado: datosFormulario.aforo,
+              AforoRuta: datosFormulario.docc,
               Clasificacion: "string",
             };
             console.log(json);
@@ -191,7 +189,21 @@ export function RutaSimple({ cantidad, IdCliente }) {
           className="d-flex flex-wrap w-100">
           <div className="col-12 mb-1">
             <ModalC ContenidoModal={<CrearSitios />} Nombre={"Crear Sitio"} />
-            <ModalC ContenidoModal={<Segmentos />} Nombre={"Crear Segmento"} />
+            {/* <ModalC ContenidoModal={<Segmentos />} Nombre={"Crear Segmento"} /> */}
+            <Form.Check // prettier-ignore
+              type={"checkbox"}
+              id={`default-checkbox`}
+              label={`aforo`}
+              style={{ display: "inline-block", marginLeft: "2px" }}
+              {...register("aforo")}
+            />
+            <Form.Check // prettier-ignore
+              type={"checkbox"}
+              id={`default-checkbox2`}
+              label={`Doccertificado`}
+              style={{ display: "inline-block", marginLeft: "2px" }}
+              {...register("docc")}
+            />
             <Button
               style={{
                 borderRadius: "5px",
@@ -211,7 +223,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
                 borderRadius: "5px",
                 color: "white",
                 padding: "2px",
-                marginLeft: "1100px",
+                marginLeft: "900px",
                 cursor: "pointer",
               }}
               onClick={async () => {
@@ -245,138 +257,175 @@ export function RutaSimple({ cantidad, IdCliente }) {
             />
           </div>
           {[...Array(Number(cantidad))].map((_, i) => (
-            <div key={i} className="col-2 border border-1 gap-1 p-1 me-2">
-                <h6>sitio {i+1}</h6>
-              <InputGroup size="sm" className="mb-1">
-                <InputGroup.Text id="inputGroup-sizing-sm">
-                  Tipo
-                </InputGroup.Text>
-                <Form.Select
-                  aria-describedby="inputGroup-sizing-sm"
-                  value={tiposSitio[i] || ""}
-                  onChange={(e) => handleTipoSitioChange(i, e.target.value)}>
-                  <option value="">--Seleccione--</option>
-                  <option value="Aduana">Aduana</option>
-                  <option value="Cliente">Cliente</option>
-                </Form.Select>
-              </InputGroup>
+            <>
+              <div key={i} className="col-2 border border-1 gap-1 p-1 me-2">
+                <h6>sitio {i + 1}</h6>
+                <InputGroup size="sm" className="mb-1">
+                  <InputGroup.Text id="inputGroup-sizing-sm">
+                    Tipo
+                  </InputGroup.Text>
+                  <Form.Select
+                    aria-describedby="inputGroup-sizing-sm"
+                    value={tiposSitio[i] || ""}
+                    onChange={(e) => handleTipoSitioChange(i, e.target.value)}>
+                    <option value="">--Seleccione--</option>
+                    <option value="Aduana">Aduana</option>
+                    <option value="Cliente">Cliente</option>
+                  </Form.Select>
+                </InputGroup>
 
-              {/* Input de búsqueda con lista flotante */}
-              <InputGroup size="sm" className="mb-1 position-relative">
-                <InputGroup.Text id="inputGroup-sizing-sm" onClick={(()=>alert(sitiosSeleccionados[i].sitioId))}>
-                  Sitio{i + 1}
-                </InputGroup.Text>
-                <Form.Control
-                  type="text"
-                  placeholder="Buscar sitio"
-                  name={`Sitio${i + 1}`}
-                  value={tiposSitio[`searchTerm_${i}`] || ""}
-                  onChange={(e) => handleSearchChange(e, i)}
-                  aria-label="Buscar sitio"
-                  disabled={
-                    tiposSitio[i] !== "Aduana" && tiposSitio[i] !== "Cliente"
-                  } // Deshabilitar si no es "Aduana" ni "Cliente"
-                  style={{ fontSize: "10px" }}
-                />
-                {(tiposSitio[i] === "Aduana" || tiposSitio[i] === "Cliente") &&
-                  tiposSitio[`searchTerm_${i}`] && (
-                    <div
-                      className="position-absolute w-100 mt-1 border border-1 bg-white"
-                      style={{
-                        zIndex: 10,
-                        top: "100%",
-                        left: 0,
-                        maxHeight: "200px",
-                        overflowY: "auto",
-                      }}>
-                      {(tiposSitio[i] === "Aduana"
-                        ? tiposSitio[`filteredSitios_${i}`] || sitiosAduana
-                        : tiposSitio[`filteredSitios_${i}`] || sitiosCliente
-                      ).map((sitio) => (
-                        <div
-                          key={sitio.Id}
-                          className="p-2"
-                          style={{
-                            cursor: "pointer",
-                          }}
-                          onClick={() =>
-                            handleSitioSelect(sitio.Id, sitio.Nombre, i)
-                          }>
-                          {sitio.Nombre}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-              </InputGroup>
-
-              {/* Otros campos */}
-              {i !== Number(cantidad) - 1 && (
-                <>
-                  <InputGroup className="mb-2 position-relative" size="sm">
-                    <InputGroup.Text id="inputGroup-sizing-sm">
-                      Segm
-                    </InputGroup.Text>
-                    <Form.Select
-                      aria-describedby="inputGroup-sizing-sm"
-                      style={{ fontSize: "10px" }}
-                      {...register(`segmento${i + 1}`, { required: true })}>
-                      {segmentosPorCliente
-                        .sort((a, b) => {
-                          const nombreA =
-                            `${a.Sitio1Nombre} ${a.Sitio2Nombre}`.toLowerCase();
-                          const nombreB =
-                            `${b.Sitio1Nombre} ${b.Sitio2Nombre}`.toLowerCase();
-                          return nombreA.localeCompare(nombreB);
-                        })
-                        .map((segmento) => (
-                          <option key={segmento.Id} value={segmento.Id}>
-                            {segmento.Sitio1Nombre} - {segmento.Sitio2Nombre}
-                          </option>
+                {/* Input de búsqueda con lista flotante */}
+                <InputGroup size="sm" className="mb-1 position-relative">
+                  <InputGroup.Text
+                    id="inputGroup-sizing-sm"
+                    onClick={() => alert(sitiosSeleccionados[i].sitioId)}>
+                    Sitio{i + 1}
+                  </InputGroup.Text>
+                  <Form.Control
+                    type="text"
+                    placeholder="Buscar sitio"
+                    name={`Sitio${i + 1}`}
+                    value={tiposSitio[`searchTerm_${i}`] || ""}
+                    onChange={(e) => handleSearchChange(e, i)}
+                    aria-label="Buscar sitio"
+                    disabled={
+                      tiposSitio[i] !== "Aduana" && tiposSitio[i] !== "Cliente"
+                    } // Deshabilitar si no es "Aduana" ni "Cliente"
+                    style={{ fontSize: "10px" }}
+                  />
+                  {(tiposSitio[i] === "Aduana" ||
+                    tiposSitio[i] === "Cliente") &&
+                    tiposSitio[`searchTerm_${i}`] && (
+                      <div
+                        className="position-absolute w-100 mt-1 border border-1 bg-white"
+                        style={{
+                          zIndex: 10,
+                          top: "100%",
+                          left: 0,
+                          maxHeight: "200px",
+                          overflowY: "auto",
+                        }}>
+                        {(tiposSitio[i] === "Aduana"
+                          ? tiposSitio[`filteredSitios_${i}`] || sitiosAduana
+                          : tiposSitio[`filteredSitios_${i}`] || sitiosCliente
+                        ).map((sitio) => (
+                          <div
+                            key={sitio.Id}
+                            className="p-2"
+                            style={{
+                              cursor: "pointer",
+                            }}
+                            onClick={() =>
+                              handleSitioSelect(sitio.Id, sitio.Nombre, i)
+                            }>
+                            {sitio.Nombre}
+                          </div>
                         ))}
-                    </Form.Select>
-                  </InputGroup>
-                </>
+                      </div>
+                    )}
+                </InputGroup>
+
+                {/* Otros campos */}
+                {i !== Number(cantidad) - 1 && (
+                  <>
+                    <InputGroup className="mb-2 position-relative" size="sm">
+                      <InputGroup.Text id="inputGroup-sizing-sm">
+                        Segm
+                      </InputGroup.Text>
+                      <Form.Select
+                        aria-describedby="inputGroup-sizing-sm"
+                        style={{ fontSize: "10px" }}
+                        {...register(`segmento${i + 1}`, { required: true })}>
+                        {segmentosPorCliente
+                          .sort((a, b) => {
+                            const nombreA =
+                              `${a.Sitio1Nombre} ${a.Sitio2Nombre}`.toLowerCase();
+                            const nombreB =
+                              `${b.Sitio1Nombre} ${b.Sitio2Nombre}`.toLowerCase();
+                            return nombreA.localeCompare(nombreB);
+                          })
+                          .map((segmento) => (
+                            <option key={segmento.Id} value={segmento.Id}>
+                              {segmento.Sitio1Nombre} - {segmento.Sitio2Nombre}
+                            </option>
+                          ))}
+                      </Form.Select>
+                    </InputGroup>
+                  </>
+                )}
+
+                <InputGroup size="sm" className="mb-1">
+                  <InputGroup.Text id="inputGroup-sizing-sm">
+                    HE
+                  </InputGroup.Text>
+                  <Form.Control
+                    aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm"
+                    type="number"
+                    {...register(`HE${i + 1}`)}
+                  />
+                </InputGroup>
+
+                <InputGroup size="sm" className="mb-1">
+                  <InputGroup.Text id="inputGroup-sizing-sm">
+                    HS
+                  </InputGroup.Text>
+                  <Form.Control
+                    aria-label="Small"
+                    aria-describedby="inputGroup-sizing-sm"
+                    type="number"
+                    {...register(`HS${i + 1}`, { required: true })}
+                  />
+                </InputGroup>
+
+                <InputGroup size="sm" className="mb-1">
+                  <InputGroup.Text id="inputGroup-sizing-sm">
+                    Regimen
+                  </InputGroup.Text>
+                  <Form.Select
+                    aria-describedby="inputGroup-sizing-sm"
+                    {...register(`Regimen${i + 1}`, { required: true })}>
+                    <option value="N/A">N/A</option>
+                    <option value="4000/IMPORTACIÓN DEFINITIVA">4000</option>
+                    <option value="8100/TRÁNSITO HACIA ZOLI ZIP">8100</option>
+                    <option value="4600/IMPORTACION DEFINITIVA FAUCA NO CANCELA TITULO">
+                      4600
+                    </option>
+                    <option value="5000/ADMISION TEMP PERFEC ACTIVO CON TRANSFORMACION ZOLI">
+                      5000
+                    </option>
+                  </Form.Select>
+                </InputGroup>
+              </div>
+              {i + 1 < cantidad && (
+                <div style={{ marginTop: "100px", marginRight: "8px" }}>
+                  {/* <button
+                      style={{
+                        border: "none",
+                        backgroundColor: "#6d9ad3",
+                        fontSize: "12px",
+                        color: "white",
+                        borderRadius:"3px",
+                        padding:"5px"
+                      }}>
+                      ←Segmento→{" "}
+                    </button> */}
+                  <ModalC
+                    ContenidoModal={
+                      <Segmentos
+                        Sitio1Id={sitiosSeleccionados[i]?.sitioId}
+                        Sitio2Id={sitiosSeleccionados[i + 1]?.sitioId}
+                      />
+                    }
+                    Nombre={
+                      <FaPlaneDeparture
+                        style={{ fontWeight: "bolder", fontSize: "20px" }}
+                      />
+                    }
+                  />
+                </div>
               )}
-
-              <InputGroup size="sm" className="mb-1">
-                <InputGroup.Text id="inputGroup-sizing-sm">HE</InputGroup.Text>
-                <Form.Control
-                  aria-label="Small"
-                  aria-describedby="inputGroup-sizing-sm"
-                  type="number"
-                  {...register(`HE${i + 1}`)}
-                />
-              </InputGroup>
-
-              <InputGroup size="sm" className="mb-1">
-                <InputGroup.Text id="inputGroup-sizing-sm">HS</InputGroup.Text>
-                <Form.Control
-                  aria-label="Small"
-                  aria-describedby="inputGroup-sizing-sm"
-                  type="number"
-                  {...register(`HS${i + 1}`, { required: true })}
-                />
-              </InputGroup>
-
-              <InputGroup size="sm" className="mb-1">
-                <InputGroup.Text id="inputGroup-sizing-sm">
-                  Regimen
-                </InputGroup.Text>
-                <Form.Select
-                  aria-describedby="inputGroup-sizing-sm"
-                  {...register(`Regimen${i + 1}`, { required: true })}>
-                  <option value="N/A">N/A</option>
-                  <option value="4000/IMPORTACIÓN DEFINITIVA">4000</option>
-                  <option value="4000/TRÁNSITO HACIA ZOLI ZIP">8100</option>
-                  <option value="4600/IMPORTACION DEFINITIVA FAUCA NO CANCELA TITULO">
-                    4600
-                  </option>
-                  <option value="5000/ADMISION TEMP PERFEC ACTIVO CON TRANSFORMACION ZOLI">
-                    5000
-                  </option>
-                </Form.Select>
-              </InputGroup>
-            </div>
+            </>
           ))}
         </Form>
       </div>

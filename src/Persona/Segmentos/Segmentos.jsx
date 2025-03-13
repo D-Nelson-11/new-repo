@@ -3,7 +3,7 @@ import { set, useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "../../api/axios";
 
-function Segmentos() {
+function Segmentos({Sitio1Id,Sitio2Id}) {
   const { handleSubmit, register, getValues, setValue } = useForm();
   const [tipoDeSitio, setTipoDeSitio] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,6 +13,11 @@ function Segmentos() {
 
   useEffect(() => {
     async function ObtenerDatos() {
+      if (Sitio1Id && Sitio2Id){
+        setValue('Sitio1Id',Sitio1Id);
+        setValue('Sitio2Id',Sitio2Id);
+
+      }
       try {
         const resp = await axios.post(
           "https://analisisderedapi.vesta-accelerate.com/api/TipoSitioCrudApi/Index",

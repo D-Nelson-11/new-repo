@@ -50,6 +50,13 @@ function CrearRutas() {
               ]}>
               Dinant Exports
             </option>
+            <option
+              value={[
+                "B49E29B0-F0CD-4ED2-B0C4-21A2D59925A8",
+                "SOUTHERN APPAREL CONTRACTORS, S.A",
+              ]}>
+              SOUTHERN APPAREL CONTRACTORS, S.A
+            </option>
           </Form.Select>
         </div>
         <div className="mb-3 col-1 h-75">
