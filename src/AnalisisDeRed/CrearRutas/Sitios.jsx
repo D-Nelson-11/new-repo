@@ -373,6 +373,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                         aria-describedby="inputGroup-sizing-sm"
                         style={{ fontSize: "10px" }}
                         {...register(`segmento${i + 1}`, { required: true })}>
+                        <option value="">--seleccione--</option>
                         {segmentosPorCliente
                           .sort((a, b) => {
                             const nombreA =
@@ -668,6 +669,7 @@ export function SitiosRutaHija({
                       {...register(`segmentoH${i + 1}`, {
                         required: true,
                       })}>
+                      <option value="">--seleccione--</option>
                       {segmentosPorCliente
                         .sort((a, b) => {
                           const nombreA =

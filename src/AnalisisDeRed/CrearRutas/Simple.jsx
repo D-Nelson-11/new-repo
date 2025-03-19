@@ -336,6 +336,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
                         aria-describedby="inputGroup-sizing-sm"
                         style={{ fontSize: "10px" }}
                         {...register(`segmento${i + 1}`, { required: true })}>
+                      <option value="">--seleccione--</option>
                         {segmentosPorCliente
                           .sort((a, b) => {
                             const nombreA =

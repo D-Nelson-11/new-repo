@@ -57,6 +57,13 @@ function CrearRutas() {
               ]}>
               SOUTHERN APPAREL CONTRACTORS, S.A
             </option>
+            <option
+              value={[
+                "9247ff77-772b-460c-9a6d-1356e3675560",
+                "LOGÍSTICA INTEGRAL HONDUREÑA S.A. DE C.V.",
+              ]}>
+              LOGÍSTICA INTEGRAL HONDUREÑA S.A. DE C.V.
+            </option>
           </Form.Select>
         </div>
         <div className="mb-3 col-1 h-75">
