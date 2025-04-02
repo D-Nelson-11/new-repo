@@ -64,6 +64,33 @@ function CrearRutas() {
               ]}>
               LOGÍSTICA INTEGRAL HONDUREÑA S.A. DE C.V.
             </option>
+            <option
+              value={[
+                "71A408DE-F4C1-489D-B2EE-0F27FC48133B",
+                "EXPORTADORA DEL ATLANTICO SA DE CV",
+              ]}>
+              EXPORTADORA DEL ATLANTICO SA DE CV
+            </option><option
+              value={[
+                "EB4C57BB-672E-40BC-858A-1719B7224A88",
+                "STANDARD FRUIT DE HONDURAS S.A.",
+              ]}>
+              STANDARD FRUIT DE HONDURAS S.A.
+            </option>
+            <option
+              value={[
+                "6F15E370-6C5B-4A12-9E92-12DEB27C8DAB",
+                "EMPACADORA PERRY Y COMPAÑÍA LIMITAD",
+              ]}>
+              EMPACADORA PERRY Y COMPAÑÍA LIMITAD
+            </option>
+            <option
+              value={[
+                "0943F378-CD71-4567-9DA7-12DEAF62B1E3",
+                "AGRIBRANDS PURINA DE GUATEMALA,S.A.",
+              ]}>
+              AGRIBRANDS PURINA DE GUATEMALA,S.A.
+            </option>
           </Form.Select>
         </div>
         <div className="mb-3 col-1 h-75">

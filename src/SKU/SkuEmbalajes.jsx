@@ -22,8 +22,6 @@ function SkuEmbalajes() {
 
   setValue("data", formatted); // Actualiza el textarea con los valores formateados
 
-    return;
-
     let confirmar = confirm("¿Estás seguro de enviar los datos?");
     if (!confirmar) return;
     setCargando(true);

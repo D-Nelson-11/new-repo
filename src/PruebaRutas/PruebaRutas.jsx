@@ -123,20 +123,21 @@ function PruebaRutas() {
           jsonRutasSimples.Sitios = sitiosAnalisis.map((sitio, index) => ({
             Id: sitio,
             Regimen: index == posicionRegimen ? nombreRegimen : "N/A",
-            DuracionEntrada: 36,
-            DuracionSalida: 36,
+            DuracionEntrada: 50,
+            DuracionSalida: 50,
             SitioJump: false,
           }));
           jsonRutasSimples.Segmentos = segmentos.map((segmento, index) => ({
             Id: segmento,
             Orden: index + 1,
           }));
+          jsonRutasSimples.LineaProducto = 'Inbound';
           jsonRutasSimples.RutaCompuesta = [];
           jsonRutasSimples.CreatedBy = data[2][0]; // fila 3 columna A
           jsonRutasSimples.ClienteId = data[0][1]; // fila 1 columna B
           jsonRutasSimples.ClienteNombre = data[1][1]; // fila 2 columna B
           jsonRutasSimples.Doccertificado = false;
-          jsonRutasSimples.AforoRuta = false;
+          jsonRutasSimples.AforoRuta = true;
           jsonRutasSimples.Clasificacion = "IB/PT";
 
           rutasJson.push(jsonRutasSimples);

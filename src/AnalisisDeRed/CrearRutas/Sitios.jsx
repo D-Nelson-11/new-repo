@@ -120,7 +120,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
             console.log(datosFormulario);
 
             let json = {
-              TipoDeclaracionId: 0,
+              TipoDeclaracionId: 6,
               NombreRuta: Object.values(datosFormulario.sitio)
                 .map((sitio) => sitio.sitioNombre.toUpperCase())
                 .join("/"),
@@ -143,6 +143,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                     Orden: i + 1,
                   };
                 }),
+              LineaProducto: "Inbound",
               RutaCompuesta: [
                 {
                   TipoDeclaracionId: 0,

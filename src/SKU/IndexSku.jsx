@@ -3,7 +3,6 @@ import Cardss from "../components/Cardss";
 import { Container } from "react-bootstrap";
 import Sku from "./Sku";
 import SkuEmbalajes from "./SkuEmbalajes";
-import SkusRelacion from "./SkusRelacion";
 
 function IndexSku() {
   return (

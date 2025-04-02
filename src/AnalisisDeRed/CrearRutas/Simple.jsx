@@ -110,6 +110,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
             Sitios de la Ruta
           </h6>
         </div>
+        <ModalC ContenidoModal={<CrearSitios />} Nombre={"Crear Sitio"} />
         <Form
           onSubmit={handleSubmit((data) => {
             const sitioSeleccionado = sitiosSeleccionados;
@@ -121,7 +122,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
             console.log(datosFormulario);
 
             let json = {
-              TipoDeclaracionId: 0,
+              TipoDeclaracionId: 6,
               NombreRuta: Object.values(datosFormulario.sitio)
                 .map((sitio) => sitio.sitioNombre.toUpperCase())
                 .join("/"),
@@ -142,13 +143,14 @@ export function RutaSimple({ cantidad, IdCliente }) {
                     Orden: i + 1,
                   };
                 }),
+              LineaProducto: "Inbound",
               RutaCompuesta: [],
               CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
               ClienteId: IdCliente.split(",")[0],
               ClienteNombre: IdCliente.split(",")[1],
-              Doccertificado: datosFormulario.aforo,
-              AforoRuta: datosFormulario.docc,
-              Clasificacion: "string",
+              Doccertificado: datosFormulario.docc,
+              AforoRuta: datosFormulario.aforo,
+              Clasificacion: "IB/CPG/M&P",
             };
             console.log(json);
             // Abrir nueva ventana
@@ -188,7 +190,6 @@ export function RutaSimple({ cantidad, IdCliente }) {
           })}
           className="d-flex flex-wrap w-100">
           <div className="col-12 mb-1">
-            <ModalC ContenidoModal={<CrearSitios />} Nombre={"Crear Sitio"} />
             {/* <ModalC ContenidoModal={<Segmentos />} Nombre={"Crear Segmento"} /> */}
             <Form.Check // prettier-ignore
               type={"checkbox"}
