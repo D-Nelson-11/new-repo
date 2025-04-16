@@ -150,7 +150,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
               ClienteNombre: IdCliente.split(",")[1],
               Doccertificado: datosFormulario.docc,
               AforoRuta: datosFormulario.aforo,
-              Clasificacion: "IB/CPG/M&P",
+              Clasificacion: "IB/PT",
             };
             console.log(json);
             // Abrir nueva ventana
@@ -396,6 +396,12 @@ export function RutaSimple({ cantidad, IdCliente }) {
                     <option value="5000/ADMISION TEMP PERFEC ACTIVO CON TRANSFORMACION ZOLI">
                       5000
                     </option>
+                    <option value="5200/ADMISION TEMP0RAL  P/ PERFECC ACTIVO SIN TRANSFOR ZOLI">
+                      5200
+                    </option>
+                    <option value="TRANSITO ZONA LIBRE NO CANCELA TITULO (FAUCA)">
+                      8300
+                    </option>
                   </Form.Select>
                 </InputGroup>
               </div>
@@ -417,6 +423,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
                       <Segmentos
                         Sitio1Id={sitiosSeleccionados[i]?.sitioId}
                         Sitio2Id={sitiosSeleccionados[i + 1]?.sitioId}
+                        ClienteId= {IdCliente}
                       />
                     }
                     Nombre={

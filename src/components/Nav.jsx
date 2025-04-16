@@ -26,6 +26,7 @@ function BarraNavegacion() {
             <Nav.Link href="/new-repo/#/Sku">Skus</Nav.Link>
             <Nav.Link href="/new-repo/#/Personas">Sitios</Nav.Link>
             <Nav.Link href="/new-repo/#/Rutas">Rutas</Nav.Link>
+            <Nav.Link href="/new-repo/#/Cfo">Cfo</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

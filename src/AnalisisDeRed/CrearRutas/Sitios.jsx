@@ -172,6 +172,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                       Orden: i + 1,
                     };
                   }),
+                  LineaProducto: "Inbound",
                   RutaCompuesta: [],
                   CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
                   ClienteId: IdCliente.split(",")[0],
@@ -426,34 +427,30 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                     {...register(`Regimen${i + 1}`, { required: true })}>
                     <option value="N/A">N/A</option>
                     <option value="4000/IMPORTACIÓN DEFINITIVA">4000</option>
-                    <option value="4000/TRÁNSITO HACIA ZOLI ZIP">8100</option>
+                    <option value="8100/TRÁNSITO HACIA ZOLI ZIP">8100</option>
                     <option value="4600/IMPORTACION DEFINITIVA FAUCA NO CANCELA TITULO">
                       4600
                     </option>
                     <option value="5000/ADMISION TEMP PERFEC ACTIVO CON TRANSFORMACION ZOLI">
                       5000
                     </option>
+                    <option value="5200/ADMISION TEMP0RAL  P/ PERFECC ACTIVO SIN TRANSFOR ZOLI">
+                      5000
+                    </option>
+                    <option value="5200/ADMISION TEMP0RAL  P/ PERFECC ACTIVO SIN TRANSFOR ZOLI">
+                      5200
+                    </option>
                   </Form.Select>
                 </InputGroup>
               </div>
               {i + 1 < cantidad && (
                 <div style={{ marginTop: "100px", marginRight: "8px" }}>
-                  {/* <button
-                    style={{
-                      border: "none",
-                      backgroundColor: "#6d9ad3",
-                      fontSize: "12px",
-                      color: "white",
-                      borderRadius:"3px",
-                      padding:"5px"
-                    }}>
-                    ←Segmento→{" "}
-                  </button> */}
                   <ModalC
                     ContenidoModal={
                       <Segmentos
                         Sitio1Id={sitiosSeleccionados[i]?.sitioId}
                         Sitio2Id={sitiosSeleccionados[i + 1]?.sitioId}
+                        ClienteId= {IdCliente}
                       />
                     }
                     Nombre={
@@ -472,7 +469,10 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
             register={register}
             cantidadMadre={cantidad}
             setSitiosSeleccionados={setSitiosSeleccionados}
-            sitiosSeleccionados={setSitiosSeleccionados}
+            sitiosSeleccionados={sitiosSeleccionados}
+            sitiosAduana={sitiosAduana}
+            sitiosCliente={sitiosCliente}
+            segmentosPorCliente={segmentosPorCliente}
           />
         </Form>
       </div>
@@ -487,12 +487,11 @@ export function SitiosRutaHija({
   cantidadMadre,
   setSitiosSeleccionados,
   sitiosSeleccionados,
+  sitiosAduana,
+  sitiosCliente,
+  segmentosPorCliente
 }) {
-  let [sitiosAduana, setSitiosAduana] = useState([]);
-  let [sitiosCliente, setSitiosCliente] = useState([]);
-  let [segmentosPorCliente, setSegmentosPorCliente] = useState([]);
   const [tiposSitio, setTiposSitio] = useState({});
-  // const [sitiosSeleccionados, setSitiosSeleccionados] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredSitios, setFilteredSitios] = useState([]);
 
@@ -545,34 +544,6 @@ export function SitiosRutaHija({
     }));
   };
 
-  useEffect(() => {
-    console.log(IdCliente);
-    async function obtenerDataSitios() {
-      try {
-        const res = await axios.post(
-          "https://analisisderedapi.vesta-accelerate.com/api/SitioCrudApi/GetSitiosAduanas",
-          {}
-        );
-        setSitiosAduana(res.data.Message);
-
-        const res2 = await axios.post(
-          "https://analisisderedapi.vesta-accelerate.com/api/SitioCrudApi/Index",
-          { ClienteId: IdCliente.split(",")[0] }
-        );
-        setSitiosCliente(res2.data.Message);
-
-        const res3 = await axios.post(
-          "https://analisisderedapi.vesta-accelerate.com/api/SegmentoCrudApi/Index",
-          { ClienteId: IdCliente.split(",")[0] }
-        );
-        setSegmentosPorCliente(res3.data.Message);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    obtenerDataSitios();
-  }, []);
-
   return (
     <>
       <div className="d-flex flex-wrap col-12 mt-1">
@@ -610,7 +581,8 @@ export function SitiosRutaHija({
                 <InputGroup.Text
                   id="inputGroup-sizing-sm"
                   onClick={() => {
-                    alert(sitiosSeleccionados[i].sitioId);
+                   alert(sitiosSeleccionados[i + Number(cantidadMadre)].sitioId);
+                    
                   }}>
                   Sitio{i + 1}
                 </InputGroup.Text>
@@ -731,6 +703,9 @@ export function SitiosRutaHija({
                   <option value="5000/ADMISION TEMP PERFEC ACTIVO CON TRANSFORMACION ZOLI">
                     5000
                   </option>
+                  <option value="5200/ADMISION TEMP0RAL  P/ PERFECC ACTIVO SIN TRANSFOR ZOLI">
+                      5200
+                    </option>
                 </Form.Select>
               </InputGroup>
             </div>
@@ -750,8 +725,9 @@ export function SitiosRutaHija({
                 <ModalC
                   ContenidoModal={
                     <Segmentos
-                      Sitio1Id={sitiosSeleccionados[i]?.sitioId}
-                      Sitio2Id={sitiosSeleccionados[i + 1]?.sitioId}
+                      Sitio1Id={sitiosSeleccionados[i + Number(cantidadMadre)]?.sitioId}
+                      Sitio2Id={sitiosSeleccionados[i + 1 + Number(cantidadMadre)]?.sitioId}
+                      ClienteId= {IdCliente.split(",")[0]}
                     />
                   }
                   Nombre={

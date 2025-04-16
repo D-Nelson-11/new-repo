@@ -3,7 +3,7 @@ import { set, useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "../../api/axios";
 
-function Segmentos({Sitio1Id,Sitio2Id}) {
+function Segmentos({ Sitio1Id, Sitio2Id, ClienteId }) {
   const { handleSubmit, register, getValues, setValue } = useForm();
   const [tipoDeSitio, setTipoDeSitio] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,10 +13,9 @@ function Segmentos({Sitio1Id,Sitio2Id}) {
 
   useEffect(() => {
     async function ObtenerDatos() {
-      if (Sitio1Id && Sitio2Id){
-        setValue('Sitio1Id',Sitio1Id);
-        setValue('Sitio2Id',Sitio2Id);
-
+      if (Sitio1Id && Sitio2Id) {
+        setValue("Sitio1Id", Sitio1Id);
+        setValue("Sitio2Id", Sitio2Id);
       }
       try {
         const resp = await axios.post(
@@ -49,16 +48,21 @@ function Segmentos({Sitio1Id,Sitio2Id}) {
 
   const onSubmit = async (values) => {
     let JsonSitioAr = {
-        "TipoSegmentoId":values.TipoSegmentoId,
-        "Sitio1Id": values.Sitio1Id,
-        "Sitio2Id": values.Sitio2Id,
-        "Kilometros": values.Kilometros,
-        "ParadasAutorizadas": 0,
-        "Observacion": values.TipoSegmentoId == "7a907087-bdb2-4ac9-8e1b-15ca306b99c2" ? "TRÁNSITO SEGÚN GOOGLE MAPS" : values.TipoSegmentoId == "c9d2440e-8afa-4051-9be6-15ca30342223" ? "TRÁNSITO SEGÚN SEARATES" : "N/D",
-        "CreatedBy": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-        "ClienteId": values.Cliente.split(",")[0],
-        "ClienteNombre": values.Cliente.split(",")[1],
-      };
+      TipoSegmentoId: values.TipoSegmentoId,
+      Sitio1Id: values.Sitio1Id,
+      Sitio2Id: values.Sitio2Id,
+      Kilometros: values.Kilometros,
+      ParadasAutorizadas: 0,
+      Observacion:
+        values.TipoSegmentoId == "7a907087-bdb2-4ac9-8e1b-15ca306b99c2"
+          ? "TRÁNSITO SEGÚN GOOGLE MAPS"
+          : values.TipoSegmentoId == "c9d2440e-8afa-4051-9be6-15ca30342223"
+          ? "TRÁNSITO SEGÚN SEARATES"
+          : "N/D",
+      CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+      ClienteId: values.Cliente.split(",")[0],
+      ClienteNombre: values.Cliente.split(",")[1],
+    };
     setValue("json", JSON.stringify(JsonSitioAr, null, 2));
     setDisabled(false);
   };
@@ -70,12 +74,17 @@ function Segmentos({Sitio1Id,Sitio2Id}) {
   return (
     <Row className="w-100">
       <Col md={6}>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form
+          onSubmit={(e) => {
+            e.stopPropagation(); // evita que se propague al formulario padre
+            handleSubmit(onSubmit)(e); // ejecuta el submit de react-hook-form
+          }}>
           <Row>
             <Col>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Tipo de segmento</Form.Label>
-                <Form.Select {...register("TipoSegmentoId",{required:true})}>
+                <Form.Select
+                  {...register("TipoSegmentoId", { required: true })}>
                   <option value="">Seleccione</option>
                   <option value="7a907087-bdb2-4ac9-8e1b-15ca306b99c2">
                     terrestre
@@ -130,6 +139,19 @@ function Segmentos({Sitio1Id,Sitio2Id}) {
             </Col>
           </Row>
           <Row>
+            {ClienteId ?  (
+              <Col>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label>Cliente</Form.Label>
+                  <Form.Select {...register("Cliente")}>
+                      <option
+                        value={[ClienteId.split(",")[0], ClienteId.split(",")[1] ]}>
+                        {ClienteId.split(",")[1]}
+                      </option>
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+            ):(
             <Col>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Cliente</Form.Label>
@@ -144,6 +166,7 @@ function Segmentos({Sitio1Id,Sitio2Id}) {
                 </Form.Select>
               </Form.Group>
             </Col>
+            )}
           </Row>
           <Row>
             <Col>
@@ -170,7 +193,9 @@ function Segmentos({Sitio1Id,Sitio2Id}) {
                     console.log(resp);
                     alert("Segmento creado correctamente");
                   } catch (error) {
-                    alert("Error, revisá si los kilometros están bien, si los sitios peretenecen al cliente seleccionado o si el segmento ya existe");
+                    alert(
+                      "Error, revisá si los kilometros están bien, si los sitios peretenecen al cliente seleccionado o si el segmento ya existe"
+                    );
                   }
                 }}>
                 Crear

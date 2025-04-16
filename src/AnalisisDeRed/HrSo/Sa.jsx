@@ -3,7 +3,7 @@ import { Form, Col, Row, Container, Button } from "react-bootstrap";
 import axios from "../../api/axios";
 import { useState, useEffect } from "react";
 
-function Hr() {
+function Sa() {
   const { register, handleSubmit } = useForm();
   return (
     <Container fluid className="mt-3">
@@ -12,31 +12,31 @@ function Hr() {
 
           // CREAR SOLICITUD HR
           let json1 = {
-            Nombre: data.NombreSolicitudHr,
+            Nombre: data.NombreSolicitudSo,
             CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-            SistemaId: "19667294-D673-4C55-B1AF-1900833C7D52",
-            MetodoNombre: "CrearHojaRuta",
+            SistemaId: "19667294-d673-4c55-b1af-1900833c7d52",
+            MetodoNombre: "CrearSolicitudAforo",
             EsDiferido: false,
           };
           const resp1 = await axios.post(
             "https://analisisderedapi.vesta-accelerate.com/api/TipoSolicitudCrudApi/Create",
             json1
           );
-          console.log('tipoSolicitudHr: ' + resp1.data.Id);
+          console.log('tipoSolicitudSa: ' + resp1.data.Id);
 
-          // CREAR SOLICITUD AR
-          let json2 = {
-            Nombre: data.NombreSolicitudAr,
-            CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-            SistemaId: "62B010A8-F266-4422-BAA3-1900831A2E06",
-            MetodoNombre: "AsignarReferenciaOperativaHojaRutaAGestion",
-            EsDiferido: false,
-          };
-          const resp2 = await axios.post(
-            "https://analisisderedapi.vesta-accelerate.com/api/TipoSolicitudCrudApi/Create",
-            json2
-          );
-          console.log('tipoSolicitudAr: ' + resp2.data.Id);
+          // // CREAR SOLICITUD AR
+          // let json2 = {
+          //   Nombre: data.NombreSolicitudAr,
+          //   CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+          //   SistemaId: "62B010A8-F266-4422-BAA3-1900831A2E06",
+          //   MetodoNombre: "AsignarReferenciaOperativaHojaRutaAGestion",
+          //   EsDiferido: false,
+          // };
+          // const resp2 = await axios.post(
+          //   "https://analisisderedapi.vesta-accelerate.com/api/TipoSolicitudCrudApi/Create",
+          //   json2
+          // );
+          // console.log('tipoSolicitudAr: ' + resp2.data);
 
           // CREAR ENCABEZADO SOLICITUD
           let json3 = {
@@ -49,17 +49,13 @@ function Hr() {
           );
           console.log('Id Encabezado: ' + resp3.data.Id);
 
-        // CREAR UNIÓN DE HR Y AR 
+        // CREAR UNIÓN DE SOLICITUD Y ENCABEZADO
           const json4 = {
             UsuarioId: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
             TipoSolicitudes: [
               {
                 Id: resp1.data.Id,
                 Orden: 1,
-              },
-              {
-                Id: resp2.data.Id,
-                Orden: 2,
               },
             ],
             EncabezadoSolicitudId: resp3.data.Id,
@@ -69,12 +65,12 @@ function Hr() {
             "https://analisisderedapi.vesta-accelerate.com/api/EncabezadoTipoSolicitudApi/AddTipoSolicitud",
             json4
           );
-          console.log('Relación de HR Y AR: ' + resp4.data.Id);
+          console.log('Relación de SA y encabezado: ' + resp4.data.Id);
 
           // CREAR CRITERIO HR
           const json5 = {
             SistemaId: "62b010a8-f266-4422-baa3-1900831a2e06",
-            TipoReferenciaId: 5,
+            TipoReferenciaId: 2,
             Criterio: data.NombreCriterio,
             TipoCriterio: 1,
             Operador: 3,
@@ -106,15 +102,15 @@ function Hr() {
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Nombre Solicitud hr</Form.Label>
+              <Form.Label>Nombre Solicitud SA</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Nombre"
-                {...register("NombreSolicitudHr", { required: true })}
+                {...register("NombreSolicitudSo", { required: true })}
               />
             </Form.Group>
           </Col>
-          <Col>
+          {/* <Col>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Nombre Solicitud ar</Form.Label>
               <Form.Control
@@ -123,7 +119,7 @@ function Hr() {
                 {...register("NombreSolicitudAr", { required: true })}
               />
             </Form.Group>
-          </Col>
+          </Col> */}
         </Row>
         <Row>
           <Col>
@@ -159,4 +155,4 @@ function Hr() {
   );
 }
 
-export default Hr;
+export default Sa;

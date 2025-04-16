@@ -8,6 +8,7 @@ import Matriz from "./Matriz/Matriz.jsx";
 import Sku from './SKU/Sku.jsx';
 import IndexSku from "./SKU/IndexSku.jsx";
 import CrearRutas from "./AnalisisDeRed/CrearRutas/CrearRutas.jsx";
+import CFO from './CFO/Index.jsx'
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
         <Route path="/Matriz" element={<Matriz />} />
         <Route path="/Sku" element={<IndexSku />} />
         <Route path="/Rutas" element={<CrearRutas />} />
+        <Route path="/Cfo" element={<CFO />} />
+
+
         {/* <Route path="/Skus" element={<Skus />} /> */}
       </Route>
     </Routes>
