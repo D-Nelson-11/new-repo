@@ -474,7 +474,7 @@ export default function Sku() {
                   placeholder=""
                   size="sm"
                   {...form3.register("SkuId", { required: true })}
-                  value={skuProveedor}
+                  // value={skuProveedor}
                 />
               </Col>
               <Col>
@@ -577,7 +577,7 @@ export default function Sku() {
                   placeholder=""
                   size="sm"
                   {...form4.register("SkuProveedorId", { required: true })}
-                  value={skuProveedor}
+                  // value={skuProveedor}
                 />
               </Col>
             </Row>
