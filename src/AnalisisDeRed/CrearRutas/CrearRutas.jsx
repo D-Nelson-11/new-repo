@@ -91,6 +91,13 @@ function CrearRutas() {
               ]}>
               AGRIBRANDS PURINA DE GUATEMALA,S.A.
             </option>
+            <option
+              value={[
+                "8092E57D-03A5-44D3-B271-0F27EBF3D818",
+                "CORPORACION DINANT SA DE CV",
+              ]}>
+              CORPORACION DINANT SA DE CV
+            </option>
           </Form.Select>
         </div>
         <div className="mb-3 col-1 h-75">
