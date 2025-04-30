@@ -12,7 +12,7 @@ function Index() {
   return (
     <Container className="mt-5 d-flex">
       <Cardss subModulo={"Esquemas"} Contenido={<Esquemas/>} Nombre="Crear" />
-      <Cardss subModulo={"Crear Rutas"} Contenido={<PruebaRutas/>} Nombre="Crear" />
+      {/* <Cardss subModulo={"Crear Rutas"} Contenido={<PruebaRutas/>} Nombre="Crear" /> */}
       <Cardss subModulo={"Crear HR"} Contenido={<Hr/>} Nombre="Crear" />
       <Cardss subModulo={"Crear SO"} Contenido={<So/>} Nombre="Crear" />
       <Cardss subModulo={"Crear SA"} Contenido={<Sa/>} Nombre="Crear" />

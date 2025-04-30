@@ -16,6 +16,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredSitios, setFilteredSitios] = useState([]);
   const { register, getValues, handleSubmit } = useForm();
+  const [loading,setLoading] = useState(false);
   let datosFormulario = {};
 
   const handleTipoSitioChange = (index, value) => {
@@ -255,6 +256,10 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
               className="bg-warning">
               Crear Json Ruta
             </Button>
+            {loading &&(
+              <p style={{display:"inline-block", marginLeft:"700px"}}>actualizando...</p>
+            )}
+
             <TfiReload
               style={{
                 fontSize: "35px",
@@ -262,13 +267,14 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                 borderRadius: "5px",
                 color: "white",
                 padding: "2px",
-                marginLeft: "900px",
+                marginLeft: !loading ? "800" : "10px",
                 cursor: "pointer",
               }}
               onClick={async () => {
                 let confirmar = confirm("¿Desea recargar sitios y segmentos?");
                 if (confirmar) {
                   try {
+                    setLoading(true);
                     const res = await axios.post(
                       "https://analisisderedapi.vesta-accelerate.com/api/SitioCrudApi/GetSitiosAduanas",
                       {}
@@ -286,10 +292,13 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                       { ClienteId: IdCliente.split(",")[0] }
                     );
                     setSegmentosPorCliente(res3.data.Message);
+                    setLoading(false);
                     alert("Sitios y segmentos recargados correctamente");
                   } catch (err) {
                     alert("Error al recargar sitios y segmentos");
                     console.log(err);
+                    setLoading(false);
+
                   }
                 }
               }}
@@ -727,7 +736,7 @@ export function SitiosRutaHija({
                     <Segmentos
                       Sitio1Id={sitiosSeleccionados[i + Number(cantidadMadre)]?.sitioId}
                       Sitio2Id={sitiosSeleccionados[i + 1 + Number(cantidadMadre)]?.sitioId}
-                      ClienteId= {IdCliente.split(",")[0]}
+                      ClienteId= {IdCliente}
                     />
                   }
                   Nombre={
