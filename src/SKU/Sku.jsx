@@ -260,6 +260,8 @@ export default function Sku() {
                         "https://personasapi.vesta-accelerate.com/api/SkuProveedor/Create",
                         textArea
                       );
+                      console.log(resp)
+
                       setSkuProveedor(resp.data.Message.Id);
                       form4.setValue("SkuProveedorId", resp.data.Message.Id);
                       form3.setValue("SkuId", resp.data.Message.Id);
