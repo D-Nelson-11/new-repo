@@ -10,101 +10,81 @@ function CrearRutas() {
   let [tipoRuta, setTipoRuta] = useState("");
   let [sitios, setSitios] = useState(false);
 
+  const clientes = [
+    {
+      id: "1194ba34-fcb6-433d-863a-0f25da9a6522",
+      nombre: "CARGILL DE HONDURAS",
+    },
+    { id: "65507ECF-249E-454B-A95A-0061BA0FA2BA", nombre: "VESTA TRADING" },
+    {
+      id: "B6BCFD11-E191-4C92-9E31-0F296273235E",
+      nombre: "AZUCARERA DEL NORTE S.A. DE C.V.",
+    },
+    {
+      id: "520E3857-D535-4BA0-B0A6-23E7DA34F0A6",
+      nombre: "MAGNO CARTONES Y EMPAQUES S. DE R.L.",
+    },
+    {
+      id: "CF884F18-6C35-4703-A48B-21FD0680B2CE",
+      nombre: "DINANT EXPORTS SA DE CV",
+    },
+    {
+      id: "B49E29B0-F0CD-4ED2-B0C4-21A2D59925A8",
+      nombre: "SOUTHERN APPAREL CONTRACTORS, S.A",
+    },
+    {
+      id: "9247ff77-772b-460c-9a6d-1356e3675560",
+      nombre: "LOGÍSTICA INTEGRAL HONDUREÑA S.A. DE C.V.",
+    },
+    {
+      id: "71A408DE-F4C1-489D-B2EE-0F27FC48133B",
+      nombre: "EXPORTADORA DEL ATLANTICO SA DE CV",
+    },
+    {
+      id: "EB4C57BB-672E-40BC-858A-1719B7224A88",
+      nombre: "STANDARD FRUIT DE HONDURAS S.A.",
+    },
+    {
+      id: "6F15E370-6C5B-4A12-9E92-12DEB27C8DAB",
+      nombre: "EMPACADORA PERRY Y COMPAÑÍA LIMITAD",
+    },
+    {
+      id: "0943F378-CD71-4567-9DA7-12DEAF62B1E3",
+      nombre: "AGRIBRANDS PURINA DE GUATEMALA,S.A.",
+    },
+    {
+      id: "8092E57D-03A5-44D3-B271-0F27EBF3D818",
+      nombre: "CORPORACION DINANT SA DE CV",
+    },
+    {
+      id: "691A8DEC-F8F9-4055-A405-24B2EB1B6BB2",
+      nombre: "ALSA CONSOLIDADORES S.A",
+    },
+    {
+      id: "BF036D39-5FBD-4CC3-934D-138B20F8D4D1",
+      nombre: "PROMODA DE HONDURAS SA",
+    },
+    {
+      id: "E9CB3A00-6EF1-41F9-A3DE-138B2016972B",
+      nombre: "JOVENMODA DE HONDURAS SA",
+    },
+    {
+      id: "E747939F-542D-4514-B3BC-138B1FDD8349",
+      nombre: "ESPATIENDAS DE HONDURAS SA",
+    },
+  ];
+
   return (
     <Container className="w-100 mt-2" fluid>
       <Form className="d-flex flex-wrap">
         <div className="mb-3 col-2 h-75">
-          <Form.Select
-            onChange={() => set}
-            {...form1.register("IdCliente", { required: true })}>
+          <Form.Select {...form1.register("IdCliente", { required: true })}>
             <option value="">--Seleccione Cliente--</option>
-            <option
-              value={[
-                "1194ba34-fcb6-433d-863a-0f25da9a6522",
-                "CARGILL DE HONDURAS",
-              ]}>
-              Cargill de Honduras
-            </option>
-            <option
-              value={["65507ECF-249E-454B-A95A-0061BA0FA2BA", "VESTA TRADING"]}>
-              Vesta Trading
-            </option>
-            <option
-              value={[
-                "B6BCFD11-E191-4C92-9E31-0F296273235E",
-                "AZUCARERA DEL NORTE S.A. DE C.V.",
-              ]}>
-              Azunosa
-            </option>
-            <option
-              value={[
-                "520E3857-D535-4BA0-B0A6-23E7DA34F0A6",
-                "MAGNO CARTONES Y EMPAQUES S. DE R.L.",
-              ]}>
-              Magno Cartones y Empaques
-            </option>
-            <option
-              value={[
-                "CF884F18-6C35-4703-A48B-21FD0680B2CE",
-                "DINANT EXPORTS SA DE CV",
-              ]}>
-              Dinant Exports
-            </option>
-            <option
-              value={[
-                "B49E29B0-F0CD-4ED2-B0C4-21A2D59925A8",
-                "SOUTHERN APPAREL CONTRACTORS, S.A",
-              ]}>
-              SOUTHERN APPAREL CONTRACTORS, S.A
-            </option>
-            <option
-              value={[
-                "9247ff77-772b-460c-9a6d-1356e3675560",
-                "LOGÍSTICA INTEGRAL HONDUREÑA S.A. DE C.V.",
-              ]}>
-              LOGÍSTICA INTEGRAL HONDUREÑA S.A. DE C.V.
-            </option>
-            <option
-              value={[
-                "71A408DE-F4C1-489D-B2EE-0F27FC48133B",
-                "EXPORTADORA DEL ATLANTICO SA DE CV",
-              ]}>
-              EXPORTADORA DEL ATLANTICO SA DE CV
-            </option><option
-              value={[
-                "EB4C57BB-672E-40BC-858A-1719B7224A88",
-                "STANDARD FRUIT DE HONDURAS S.A.",
-              ]}>
-              STANDARD FRUIT DE HONDURAS S.A.
-            </option>
-            <option
-              value={[
-                "6F15E370-6C5B-4A12-9E92-12DEB27C8DAB",
-                "EMPACADORA PERRY Y COMPAÑÍA LIMITAD",
-              ]}>
-              EMPACADORA PERRY Y COMPAÑÍA LIMITAD
-            </option>
-            <option
-              value={[
-                "0943F378-CD71-4567-9DA7-12DEAF62B1E3",
-                "AGRIBRANDS PURINA DE GUATEMALA,S.A.",
-              ]}>
-              AGRIBRANDS PURINA DE GUATEMALA,S.A.
-            </option>
-            <option
-              value={[
-                "8092E57D-03A5-44D3-B271-0F27EBF3D818",
-                "CORPORACION DINANT SA DE CV",
-              ]}>
-              CORPORACION DINANT SA DE CV
-            </option>
-            <option
-              value={[
-                "691A8DEC-F8F9-4055-A405-24B2EB1B6BB2",
-                "ALSA CONSOLIDADORES S.A",
-              ]}>
-              ALSA CONSOLIDADORES S,A 
-            </option>
+            {clientes.map((cliente) => (
+              <option key={cliente.id} value={[cliente.id, cliente.nombre]}>
+                {cliente.nombre}
+              </option>
+            ))}
           </Form.Select>
         </div>
         <div className="mb-3 col-1 h-75">
