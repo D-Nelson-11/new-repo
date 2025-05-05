@@ -72,6 +72,10 @@ function CrearRutas() {
       id: "E747939F-542D-4514-B3BC-138B1FDD8349",
       nombre: "ESPATIENDAS DE HONDURAS SA",
     },
+    {
+      id: "27276913-746D-4188-B747-138B2093C5A3",
+      nombre: "INTERTIENDAS DE HONDURAS SA",
+    },
   ];
 
   return (
