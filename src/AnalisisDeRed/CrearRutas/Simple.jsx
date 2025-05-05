@@ -205,6 +205,19 @@ export function RutaSimple({ cantidad, IdCliente }) {
               style={{ display: "inline-block", marginLeft: "2px" }}
               {...register("docc")}
             />
+            <select
+              style={{
+                display: "inline-block",
+                marginLeft: "4px",
+                borderRadius: "5px",
+                border: "none",
+                color: "black",
+                fontSize: "12px",
+              }}
+              {...register("Clasificacion")}>
+              <option value="0">--Clasificación--</option>
+              <option value="1">IB/MP</option>
+            </select>
             <Button
               style={{
                 borderRadius: "5px",
@@ -337,7 +350,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
                         aria-describedby="inputGroup-sizing-sm"
                         style={{ fontSize: "10px" }}
                         {...register(`segmento${i + 1}`, { required: true })}>
-                      <option value="">--seleccione--</option>
+                        <option value="">--seleccione--</option>
                         {segmentosPorCliente
                           .sort((a, b) => {
                             const nombreA =
@@ -423,7 +436,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
                       <Segmentos
                         Sitio1Id={sitiosSeleccionados[i]?.sitioId}
                         Sitio2Id={sitiosSeleccionados[i + 1]?.sitioId}
-                        ClienteId= {IdCliente}
+                        ClienteId={IdCliente}
                       />
                     }
                     Nombre={

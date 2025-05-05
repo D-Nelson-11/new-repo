@@ -1,0 +1,43 @@
+.search_bar {
+    position: relative;
+    width: 100%;
+    display: flex;
+  }
+  
+  .search_input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 9px;
+  }
+  
+  .search_results {
+    position: absolute;
+    top: 100%; /* Posiciona justo debajo del input */
+    left: 0;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000; /* Asegura que esté sobre otros elementos */
+  }
+  
+  .search_item {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+  }
+  
+  .search_item:last-child {
+    border-bottom: none;
+  }
+  
+  .search_item:hover {
+    background-color: #f0f0f0; /* Efecto hover */
+  }

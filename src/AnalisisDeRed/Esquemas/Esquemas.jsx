@@ -6,6 +6,9 @@ import jsonAmatillo from "./JSON/amatillo.json";
 import jsonPtoCortes from "./JSON/PuertoCortes.json";
 import jsonLaMesa from "./JSON/LaMesa.json";
 import jsonElPoy from "./JSON/ElPoy.json";
+import jsonCastilla from "./JSON/puertoCastilla.json";
+import ClientesSelect from "../../components/ClientesSelect";
+
 
 function Esquemas() {
   const { handleSubmit, register, setValue } = useForm();
@@ -13,57 +16,65 @@ function Esquemas() {
   const [EsquemaCortes, setEsquemaCortes] = useState(jsonPtoCortes);
   const [EsquemaLaMesa, setEsquemaLaMesa] = useState(jsonLaMesa);
   const [EsquemaElPoy, setEsquemaElPoy] = useState(jsonElPoy);
-
+  const [EsquemaCastilla, setEsquemaCastilla] = useState(jsonCastilla);
   const [textAreaValue, setTextAreaValue] = useState("");
 
   const onSubmit = (values) => {
     if (values.esquemaNombre == 1) {
       const updatedEsquemaAmatillo = { ...EsquemaAmatillo };
       updatedEsquemaAmatillo.Esquemas.forEach((esquema) => {
-        esquema.ClienteId = values.ClienteId;
+        esquema.ClienteId = values.Cliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre = values.NombreCliente;
+        esquema.ClienteNombre = values.Cliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
 
       });
 
-      setEsquemaAmatillo(updatedEsquemaAmatillo);
       setTextAreaValue(JSON.stringify(updatedEsquemaAmatillo, null, 2));
     } else if (values.esquemaNombre == 3) {
       const updatedEsquemaCortes = { ...EsquemaCortes };
       updatedEsquemaCortes.Esquemas.forEach((esquema) => {
-        esquema.ClienteId = values.ClienteId;
+        esquema.ClienteId = values.Cliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre = values.NombreCliente;
+        esquema.ClienteNombre =  values.Cliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
       });
 
-      setEsquemaCortes(updatedEsquemaCortes);
       setTextAreaValue(JSON.stringify(updatedEsquemaCortes, null, 2));
     } else if (values.esquemaNombre == 4) {
       const updatedEsquemaLaMesa = { ...EsquemaLaMesa };
       updatedEsquemaLaMesa.Esquemas.forEach((esquema) => {
-        esquema.ClienteId = values.ClienteId;
+        esquema.ClienteId = values.Cliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre = values.NombreCliente;
+        esquema.ClienteNombre =  values.Cliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
       });
 
-      setEsquemaCortes(updatedEsquemaLaMesa);
       setTextAreaValue(JSON.stringify(updatedEsquemaLaMesa, null, 2));
     } else if (values.esquemaNombre == 5) {
       const updatedEsquemaElPoy = { ...EsquemaElPoy };
       updatedEsquemaElPoy.Esquemas.forEach((esquema) => {
-        esquema.ClienteId = values.ClienteId;
+        esquema.ClienteId = values.Cliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre = values.NombreCliente;
+        esquema.ClienteNombre =  values.Cliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
       });
 
-      setEsquemaCortes(updatedEsquemaElPoy);
       setTextAreaValue(JSON.stringify(updatedEsquemaElPoy, null, 2));
+    }else if (values.esquemaNombre == 2) {
+      const updatedEsquemaCastilla = { ...EsquemaCastilla };
+      updatedEsquemaCastilla.Esquemas.forEach((esquema) => {
+        esquema.ClienteId = values.Cliente.split(",")[0];
+        esquema.SitioPorRutaId = values.SitioXRuta;
+        esquema.ClienteNombre =  values.Cliente.split(",")[1];
+        esquema.UsuarioId = values.IdUsuario;
+      });
+
+      setTextAreaValue(JSON.stringify(updatedEsquemaCastilla, null, 2));
     }
   };
+
+ 
 
   return (
     <div className="d-flex w-100 justify-content-between">
@@ -74,7 +85,7 @@ function Esquemas() {
             <Form.Select
               aria-label="Default select example"
               {...register("esquemaNombre", { required: true })}>
-              <option value=""></option>
+              <option value="">--Seleccione--</option>
               <option value="1">
                 El Florido/Amatillo/Las Manos/Corinto/Agua Caliente
               </option>
@@ -93,7 +104,7 @@ function Esquemas() {
               {...register("SitioXRuta", { required: true })}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>ClienteId</Form.Label>
             <Form.Control
               type="text"
@@ -108,6 +119,10 @@ function Esquemas() {
               placeholder=""
               {...register("NombreCliente", { required: true })}
             />
+          </Form.Group> */}
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Label>Cliente</Form.Label>
+            <ClientesSelect register={register} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Usuario</Form.Label>

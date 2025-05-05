@@ -7,6 +7,7 @@ import Segmentos from "../../Persona/Segmentos/Segmentos";
 import { TfiReload } from "react-icons/tfi";
 import { useForm } from "react-hook-form";
 import { FaPlaneDeparture } from "react-icons/fa";
+import SearchBar from "../../components/SearchBar";
 export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
   let [sitiosAduana, setSitiosAduana] = useState([]);
   let [sitiosCliente, setSitiosCliente] = useState([]);
@@ -15,8 +16,8 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
   const [sitiosSeleccionados, setSitiosSeleccionados] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredSitios, setFilteredSitios] = useState([]);
-  const { register, getValues, handleSubmit } = useForm();
-  const [loading,setLoading] = useState(false);
+  const { register, getValues, handleSubmit, setValue } = useForm();
+  const [loading, setLoading] = useState(false);
   let datosFormulario = {};
 
   const handleTipoSitioChange = (index, value) => {
@@ -167,12 +168,14 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                       };
                     }),
                   // ejemplo: i = 5 , entonces 5 = a 6-1? si entonces devuelve un solo elemento para recorrer en .map, es para saber cuantos segmentos hay en la hija
-                  Segmentos: Array.from(cantidadHija).map((_, i) => {
-                    return {
-                      Id: datosFormulario[`segmentoH${i + 1}`],
-                      Orden: i + 1,
-                    };
-                  }),
+                  Segmentos: Array.from({ length: cantidadHija - 1 }).map(
+                    (_, i) => {
+                      return {
+                        Id: datosFormulario[`segmentoH${i + 1}`],
+                        Orden: i + 1,
+                      };
+                    }
+                  ),
                   LineaProducto: "Inbound",
                   RutaCompuesta: [],
                   CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
@@ -186,8 +189,8 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
               CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
               ClienteId: IdCliente.split(",")[0],
               ClienteNombre: IdCliente.split(",")[1],
-              Doccertificado: false,
-              AforoRuta: false,
+              Doccertificado: datosFormulario.docc,
+              AforoRuta: datosFormulario.aforo,
               Clasificacion: "string",
             };
             console.log(json);
@@ -244,6 +247,19 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
               style={{ display: "inline-block", marginLeft: "2px" }}
               {...register("docc")}
             />
+            <select
+              style={{
+                display: "inline-block",
+                marginLeft: "4px",
+                borderRadius: "5px",
+                border: "none",
+                color: "black",
+                fontSize:"12px"
+              }}
+              {...register("Clasificacion")}>
+              <option value="0">--Clasificación--</option>
+              <option value="1">IB/MP</option>
+            </select>
             <Button
               style={{
                 borderRadius: "5px",
@@ -256,8 +272,10 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
               className="bg-warning">
               Crear Json Ruta
             </Button>
-            {loading &&(
-              <p style={{display:"inline-block", marginLeft:"700px"}}>actualizando...</p>
+            {loading && (
+              <p style={{ display: "inline-block", marginLeft: "700px" }}>
+                actualizando...
+              </p>
             )}
 
             <TfiReload
@@ -298,7 +316,6 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                     alert("Error al recargar sitios y segmentos");
                     console.log(err);
                     setLoading(false);
-
                   }
                 }
               }}
@@ -377,10 +394,10 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                 {i !== Number(cantidad) - 1 && (
                   <>
                     <InputGroup className="mb-2 position-relative" size="sm">
-                      <InputGroup.Text id="inputGroup-sizing-sm">
+                      {/* <InputGroup.Text id="inputGroup-sizing-sm">
                         Segm
-                      </InputGroup.Text>
-                      <Form.Select
+                      </InputGroup.Text> */}
+                      {/* <Form.Select
                         aria-describedby="inputGroup-sizing-sm"
                         style={{ fontSize: "10px" }}
                         {...register(`segmento${i + 1}`, { required: true })}>
@@ -398,7 +415,14 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                               {segmento.Sitio1Nombre} - {segmento.Sitio2Nombre}
                             </option>
                           ))}
-                      </Form.Select>
+                      </Form.Select> */}
+                      <SearchBar
+                        items={segmentosPorCliente}
+                        register={register}
+                        setValue={setValue}
+                        i={i + 1}
+                        hija={false}
+                      />
                     </InputGroup>
                   </>
                 )}
@@ -459,7 +483,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                       <Segmentos
                         Sitio1Id={sitiosSeleccionados[i]?.sitioId}
                         Sitio2Id={sitiosSeleccionados[i + 1]?.sitioId}
-                        ClienteId= {IdCliente}
+                        ClienteId={IdCliente}
                       />
                     }
                     Nombre={
@@ -482,6 +506,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
             sitiosAduana={sitiosAduana}
             sitiosCliente={sitiosCliente}
             segmentosPorCliente={segmentosPorCliente}
+            setValue={setValue}
           />
         </Form>
       </div>
@@ -498,7 +523,8 @@ export function SitiosRutaHija({
   sitiosSeleccionados,
   sitiosAduana,
   sitiosCliente,
-  segmentosPorCliente
+  segmentosPorCliente,
+  setValue,
 }) {
   const [tiposSitio, setTiposSitio] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
@@ -590,8 +616,9 @@ export function SitiosRutaHija({
                 <InputGroup.Text
                   id="inputGroup-sizing-sm"
                   onClick={() => {
-                   alert(sitiosSeleccionados[i + Number(cantidadMadre)].sitioId);
-                    
+                    alert(
+                      sitiosSeleccionados[i + Number(cantidadMadre)].sitioId
+                    );
                   }}>
                   Sitio{i + 1}
                 </InputGroup.Text>
@@ -642,7 +669,7 @@ export function SitiosRutaHija({
               {i !== Number(cantidad) - 1 && (
                 <>
                   <InputGroup className="mb-2 position-relative" size="sm">
-                    <InputGroup.Text id="inputGroup-sizing-sm">
+                    {/* <InputGroup.Text id="inputGroup-sizing-sm">
                       Segm
                     </InputGroup.Text>
                     <Form.Select
@@ -665,7 +692,14 @@ export function SitiosRutaHija({
                             {segmento.Sitio1Nombre} - {segmento.Sitio2Nombre}
                           </option>
                         ))}
-                    </Form.Select>
+                    </Form.Select> */}
+                    <SearchBar
+                      items={segmentosPorCliente}
+                      register={register}
+                      setValue={setValue}
+                      i={i + 1}
+                      hija={true}
+                    />
                   </InputGroup>
                 </>
               )}
@@ -713,8 +747,8 @@ export function SitiosRutaHija({
                     5000
                   </option>
                   <option value="5200/ADMISION TEMP0RAL  P/ PERFECC ACTIVO SIN TRANSFOR ZOLI">
-                      5200
-                    </option>
+                    5200
+                  </option>
                 </Form.Select>
               </InputGroup>
             </div>
@@ -734,9 +768,14 @@ export function SitiosRutaHija({
                 <ModalC
                   ContenidoModal={
                     <Segmentos
-                      Sitio1Id={sitiosSeleccionados[i + Number(cantidadMadre)]?.sitioId}
-                      Sitio2Id={sitiosSeleccionados[i + 1 + Number(cantidadMadre)]?.sitioId}
-                      ClienteId= {IdCliente}
+                      Sitio1Id={
+                        sitiosSeleccionados[i + Number(cantidadMadre)]?.sitioId
+                      }
+                      Sitio2Id={
+                        sitiosSeleccionados[i + 1 + Number(cantidadMadre)]
+                          ?.sitioId
+                      }
+                      ClienteId={IdCliente}
                     />
                   }
                   Nombre={

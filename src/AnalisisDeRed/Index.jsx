@@ -7,6 +7,7 @@ import CrearRutas from "./CrearRutas/CrearRutas";
 import Hr from "./HrSo/Hr";
 import So from "./HrSo/So";
 import Sa from "./HrSo/Sa";
+import Cronometro from "./Cronometro/Cronometro";
 
 function Index() {
   return (
@@ -16,6 +17,8 @@ function Index() {
       <Cardss subModulo={"Crear HR"} Contenido={<Hr/>} Nombre="Crear" />
       <Cardss subModulo={"Crear SO"} Contenido={<So/>} Nombre="Crear" />
       <Cardss subModulo={"Crear SA"} Contenido={<Sa/>} Nombre="Crear" />
+      <Cardss subModulo={"Cronometro"} Contenido={<Cronometro/>} Nombre="Crear" />
+
 
       {/* <Cardss subModulo={"Crear Rutas 2"} Contenido={<CrearRutas/>} Nombre="Crear" /> */}
       {/* <Cardss subModulo={"Rotuladores"} Contenido={<Rotuladores/>} Nombre="Crear" /> */}

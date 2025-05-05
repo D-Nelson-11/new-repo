@@ -98,6 +98,13 @@ function CrearRutas() {
               ]}>
               CORPORACION DINANT SA DE CV
             </option>
+            <option
+              value={[
+                "691A8DEC-F8F9-4055-A405-24B2EB1B6BB2",
+                "ALSA CONSOLIDADORES S.A",
+              ]}>
+              ALSA CONSOLIDADORES S,A 
+            </option>
           </Form.Select>
         </div>
         <div className="mb-3 col-1 h-75">
