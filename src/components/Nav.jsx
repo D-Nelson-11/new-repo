@@ -2,7 +2,6 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Outlet } from "react-router-dom";
-import { Modal, Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
@@ -27,6 +26,8 @@ function BarraNavegacion() {
             {/* <Nav.Link href="/new-repo/#/Personas">Sitios</Nav.Link> */}
             <Nav.Link href="/new-repo/#/Rutas">Rutas</Nav.Link>
             <Nav.Link href="/new-repo/#/Cfo">Cfo</Nav.Link>
+            <Nav.Link href="/new-repo/#/validarR">Validar</Nav.Link>
+
           </Nav>
         </Container>
       </Navbar>

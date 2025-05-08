@@ -7,7 +7,6 @@ function ClientesSelect({ register }) {
   useEffect(() => {
     async function ObtenerDatos() {
         try {
-          console.log('vine')
         const resp2 = await axios.get(
           "https://personasapi.vesta-accelerate.com/api/PersonaClienteServiceApi/GetAllClientes"
         );
@@ -22,6 +21,7 @@ function ClientesSelect({ register }) {
         );
       } catch (error) {
         console.error(error);
+      } finally {
       }
     }
 

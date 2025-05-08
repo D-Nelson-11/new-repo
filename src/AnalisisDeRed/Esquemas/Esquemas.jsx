@@ -8,15 +8,19 @@ import jsonLaMesa from "./JSON/LaMesa.json";
 import jsonElPoy from "./JSON/ElPoy.json";
 import jsonCastilla from "./JSON/puertoCastilla.json";
 import ClientesSelect from "../../components/ClientesSelect";
-
+import jsonToncontin from "./JSON/Toncontin.json";
+import axios from "../../api/axios";
 
 function Esquemas() {
-  const { handleSubmit, register, setValue } = useForm();
+  const { handleSubmit, register, setValue, getValues } = useForm();
   const [EsquemaAmatillo, setEsquemaAmatillo] = useState(jsonAmatillo);
   const [EsquemaCortes, setEsquemaCortes] = useState(jsonPtoCortes);
   const [EsquemaLaMesa, setEsquemaLaMesa] = useState(jsonLaMesa);
   const [EsquemaElPoy, setEsquemaElPoy] = useState(jsonElPoy);
   const [EsquemaCastilla, setEsquemaCastilla] = useState(jsonCastilla);
+  const [EsquemaToncontin, setEsquemaToncontin] = useState(jsonToncontin);
+  const [sitiosPorRuta, setSitiosPorRuta] = useState([]);
+
   const [textAreaValue, setTextAreaValue] = useState("");
 
   const onSubmit = (values) => {
@@ -27,7 +31,6 @@ function Esquemas() {
         esquema.SitioPorRutaId = values.SitioXRuta;
         esquema.ClienteNombre = values.Cliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
-
       });
 
       setTextAreaValue(JSON.stringify(updatedEsquemaAmatillo, null, 2));
@@ -36,7 +39,7 @@ function Esquemas() {
       updatedEsquemaCortes.Esquemas.forEach((esquema) => {
         esquema.ClienteId = values.Cliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre =  values.Cliente.split(",")[1];
+        esquema.ClienteNombre = values.Cliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
       });
 
@@ -46,7 +49,7 @@ function Esquemas() {
       updatedEsquemaLaMesa.Esquemas.forEach((esquema) => {
         esquema.ClienteId = values.Cliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre =  values.Cliente.split(",")[1];
+        esquema.ClienteNombre = values.Cliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
       });
 
@@ -56,25 +59,37 @@ function Esquemas() {
       updatedEsquemaElPoy.Esquemas.forEach((esquema) => {
         esquema.ClienteId = values.Cliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre =  values.Cliente.split(",")[1];
+        esquema.ClienteNombre = values.Cliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
       });
 
       setTextAreaValue(JSON.stringify(updatedEsquemaElPoy, null, 2));
-    }else if (values.esquemaNombre == 2) {
+    } else if (values.esquemaNombre == 2) {
       const updatedEsquemaCastilla = { ...EsquemaCastilla };
       updatedEsquemaCastilla.Esquemas.forEach((esquema) => {
         esquema.ClienteId = values.Cliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre =  values.Cliente.split(",")[1];
+        esquema.ClienteNombre = values.Cliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
       });
 
       setTextAreaValue(JSON.stringify(updatedEsquemaCastilla, null, 2));
+    } else if (values.esquemaNombre == 6) {
+      const updatedEsquemaToncontin = { ...EsquemaToncontin };
+      updatedEsquemaToncontin.Esquemas.forEach((esquema) => {
+        esquema.ClienteId = values.Cliente.split(",")[0];
+        esquema.SitioPorRutaId = values.SitioXRuta;
+        esquema.ClienteNombre = values.Cliente.split(",")[1];
+        esquema.UsuarioId = values.IdUsuario;
+      });
+
+      setTextAreaValue(JSON.stringify(updatedEsquemaToncontin, null, 2));
     }
   };
 
- 
+  function handleIsLoading(isLoading) {
+    setIsloading(isLoading);
+  }
 
   return (
     <div className="d-flex w-100 justify-content-between">
@@ -93,33 +108,51 @@ function Esquemas() {
               <option value="3">Puerto Cortés</option>
               <option value="4">La Mesa</option>
               <option value="5">El Poy</option>
+              <option value="6">Toncontin</option>
             </Form.Select>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Sitio Por Ruta</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder=""
-              {...register("SitioXRuta", { required: true })}
-            />
+            <Form.Label>RutaId</Form.Label>
+            <div className="d-flex gap-1">
+              <Form.Control
+                type="text"
+                placeholder=""
+                {...register("RutaId", { required: true })}
+                style={{ width: "65%" }}              />
+              <Button
+                onClick={async () => {
+                  try {
+                    const resp = await axios.post(
+                      "https://analisisderedapi.vesta-accelerate.com/api/SitioPorRutaCrudApi/Index",
+                      { RutaId: getValues("RutaId") }
+                    );
+                    console.log(resp.data);
+                    setSitiosPorRuta(resp.data.Message);
+                  } catch (error) {
+                    console.error(error);
+                    alert("errror chele");
+                  }
+                }}
+                variant="success"
+                style={{ width: "45%" }}>
+                Buscar Sitios
+              </Button>
+            </div>
           </Form.Group>
-          {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>ClienteId</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder=""
-              {...register("ClienteId", { required: true })}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Nombre Cliente</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder=""
-              {...register("NombreCliente", { required: true })}
-            />
-          </Form.Group> */}
+
+          {sitiosPorRuta.length > 0 && (
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Sitios</Form.Label>
+              <Form.Select {...register("SitioXRuta", { required: true })}>
+                {sitiosPorRuta.map((sitio) => (
+                  <option key={sitio.Id} value={sitio.Id}>
+                    {sitio.SitioNombre}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+          )}
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Cliente</Form.Label>
             <ClientesSelect register={register} />

@@ -100,28 +100,7 @@ function So() {
           console.log('CriterioAnalisisEncabezadoId: ' + resp6.data.Id);
         })}>
         <Row>
-          <Col>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Nombre Solicitud SO</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Nombre"
-                {...register("NombreSolicitudSo", { required: true })}
-              />
-            </Form.Group>
-          </Col>
-          {/* <Col>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Nombre Solicitud ar</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Nombre"
-                {...register("NombreSolicitudAr", { required: true })}
-              />
-            </Form.Group>
-          </Col> */}
-        </Row>
-        <Row>
+        
           <Col>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Nombre Encabezado</Form.Label>
@@ -132,6 +111,19 @@ function So() {
               />
             </Form.Group>
           </Col>
+        </Row>
+        <Row>
+        <Col>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Nombre Solicitud SO</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Nombre"
+                {...register("NombreSolicitudSo", { required: true })}
+              />
+            </Form.Group>
+          </Col>
+       
           <Col>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Nombre Criterio</Form.Label>

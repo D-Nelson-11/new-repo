@@ -446,6 +446,10 @@ export default function Sku() {
                   const updatedJsonTipoEmbalaje = { ...jsonTipoEmbalaje[4] };
                   updatedJsonTipoEmbalaje.SkuId = values.SkuId;
                   setTextArea(JSON.stringify(updatedJsonTipoEmbalaje, null, 2));
+                }else if (values.tipoEmbalaje == 6) {
+                  const updatedJsonTipoEmbalaje = { ...jsonTipoEmbalaje[5] };
+                  updatedJsonTipoEmbalaje.SkuId = values.SkuId;
+                  setTextArea(JSON.stringify(updatedJsonTipoEmbalaje, null, 2));
                 }
               } else {
                 if (stage == "1") {
@@ -493,6 +497,8 @@ export default function Sku() {
                   <option value="3">Caja</option>
                   <option value="4">Bolsa</option>
                   <option value="5">Lamina</option>
+                  <option value="6">Sacos</option>
+
                 </Form.Select>
               </Col>
             </Row>

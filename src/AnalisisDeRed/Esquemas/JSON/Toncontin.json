@@ -1,0 +1,101 @@
+{
+    "Esquemas":[
+    {
+      "EsquemaId": "BE237A0F-39AE-4AA2-A54A-164158601631",
+      "SitioPorRutaId": "764E934E-7B16-4045-855C-24B70B9AD162",
+      "Orden": 1,
+      "ClienteId": "E1AF4FA8-8246-4EE6-B13F-0F29BE44BAC6",
+      "ClienteNombre": "CROWLEY LOGISTICS INC",
+      "Descripcion": "Inicio de Tramitador",
+      "Requerido": true,
+      "UsuarioId": "3791EBFC-253A-4928-9E3C-24A4978C19C4",
+      "EsquemaTramitador": true,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "4D708BF5-9D3E-48E9-AB7C-14F5B438B360",
+      "SitioPorRutaId": "764E934E-7B16-4045-855C-24B70B9AD162",
+      "Orden": 2,
+      "ClienteId": "E1AF4FA8-8246-4EE6-B13F-0F29BE44BAC6",
+      "ClienteNombre": "CROWLEY LOGISTICS INC",
+      "Descripcion": "Presentación",
+      "Requerido": true,
+      "UsuarioId": "3791EBFC-253A-4928-9E3C-24A4978C19C5",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "07D47B10-6ADA-456A-8036-1D643E769D28",
+      "SitioPorRutaId": "764E934E-7B16-4045-855C-24B70B9AD162",
+      "Orden": 3,
+      "ClienteId": "E1AF4FA8-8246-4EE6-B13F-0F29BE44BAC6",
+      "ClienteNombre": "CROWLEY LOGISTICS INC",
+      "Descripcion": "Inspección",
+      "Requerido": false,
+      "UsuarioId": "3791EBFC-253A-4928-9E3C-24A4978C19C6",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "694153C9-869E-4127-AE18-220714274189",
+      "SitioPorRutaId": "764E934E-7B16-4045-855C-24B70B9AD162",
+      "Orden": 4,
+      "ClienteId": "E1AF4FA8-8246-4EE6-B13F-0F29BE44BAC6",
+      "ClienteNombre": "CROWLEY LOGISTICS INC",
+      "Descripcion": "Diagnostico de Plaga",
+      "Requerido": false,
+      "UsuarioId": "3791EBFC-253A-4928-9E3C-24A4978C19C7",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "E8011FF9-F253-4831-BD72-22096517CBB0",
+      "SitioPorRutaId": "764E934E-7B16-4045-855C-24B70B9AD162",
+      "Orden": 5,
+      "ClienteId": "E1AF4FA8-8246-4EE6-B13F-0F29BE44BAC6",
+      "ClienteNombre": "CROWLEY LOGISTICS INC",
+      "Descripcion": "Fumigación",
+      "Requerido": false,
+      "UsuarioId": "3791EBFC-253A-4928-9E3C-24A4978C19C8",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "1B894327-01DE-4F3D-ABB5-1641544D66E0",
+      "SitioPorRutaId": "764E934E-7B16-4045-855C-24B70B9AD162",
+      "Orden": 6,
+      "ClienteId": "E1AF4FA8-8246-4EE6-B13F-0F29BE44BAC6",
+      "ClienteNombre": "CROWLEY LOGISTICS INC",
+      "Descripcion": "Liberacion Post Revision",
+      "Requerido": false,
+      "UsuarioId": "3791EBFC-253A-4928-9E3C-24A4978C19C9",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "19083163-A403-4FB8-8DD5-215C4C4BEFCC",
+      "SitioPorRutaId": "764E934E-7B16-4045-855C-24B70B9AD162",
+      "Orden": 7,
+      "ClienteId": "E1AF4FA8-8246-4EE6-B13F-0F29BE44BAC6",
+      "ClienteNombre": "CROWLEY LOGISTICS INC",
+      "Descripcion": "Liberacion Aduana",
+      "Requerido": true,
+      "UsuarioId": "3791EBFC-253A-4928-9E3C-24A4978C19C9",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "C360E3E8-7463-451B-B5A7-215C4E617B03",
+      "SitioPorRutaId": "764E934E-7B16-4045-855C-24B70B9AD162",
+      "Orden": 8,
+      "ClienteId": "E1AF4FA8-8246-4EE6-B13F-0F29BE44BAC6",
+      "ClienteNombre": "CROWLEY LOGISTICS INC",
+      "Descripcion": "Despacho",
+      "Requerido": true,
+      "UsuarioId": "3791EBFC-253A-4928-9E3C-24A4978C19C9",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    }
+  ]
+  }
+  

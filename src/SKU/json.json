@@ -32,7 +32,7 @@
     "TipoEmbalajeId": "4300448F-7EAC-4CB6-A54F-1DC21B800F2C",
     "UnidadMedida": "UNIDAD",
     "UnidadesxEmbalaje": 1,
-    "PesoxPallet":800,
+    "PesoxPallet": 800,
     "PesoxEmbalaje": 0,
     "UnidadesxPallet": 800,
     "PesoxEmbalajeProducto": 0,
@@ -68,5 +68,19 @@
     "Anchomm": 1,
     "Altomm": 1,
     "UnidadMedidaId": 44
+  },
+  {
+    "SkuId": "",
+    "TipoEmbalajeId": "F125C166-0DF3-48A8-ADCE-17055DFBD5FB",
+    "UnidadMedida": "KILOGRAMOS",
+    "UnidadesxEmbalaje": 0,
+    "PesoxPallet": 24.5,
+    "PesoxEmbalaje": 0,
+    "UnidadesxPallet": 0,
+    "PesoxEmbalajeProducto": 0.8,
+    "Largomm": 0,
+    "Anchomm": 0,
+    "Altomm": 0,
+    "UnidadMedidaId": 1
   }
 ]
