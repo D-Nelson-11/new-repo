@@ -76,6 +76,14 @@ function CrearRutas() {
       id: "27276913-746D-4188-B747-138B2093C5A3",
       nombre: "INTERTIENDAS DE HONDURAS SA",
     },
+    {
+      id: "EBF43773-E4A0-4357-897E-149A81C84AAA",
+      nombre: "CARGILL DE NICARAGUA",
+    },
+    {
+      id: "042E6402-7EFB-4415-962B-2707B4AA5BF2",
+      nombre: "CORPORACION PIPASA, S.R.L",
+    },
   ];
 
   return (
@@ -84,11 +92,13 @@ function CrearRutas() {
         <div className="mb-3 col-2 h-75">
           <Form.Select {...form1.register("IdCliente", { required: true })}>
             <option value="">--Seleccione Cliente--</option>
-            {clientes.map((cliente) => (
-              <option key={cliente.id} value={[cliente.id, cliente.nombre]}>
-                {cliente.nombre}
-              </option>
-            ))}
+            {clientes
+              .sort((a, b) => a.nombre.localeCompare(b.nombre))
+              .map((cliente) => (
+                <option key={cliente.id} value={[cliente.id, cliente.nombre]}>
+                  {cliente.nombre}
+                </option>
+              ))}
           </Form.Select>
         </div>
         <div className="mb-3 col-1 h-75">
