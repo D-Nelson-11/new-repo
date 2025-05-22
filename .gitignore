@@ -23,6 +23,6 @@ PruebaRutas
 *.njsproj
 *.sln
 *.sw?
-ModalRutas
-Tabla
-ValidarRutas
+ModalRutas.jsx
+Tabla.jsx
+ValidarRutas.jsx
