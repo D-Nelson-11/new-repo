@@ -145,12 +145,12 @@ export function RutaSimple({ cantidad, IdCliente }) {
                 }),
               LineaProducto: "Inbound",
               RutaCompuesta: [],
-              CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+              CreatedBy: datosFormulario.CreadaPor,
               ClienteId: IdCliente.split(",")[0],
               ClienteNombre: IdCliente.split(",")[1],
               Doccertificado: datosFormulario.docc,
               AforoRuta: datosFormulario.aforo,
-              Clasificacion: "IB/PT",
+              Clasificacion: datosFormulario.Clasificacion,
             };
             console.log(json);
             // Abrir nueva ventana
@@ -215,8 +215,40 @@ export function RutaSimple({ cantidad, IdCliente }) {
                 fontSize: "12px",
               }}
               {...register("Clasificacion")}>
-              <option value="0">--Clasificación--</option>
-              <option value="1">IB/MP</option>
+              <option value="">--Clasificacion--</option>
+              <option value="IB/CPG/MP-Empaque">IB/CPG/MP-Empaque</option>
+              <option value="IB/CPG/MP-Contenerizado">
+                IB/CPG/MP-Contenerizado
+              </option>
+              <option value="IB/CPG/MP-Refrigerado">
+                IB/CPG/MP-Refrigerado
+              </option>
+              <option value="IB/CPG/PT">IB/CPG/PT</option>
+              <option value="IB/CPG/M&P">IB/CPG/M&P</option>
+              <option value="IB/RETAIL/PT">IB/RETAIL/PT</option>
+              <option value="IB/ENERGIA/M&P">IB/ENERGIA/M&P</option>
+              <option value="IB/LSP">IB/LSP</option>
+            </select>
+            <select
+              style={{
+                display: "inline-block",
+                marginLeft: "4px",
+                borderRadius: "5px",
+                border: "none",
+                color: "black",
+                fontSize: "12px",
+              }}
+              {...register("CreadaPor", { required: true })}>
+              <option value="">--CreadaPor--</option>
+              <option value="F41CE2B9-F392-4198-8E2F-1329C96111C9">
+                Gabriela
+              </option>
+              <option value="C183E6D0-6855-4613-A85D-24F1E30E165E">
+                Fredy
+              </option>
+              <option value="0C3A7B92-34D7-453A-883F-24C15B24FF6A">
+                David
+              </option>
             </select>
             <Button
               style={{

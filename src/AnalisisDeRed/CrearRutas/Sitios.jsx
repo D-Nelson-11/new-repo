@@ -8,6 +8,7 @@ import { TfiReload } from "react-icons/tfi";
 import { useForm } from "react-hook-form";
 import { FaPlaneDeparture } from "react-icons/fa";
 import SearchBar from "../../components/SearchBar";
+import { datos } from "../../../../server/helper";
 export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
   let [sitiosAduana, setSitiosAduana] = useState([]);
   let [sitiosCliente, setSitiosCliente] = useState([]);
@@ -178,7 +179,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                   ),
                   LineaProducto: "Inbound",
                   RutaCompuesta: [],
-                  CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+                  CreatedBy: datosFormulario.CreadaPor,
                   ClienteId: IdCliente.split(",")[0],
                   ClienteNombre: IdCliente.split(",")[1],
                   Doccertificado: datosFormulario.docc,
@@ -186,7 +187,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                   Clasificacion: datosFormulario.Clasificacion,
                 },
               ],
-              CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+              CreatedBy: datosFormulario.CreadaPor,
               ClienteId: IdCliente.split(",")[0],
               ClienteNombre: IdCliente.split(",")[1],
               Doccertificado: datosFormulario.docc,
@@ -257,7 +258,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                 fontSize:"12px"
               }}
               {...register("Clasificacion")}>
-              <option value="">Clasificacion</option>
+              <option value="">--Clasificacion--</option>
               <option value="IB/CPG/MP-Empaque">IB/CPG/MP-Empaque</option>
               <option value="IB/CPG/MP-Contenerizado">IB/CPG/MP-Contenerizado</option>
               <option value="IB/CPG/MP-Refrigerado">IB/CPG/MP-Refrigerado</option>
@@ -266,6 +267,21 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
               <option value="IB/RETAIL/PT">IB/RETAIL/PT</option>
               <option value="IB/ENERGIA/M&P">IB/ENERGIA/M&P</option>
               <option value="IB/LSP">IB/LSP</option>
+            </select>
+             <select
+              style={{
+                display: "inline-block",
+                marginLeft: "4px",
+                borderRadius: "5px",
+                border: "none",
+                color: "black",
+                fontSize:"12px"
+              }}
+              {...register("CreadaPor",{ required: true })}>
+              <option value="">--CreadaPor--</option>
+              <option value="F41CE2B9-F392-4198-8E2F-1329C96111C9">Gabriela</option>
+              <option value="C183E6D0-6855-4613-A85D-24F1E30E165E">Fredy</option>
+              <option value="0C3A7B92-34D7-453A-883F-24C15B24FF6A">David</option>
             </select>
             <Button
               style={{
@@ -280,7 +296,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
               Crear Json Ruta
             </Button>
             {loading && (
-              <p style={{ display: "inline-block", marginLeft: "700px" }}>
+              <p style={{ display: "inline-block", marginLeft: "600px" }}>
                 actualizando...
               </p>
             )}
@@ -292,7 +308,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                 borderRadius: "5px",
                 color: "white",
                 padding: "2px",
-                marginLeft: !loading ? "800" : "10px",
+                marginLeft: !loading ? "700" : "10px",
                 cursor: "pointer",
               }}
               onClick={async () => {
