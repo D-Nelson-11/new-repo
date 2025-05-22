@@ -90,6 +90,10 @@ import { RutaSimple } from "./Simple";
       id: "9136ACD5-D43F-49E4-82FD-1DEA3C8C5A0B",
       nombre: "LIVSMART AMERICAS, S.A. DE C.V.",
     },
+    {
+      id: "A5070E56-D359-4FF1-A4AE-0F27F4532303",
+      nombre: "COMPAÑIA INDUST LIDO-POZUELO SA CV",
+    },
   ];
 
 function CrearRutas() {
