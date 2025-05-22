@@ -189,6 +189,7 @@ export default function Sku() {
                         setCategoriaVestaId(e.target.value.split(",")[0]);
                         form2.setValue("CategoriaVestaId", e.target.value.split(",")[0]);
                 }}>
+                  <option value="">--Seleccione--</option>
                   {categorias.length > 0 &&
                     categorias.map((categoria) => (
                       <option

@@ -1,9 +1,6 @@
-import React from "react";
 import Cardss from "../components/Cardss";
 import { Container } from "react-bootstrap";
 import Esquemas from './Esquemas/Esquemas'
-import PruebaRutas from "../PruebaRutas/PruebaRutas";
-import CrearRutas from "./CrearRutas/CrearRutas";
 import Hr from "./HrSo/Hr";
 import So from "./HrSo/So";
 import Sa from "./HrSo/Sa";

@@ -183,7 +183,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                   ClienteNombre: IdCliente.split(",")[1],
                   Doccertificado: datosFormulario.docc,
                   AforoRuta: datosFormulario.aforo,
-                  Clasificacion: "string",
+                  Clasificacion: datosFormulario.Clasificacion,
                 },
               ],
               CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
@@ -191,7 +191,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
               ClienteNombre: IdCliente.split(",")[1],
               Doccertificado: datosFormulario.docc,
               AforoRuta: datosFormulario.aforo,
-              Clasificacion: "string",
+              Clasificacion: datosFormulario.Clasificacion,
             };
             console.log(json);
             // Abrir nueva ventana
@@ -257,8 +257,15 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                 fontSize:"12px"
               }}
               {...register("Clasificacion")}>
-              <option value="0">--Clasificación--</option>
-              <option value="1">IB/MP</option>
+              <option value="">Clasificacion</option>
+              <option value="IB/CPG/MP-Empaque">IB/CPG/MP-Empaque</option>
+              <option value="IB/CPG/MP-Contenerizado">IB/CPG/MP-Contenerizado</option>
+              <option value="IB/CPG/MP-Refrigerado">IB/CPG/MP-Refrigerado</option>
+              <option value="IB/CPG/PT">IB/CPG/PT</option>
+              <option value="IB/CPG/M&P">IB/CPG/M&P</option>
+              <option value="IB/RETAIL/PT">IB/RETAIL/PT</option>
+              <option value="IB/ENERGIA/M&P">IB/ENERGIA/M&P</option>
+              <option value="IB/LSP">IB/LSP</option>
             </select>
             <Button
               style={{

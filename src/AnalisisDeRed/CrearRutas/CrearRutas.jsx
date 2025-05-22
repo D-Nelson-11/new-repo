@@ -5,12 +5,7 @@ import { useState } from "react";
 import { SitiosRutaMadre } from "./Sitios";
 import { RutaSimple } from "./Simple";
 
-function CrearRutas() {
-  const form1 = useForm();
-  let [tipoRuta, setTipoRuta] = useState("");
-  let [sitios, setSitios] = useState(false);
-
-  const clientes = [
+ export const clientes = [
     {
       id: "1194ba34-fcb6-433d-863a-0f25da9a6522",
       nombre: "CARGILL DE HONDURAS",
@@ -88,7 +83,19 @@ function CrearRutas() {
       id: "11633EC3-0487-4D15-B384-0F27F8CFF578",
       nombre: "UNO HONDURAS S.A. DE C.V.",
     },
+      {
+      id: "4A84BBCC-5A43-400A-AC17-0F27ED3BA39C",
+      nombre: "EMBOTELLADORA LA REYNA S.A DE C.V.",
+    }, {
+      id: "9136ACD5-D43F-49E4-82FD-1DEA3C8C5A0B",
+      nombre: "LIVSMART AMERICAS, S.A. DE C.V.",
+    },
   ];
+
+function CrearRutas() {
+  const form1 = useForm();
+  let [tipoRuta, setTipoRuta] = useState("");
+  let [sitios, setSitios] = useState(false);
 
   return (
     <Container className="w-100 mt-2" fluid>

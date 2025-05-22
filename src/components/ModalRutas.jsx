@@ -1,0 +1,31 @@
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import { useState } from "react";
+
+function ModalRutas({ renderContenido, Nombre }) {
+  const [lgShow, setLgShow] = useState(false);
+
+  return (
+    <>
+      <Button
+        onClick={() => setLgShow(true)}
+        style={{ backgroundColor: "#4375b4", border: "none" }}>
+        {Nombre}
+      </Button>
+      <Modal
+        size="xl"
+        show={lgShow}
+        onHide={() => setLgShow(false)}
+        aria-labelledby="example-modal-sizes-title-lg">
+        <Modal.Header closeButton />
+        <Modal.Body
+          className="d-flex justify-content-between"
+          style={{ height: "630px" }}>
+          {renderContenido?.()}
+        </Modal.Body>
+      </Modal>
+    </>
+  );
+}
+
+export default ModalRutas;
