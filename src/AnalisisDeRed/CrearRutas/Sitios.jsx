@@ -8,7 +8,6 @@ import { TfiReload } from "react-icons/tfi";
 import { useForm } from "react-hook-form";
 import { FaPlaneDeparture } from "react-icons/fa";
 import SearchBar from "../../components/SearchBar";
-import { datos } from "../../../../server/helper";
 export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
   let [sitiosAduana, setSitiosAduana] = useState([]);
   let [sitiosCliente, setSitiosCliente] = useState([]);
