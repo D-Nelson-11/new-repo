@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "../public/SearchBar.module.css"; // Suponiendo que usas CSS Modules
 
-const SearchBar = ({ items, register, setValue, i,hija }) => {
+const SearchBar = ({ items, register, setValue, i, hija, getValues }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [IdSegmento, setIdSegmento] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
   const searchBarRef = useRef(null); // Referencia al contenedor de la barra de búsqueda
 
@@ -49,55 +48,78 @@ const SearchBar = ({ items, register, setValue, i,hija }) => {
           backgroundColor: "#f7faf8 ",
           borderRadius: "3px",
           borderRight: "1px solid #ccc",
-          padding:"5px",
+          padding: "5px",
+        }}
+        onClick={() => {
+          const idBuscado = hija ? getValues(`segmentoH${i}`) : getValues(`segmento${i}`);
+          const itemSeleccionado = items.find((item) => item.Id === idBuscado);
+
+          if (itemSeleccionado) {
+            alert(
+              `sitio1Id: ${itemSeleccionado.Sitio1Id}\nsitio2Id: ${itemSeleccionado.Sitio2Id}`
+            );
+          } else {
+            alert("No se encontró el segmento");
+          }
         }}>
         Segm
       </label>
-      <input type="hidden" {...register(hija ? `segmentoH${i}`:`segmento${i}` )} />
-      {!hija ? (
-          <input
-            type="text"
-            placeholder="Buscar..."
-            {...register(`Nsegmento${i}`)}
-            onChange={handleSearch}
-            className={styles.search_input}
-          />
-      ):(
-        <input
-        type="text"
-        placeholder="Buscar..."
-        {...register(`NsegmentoH${i}`)}
-        onChange={handleSearch}
-        className={styles.search_input}
+      <input
+        type="hidden"
+        {...register(hija ? `segmentoH${i}` : `segmento${i}`)}
       />
+      {!hija ? (
+        <input
+          type="text"
+          autoComplete="off"
+          placeholder="Buscar..."
+          {...register(`Nsegmento${i}`)}
+          onChange={handleSearch}
+          className={styles.search_input}
+        />
+      ) : (
+        <input
+          type="text"
+          placeholder="Buscar..."
+          {...register(`NsegmentoH${i}`)}
+          onChange={handleSearch}
+          className={styles.search_input}
+        />
       )}
       {searchTerm && (
         <ul className={styles.search_results}>
-          {filteredItems.map((item, index) => (
-            <li
-              style={{ fontSize: "10px" }}
-              key={index}
-              className={styles.search_item}
-              onClick={() => {
-            
-                if (hija) {
+          {filteredItems
+            .sort((a, b) => {
+              const nameA =
+                `${a.Sitio1Nombre} - ${a.Sitio2Nombre}`.toLowerCase();
+              const nameB =
+                `${b.Sitio1Nombre} - ${b.Sitio2Nombre}`.toLowerCase();
+              return nameA.localeCompare(nameB);
+            })
+            .map((item, index) => (
+              <li
+                style={{ fontSize: "10px" }}
+                key={index}
+                className={styles.search_item}
+                onClick={() => {
+                  if (hija) {
                     setValue(
-                        `NsegmentoH${i}`,
-                        `${item.Sitio1Nombre} - ${item.Sitio2Nombre}`
-                      ); // Actualiza el valor del input
-                    setValue(`segmentoH${i}`, item.Id); // Actualiza el valor del input
-                }else{
+                      `NsegmentoH${i}`,
+                      `${item.Sitio1Nombre} - ${item.Sitio2Nombre}`
+                    );
+                    setValue(`segmentoH${i}`, item.Id);
+                  } else {
                     setValue(
-                        `Nsegmento${i}`,
-                        `${item.Sitio1Nombre} - ${item.Sitio2Nombre}`
-                      ); // Actualiza el valor del input
-                    setValue(`segmento${i}`, item.Id); // Actualiza el valor del input
-                }
-                setSearchTerm("");
-              }}>
-              {item.Sitio1Nombre} - {item.Sitio2Nombre}
-            </li>
-          ))}
+                      `Nsegmento${i}`,
+                      `${item.Sitio1Nombre} - ${item.Sitio2Nombre}`
+                    );
+                    setValue(`segmento${i}`, item.Id);
+                  }
+                  setSearchTerm("");
+                }}>
+                {item.Sitio1Nombre} - {item.Sitio2Nombre}
+              </li>
+            ))}
         </ul>
       )}
     </div>

@@ -117,7 +117,9 @@ function CrearRutas() {
           </Form.Select>
         </div>
         <div className="mb-3 col-1 h-75">
-          <Form.Select onChange={(e) => setTipoRuta(e.target.value)}>
+          <Form.Select onChange={(e) => {
+            setSitios(false);
+            setTipoRuta(e.target.value)}}>
             <option value="">Tipo Ruta</option>
             <option value="compuesta">Compuesta</option>
             <option value="simple">Simple</option>

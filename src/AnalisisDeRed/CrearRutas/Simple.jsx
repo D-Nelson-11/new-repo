@@ -7,6 +7,7 @@ import Segmentos from "../../Persona/Segmentos/Segmentos";
 import { TfiReload } from "react-icons/tfi";
 import { useForm } from "react-hook-form";
 import { FaPlaneDeparture } from "react-icons/fa";
+import SearchBar from "../../components/SearchBar";
 
 export function RutaSimple({ cantidad, IdCliente }) {
   let [sitiosAduana, setSitiosAduana] = useState([]);
@@ -16,7 +17,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
   const [sitiosSeleccionados, setSitiosSeleccionados] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredSitios, setFilteredSitios] = useState([]);
-  const { register, getValues, handleSubmit } = useForm();
+  const { register, getValues, handleSubmit, setValue } = useForm();
   let datosFormulario = {};
 
   const handleTipoSitioChange = (index, value) => {
@@ -226,8 +227,10 @@ export function RutaSimple({ cantidad, IdCliente }) {
               <option value="IB/CPG/PT">IB/CPG/PT</option>
               <option value="IB/CPG/M&P">IB/CPG/M&P</option>
               <option value="IB/RETAIL/PT">IB/RETAIL/PT</option>
-              <option value="IB/ENERGIA/M&P">IB/ENERGIA/M&P</option>
+              <option value="IB/M&P">IB/M&P</option>
               <option value="IB/LSP">IB/LSP</option>
+              <option value="IB/PT">IB/PT</option>
+
             </select>
             <select
               style={{
@@ -248,6 +251,9 @@ export function RutaSimple({ cantidad, IdCliente }) {
               </option>
               <option value="0C3A7B92-34D7-453A-883F-24C15B24FF6A">
                 David
+              </option>
+              <option value="3193F743-6761-45EB-BFED-26A60DD442D5">
+                Nohelia
               </option>
             </select>
             <Button
@@ -329,6 +335,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
                   </InputGroup.Text>
                   <Form.Control
                     type="text"
+                    autoComplete="off"
                     placeholder="Buscar sitio"
                     name={`Sitio${i + 1}`}
                     value={tiposSitio[`searchTerm_${i}`] || ""}
@@ -375,28 +382,14 @@ export function RutaSimple({ cantidad, IdCliente }) {
                 {i !== Number(cantidad) - 1 && (
                   <>
                     <InputGroup className="mb-2 position-relative" size="sm">
-                      <InputGroup.Text id="inputGroup-sizing-sm">
-                        Segm
-                      </InputGroup.Text>
-                      <Form.Select
-                        aria-describedby="inputGroup-sizing-sm"
-                        style={{ fontSize: "10px" }}
-                        {...register(`segmento${i + 1}`, { required: true })}>
-                        <option value="">--seleccione--</option>
-                        {segmentosPorCliente
-                          .sort((a, b) => {
-                            const nombreA =
-                              `${a.Sitio1Nombre} ${a.Sitio2Nombre}`.toLowerCase();
-                            const nombreB =
-                              `${b.Sitio1Nombre} ${b.Sitio2Nombre}`.toLowerCase();
-                            return nombreA.localeCompare(nombreB);
-                          })
-                          .map((segmento) => (
-                            <option key={segmento.Id} value={segmento.Id}>
-                              {segmento.Sitio1Nombre} - {segmento.Sitio2Nombre}
-                            </option>
-                          ))}
-                      </Form.Select>
+                      <SearchBar
+                        items={segmentosPorCliente}
+                        register={register}
+                        setValue={setValue}
+                        i={i + 1}
+                        hija={false}
+                        getValues={getValues}
+                      />
                     </InputGroup>
                   </>
                 )}

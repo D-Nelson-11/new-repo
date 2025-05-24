@@ -72,6 +72,8 @@ function SkuEmbalajes() {
                   <option value="d25d5f79-feb1-40da-ba74-1da1b67333cd">Lamina</option>
                   <option value="4ce88b3f-5569-4ea0-bbe4-1dda85eb7eea">Unidad</option>
                   <option value="F125C166-0DF3-48A8-ADCE-17055DFBD5FB">Sacos</option>
+                  <option value="c7d4a814-4d4e-4905-9016-22eaab9d7d60">Pipas</option>
+
               </Form.Select>
             </Col>
           </Row>

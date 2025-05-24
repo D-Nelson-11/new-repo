@@ -264,8 +264,10 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
               <option value="IB/CPG/PT">IB/CPG/PT</option>
               <option value="IB/CPG/M&P">IB/CPG/M&P</option>
               <option value="IB/RETAIL/PT">IB/RETAIL/PT</option>
-              <option value="IB/ENERGIA/M&P">IB/ENERGIA/M&P</option>
+              <option value="IB/M&P">IB/M&P</option>
               <option value="IB/LSP">IB/LSP</option>
+              <option value="IB/PT">IB/PT</option>
+
             </select>
              <select
               style={{
@@ -281,6 +283,8 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
               <option value="F41CE2B9-F392-4198-8E2F-1329C96111C9">Gabriela</option>
               <option value="C183E6D0-6855-4613-A85D-24F1E30E165E">Fredy</option>
               <option value="0C3A7B92-34D7-453A-883F-24C15B24FF6A">David</option>
+              <option value="3193F743-6761-45EB-BFED-26A60DD442D5">Nohelia</option>
+
             </select>
             <Button
               style={{
@@ -371,6 +375,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                   </InputGroup.Text>
                   <Form.Control
                     type="text"
+                    autoComplete="off"
                     placeholder="Buscar sitio"
                     name={`Sitio${i + 1}`}
                     value={tiposSitio[`searchTerm_${i}`] || ""}
@@ -412,38 +417,17 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                       </div>
                     )}
                 </InputGroup>
-                {/* Otros campos */}
+                {/* segmentos */}
                 {i !== Number(cantidad) - 1 && (
                   <>
                     <InputGroup className="mb-2 position-relative" size="sm">
-                      {/* <InputGroup.Text id="inputGroup-sizing-sm">
-                        Segm
-                      </InputGroup.Text> */}
-                      {/* <Form.Select
-                        aria-describedby="inputGroup-sizing-sm"
-                        style={{ fontSize: "10px" }}
-                        {...register(`segmento${i + 1}`, { required: true })}>
-                        <option value="">--seleccione--</option>
-                        {segmentosPorCliente
-                          .sort((a, b) => {
-                            const nombreA =
-                              `${a.Sitio1Nombre} ${a.Sitio2Nombre}`.toLowerCase();
-                            const nombreB =
-                              `${b.Sitio1Nombre} ${b.Sitio2Nombre}`.toLowerCase();
-                            return nombreA.localeCompare(nombreB);
-                          })
-                          .map((segmento) => (
-                            <option key={segmento.Id} value={segmento.Id}>
-                              {segmento.Sitio1Nombre} - {segmento.Sitio2Nombre}
-                            </option>
-                          ))}
-                      </Form.Select> */}
                       <SearchBar
                         items={segmentosPorCliente}
                         register={register}
                         setValue={setValue}
                         i={i + 1}
                         hija={false}
+                        getValues={getValues}
                       />
                     </InputGroup>
                   </>
@@ -529,6 +513,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
             sitiosCliente={sitiosCliente}
             segmentosPorCliente={segmentosPorCliente}
             setValue={setValue}
+            getValues={getValues}
           />
         </Form>
       </div>
@@ -547,6 +532,7 @@ export function SitiosRutaHija({
   sitiosCliente,
   segmentosPorCliente,
   setValue,
+  getValues
 }) {
   const [tiposSitio, setTiposSitio] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
@@ -691,36 +677,13 @@ export function SitiosRutaHija({
               {i !== Number(cantidad) - 1 && (
                 <>
                   <InputGroup className="mb-2 position-relative" size="sm">
-                    {/* <InputGroup.Text id="inputGroup-sizing-sm">
-                      Segm
-                    </InputGroup.Text>
-                    <Form.Select
-                      aria-describedby="inputGroup-sizing-sm"
-                      style={{ fontSize: "10px" }}
-                      {...register(`segmentoH${i + 1}`, {
-                        required: true,
-                      })}>
-                      <option value="">--seleccione--</option>
-                      {segmentosPorCliente
-                        .sort((a, b) => {
-                          const nombreA =
-                            `${a.Sitio1Nombre} ${a.Sitio2Nombre}`.toLowerCase();
-                          const nombreB =
-                            `${b.Sitio1Nombre} ${b.Sitio2Nombre}`.toLowerCase();
-                          return nombreA.localeCompare(nombreB);
-                        })
-                        .map((segmento) => (
-                          <option key={segmento.Id} value={segmento.Id}>
-                            {segmento.Sitio1Nombre} - {segmento.Sitio2Nombre}
-                          </option>
-                        ))}
-                    </Form.Select> */}
                     <SearchBar
                       items={segmentosPorCliente}
                       register={register}
                       setValue={setValue}
                       i={i + 1}
                       hija={true}
+                      getValues={getValues}
                     />
                   </InputGroup>
                 </>
