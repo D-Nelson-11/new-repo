@@ -169,6 +169,24 @@ function Esquemas() {
           <Button type="submit" className="w-100">
             Generar
           </Button>
+          <Button className="mt-1 w-100 bg-success border-0" onClick={async() => {
+              let confirmar = confirm("¿Seguro que desea crear el esquema?");
+              if (!confirmar) return;
+              try {
+                const resp = await axios.post(
+                  "https://analisisderedapi.vesta-accelerate.com/api/EsquemaCrudApi/CreateMany",
+                  JSON.parse(textAreaValue)
+                );
+                console.log(resp.data);
+                alert("Esquemas creados exitosamente");
+              } catch (error) {
+                console.error(error);
+                alert("Error al crear esquemas");
+              }
+
+          }}>
+            Crear
+          </Button>
         </Form>
       </div>
 

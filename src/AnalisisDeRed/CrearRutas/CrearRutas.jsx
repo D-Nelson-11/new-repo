@@ -94,6 +94,10 @@ import { RutaSimple } from "./Simple";
       id: "A5070E56-D359-4FF1-A4AE-0F27F4532303",
       nombre: "COMPAÑIA INDUST LIDO-POZUELO SA CV",
     },
+     {
+      id: "91EF67A2-4F50-44EE-B0E5-0F27E8DFB778",
+      nombre: "CERVECERIA HONDUREÑA SA DE CV",
+    },
   ];
 
 function CrearRutas() {

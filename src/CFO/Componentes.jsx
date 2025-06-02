@@ -117,6 +117,8 @@ function Componentes() {
               <th>Moneda</th>
               <th>Tipo</th>
               <th>Segmento</th>
+              <th>Marca</th>
+
             </tr>
           </thead>
           <tbody style={{ fontSize: "10px" }}>
@@ -138,6 +140,7 @@ function Componentes() {
                     <td>{item.Currency_value}</td>
                     <td>{item.tipo}</td>
                     <td>{item.ID}</td>
+                    <td>{item.Marca}</td>
                   </tr>
 
                   {/* Fila desplegable */}

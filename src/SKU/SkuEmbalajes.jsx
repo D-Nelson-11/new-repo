@@ -31,7 +31,7 @@ function SkuEmbalajes() {
       let jsonTipoEmbalaje = {
         SkuId: id,
         TipoEmbalajeId: values.IdTipoEmbalaje,
-        UnidadMedida: "KILOGRAMOS",
+        UnidadMedida: "Kilogramos",
         UnidadesxEmbalaje: 1,
         PesoxPallet: 0,
         PesoxEmbalaje: 0,
@@ -73,6 +73,8 @@ function SkuEmbalajes() {
                   <option value="4ce88b3f-5569-4ea0-bbe4-1dda85eb7eea">Unidad</option>
                   <option value="F125C166-0DF3-48A8-ADCE-17055DFBD5FB">Sacos</option>
                   <option value="c7d4a814-4d4e-4905-9016-22eaab9d7d60">Pipas</option>
+                  <option value="da934b3c-50f6-40b6-8b67-24b2c757f3bc">Flexitanque</option>
+
 
               </Form.Select>
             </Col>
