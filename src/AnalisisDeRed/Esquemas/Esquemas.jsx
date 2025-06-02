@@ -9,6 +9,7 @@ import jsonElPoy from "./JSON/ElPoy.json";
 import jsonCastilla from "./JSON/puertoCastilla.json";
 import ClientesSelect from "../../components/ClientesSelect";
 import jsonToncontin from "./JSON/Toncontin.json";
+import generales from  "./JSON/generales.json";
 import axios from "../../api/axios";
 
 function Esquemas() {
@@ -19,6 +20,7 @@ function Esquemas() {
   const [EsquemaElPoy, setEsquemaElPoy] = useState(jsonElPoy);
   const [EsquemaCastilla, setEsquemaCastilla] = useState(jsonCastilla);
   const [EsquemaToncontin, setEsquemaToncontin] = useState(jsonToncontin);
+  const [EsquemaGenerales, setEsquemaGenerales] = useState(generales);
   const [sitiosPorRuta, setSitiosPorRuta] = useState([]);
 
   const [textAreaValue, setTextAreaValue] = useState("");
@@ -84,6 +86,16 @@ function Esquemas() {
       });
 
       setTextAreaValue(JSON.stringify(updatedEsquemaToncontin, null, 2));
+    } else if (values.esquemaNombre == 7) {
+      const updatedEsquemaGenerales = { ...EsquemaGenerales };
+      updatedEsquemaGenerales.Esquemas.forEach((esquema) => {
+        esquema.ClienteId = values.Cliente.split(",")[0];
+        esquema.SitioPorRutaId = values.SitioXRuta;
+        esquema.ClienteNombre = values.Cliente.split(",")[1];
+        esquema.UsuarioId = values.IdUsuario;
+      });
+
+      setTextAreaValue(JSON.stringify(updatedEsquemaGenerales, null, 2));
     }
   };
 
@@ -109,6 +121,7 @@ function Esquemas() {
               <option value="4">La Mesa</option>
               <option value="5">El Poy</option>
               <option value="6">Toncontin</option>
+              <option value="7">Generales</option>
             </Form.Select>
           </Form.Group>
 

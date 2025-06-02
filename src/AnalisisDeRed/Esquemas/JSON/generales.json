@@ -1,0 +1,76 @@
+{
+  "Esquemas": [
+    {
+      "EsquemaId": "BE237A0F-39AE-4AA2-A54A-164158601631",
+      "SitioPorRutaId": "F1B9DD10-B15A-42BF-9CAE-272A9D95DF7A",
+      "Orden": 1,
+      "ClienteId": "8092e57d-03a5-44d3-b271-0f27ebf3d818",
+      "ClienteNombre": "CORPORACION DINANT SA DE CV",
+      "Descripcion": "Inicio de Tramitador",
+      "Requerido": true,
+      "UsuarioId": "C183E6D0-6855-4613-A85D-24F1E30E165E",
+      "EsquemaTramitador": true,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "4D708BF5-9D3E-48E9-AB7C-14F5B438B360",
+      "SitioPorRutaId": "F1B9DD10-B15A-42BF-9CAE-272A9D95DF7A",
+      "Orden": 1,
+      "ClienteId": "8092e57d-03a5-44d3-b271-0f27ebf3d818",
+      "ClienteNombre": "CORPORACION DINANT SA DE CV",
+      "Descripcion": "Presentación",
+      "Requerido": true,
+      "UsuarioId": "C183E6D0-6855-4613-A85D-24F1E30E165E",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "D95046C5-F686-4395-87CC-14F5B68FEDBE",
+      "SitioPorRutaId": "F1B9DD10-B15A-42BF-9CAE-272A9D95DF7A",
+      "Orden": 2,
+      "ClienteId": "8092e57d-03a5-44d3-b271-0f27ebf3d818",
+      "ClienteNombre": "CORPORACION DINANT SA DE CV",
+      "Descripcion": "Revisión",
+      "Requerido": false,
+      "UsuarioId": "C183E6D0-6855-4613-A85D-24F1E30E165E",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "1B894327-01DE-4F3D-ABB5-1641544D66E0",
+      "SitioPorRutaId": "F1B9DD10-B15A-42BF-9CAE-272A9D95DF7A",
+      "Orden": 3,
+      "ClienteId": "8092e57d-03a5-44d3-b271-0f27ebf3d818",
+      "ClienteNombre": "CORPORACION DINANT SA DE CV",
+      "Descripcion": "Liberacion Post Revision",
+      "Requerido": false,
+      "UsuarioId": "C183E6D0-6855-4613-A85D-24F1E30E165E",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "19083163-A403-4FB8-8DD5-215C4C4BEFCC",
+      "SitioPorRutaId": "F1B9DD10-B15A-42BF-9CAE-272A9D95DF7A",
+      "Orden": 4,
+      "ClienteId": "8092e57d-03a5-44d3-b271-0f27ebf3d818",
+      "ClienteNombre": "CORPORACION DINANT SA DE CV",
+      "Descripcion": "Liberacion Aduana",
+      "Requerido": true,
+      "UsuarioId": "C183E6D0-6855-4613-A85D-24F1E30E165E",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "C360E3E8-7463-451B-B5A7-215C4E617B03",
+      "SitioPorRutaId": "F1B9DD10-B15A-42BF-9CAE-272A9D95DF7A",
+      "Orden": 5,
+      "ClienteId": "8092e57d-03a5-44d3-b271-0f27ebf3d818",
+      "ClienteNombre": "CORPORACION DINANT SA DE CV",
+      "Descripcion": "Despacho",
+      "Requerido": true,
+      "UsuarioId": "C183E6D0-6855-4613-A85D-24F1E30E165E",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    }
+  ]
+}
