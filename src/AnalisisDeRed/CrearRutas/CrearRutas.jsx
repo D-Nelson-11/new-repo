@@ -98,6 +98,26 @@ import { RutaSimple } from "./Simple";
       id: "91EF67A2-4F50-44EE-B0E5-0F27E8DFB778",
       nombre: "CERVECERIA HONDUREÑA SA DE CV",
     },
+     {
+      id: "834FC5F9-AB8C-4BCA-9270-1693145FB27D",
+      nombre: "INDUSTRIA SULA S. DE RL.",
+    },
+      {
+      id: "D259B0C9-5203-4F33-81C2-0F27EA263D9E",
+      nombre: "INDUSTRIA FARMACEUTICA",
+    },
+      {
+      id: "436FCD5E-C720-4FFA-846E-24CF3A7C9AE2",
+      nombre: "ACAVISA HN",
+    },
+      {
+      id: "5B6B3C65-B006-4AE2-904D-1BFF7FFEF846",
+      nombre: "ACI DEPOT S DE RL",
+    },
+     {
+      id: "32575917-7F9E-4712-832F-0F29BC82BA3D",
+      nombre: "MAERSK HONDURAS S.A.",
+    },
   ];
 
 function CrearRutas() {
