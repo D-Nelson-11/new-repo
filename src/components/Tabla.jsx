@@ -15,7 +15,7 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 const columns = [
   { id: "Id", label: "Id", minWidth: 100 },
   { id: "NombreRuta", label: "Nombre", minWidth: 100 },
-  { id: "Categoría", label: "Categoría", minWidth: 120 },
+  { id: "Categoría", label: "Categoría", minWidth: 120, align: "center" },
   { id: "Eventos", label: "Eventos", minWidth: 120 },
   { id: "Alertas", label: "Alertas", minWidth: 120 },
 ];
@@ -23,11 +23,11 @@ const columns = [
 export default function Tabla({ data }) {
   const [rows, setRows] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(100);
   const [expandedRowId, setExpandedRowId] = React.useState(null);
 
   const [showModal, setShowModal] = React.useState(false);
-  const [eventos, setEventos] = React.useState([]);
+  const [categorias, setCategorias] = React.useState([]);
   const [modalTitle, setModalTitle] = React.useState("");
 
   const handleChangePage = (event, newPage) => setPage(newPage);
@@ -47,18 +47,19 @@ export default function Tabla({ data }) {
   };
 
   const cargarEventos = async (row) => {
-    setModalTitle(`Eventos de la ruta: ${row.NombreRuta}`);    
+    setModalTitle(`Categorías de ruta: ${row.NombreRuta}`);
     try {
       const res = await axios.post(
         "https://analisisderedapi.vesta-accelerate.com/api/RutaCategoriaCrudApi/GetRutaCaregoriasPorRutaId",
         { RutaId: [row.Id] }
       );
-      const categorias = res.data?.[1]?.Categoria || [];
-      setEventos(categorias);
+      console.log(res.data[0]?.Categoria);
+      const categorias = res.data[0]?.Categoria || [];
+      setCategorias(categorias);
       setShowModal(true);
     } catch (error) {
       console.error("Error cargando eventos", error);
-      setEventos([]);
+      setCategorias([]);
       setShowModal(true);
     }
   };
@@ -91,6 +92,7 @@ export default function Tabla({ data }) {
             <TableBody>
               {rows
                 .filter((row) => row.RutaPadreId === null)
+                .reverse()
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
                   <React.Fragment key={row.Id}>
@@ -114,14 +116,23 @@ export default function Tabla({ data }) {
                               row?.Categoria?.length > 0 ? (
                                 <FaCheckCircle
                                   className="text-success"
-                                  style={{ cursor: "pointer" }}
+                                  style={{
+                                    cursor: "pointer",
+                                    fontSize: "24px",
+                                  }}
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     cargarEventos(row);
                                   }}
                                 />
                               ) : (
-                                <FaTimesCircle className="text-danger" />
+                                <FaTimesCircle
+                                  className="text-danger"
+                                  style={{
+                                    cursor: "pointer",
+                                    fontSize: "24px",
+                                  }}
+                                />
                               )
                             ) : column.id === "Eventos" ? (
                               <Button
@@ -180,10 +191,10 @@ export default function Tabla({ data }) {
       {/* Modal de Eventos */}
       <Modal size="lg" show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>{modalTitle}</Modal.Title>
+          <Modal.Title style={{ fontSize: "12px" }}>{modalTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {eventos.length === 0 ? (
+          {categorias.length === 0 ? (
             <div className="text-center text-danger">
               <FaTimesCircle size={50} />
               <p>No se encontraron categorías.</p>
@@ -191,15 +202,11 @@ export default function Tabla({ data }) {
           ) : (
             <div className="card shadow-sm">
               <div className="card-body">
-                <h5 className="card-title">Categorías encontradas</h5>
                 <ul className="list-group list-group-flush">
-                  {eventos.map((evento, idx) => (
+                  {categorias.map((categoria, idx) => (
                     <li className="list-group-item" key={idx}>
-                      <strong>Nombre:</strong>{" "}
-                      {evento.Nombre || "Sin nombre"}
-                      <br />
                       <strong>Observación:</strong>{" "}
-                      {evento.Observacion || "Sin observación"}
+                      {categoria.Categoria.Observacion || "Sin observación"}
                     </li>
                   ))}
                 </ul>

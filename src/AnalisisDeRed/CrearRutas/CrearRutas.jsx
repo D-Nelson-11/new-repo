@@ -2,7 +2,7 @@ import React from "react";
 import { get, set, useForm } from "react-hook-form";
 import { Col, Row, Form, Button, Container } from "react-bootstrap";
 import { useState } from "react";
-import { SitiosRutaMadre } from "./Sitios";
+import { SitiosRutaMadre } from "./Compuesta";
 import { RutaSimple } from "./Simple";
 
  export const clientes = [
