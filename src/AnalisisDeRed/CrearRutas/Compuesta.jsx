@@ -466,19 +466,22 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                     {...register(`Regimen${i + 1}`, { required: true })}>
                     <option value="N/A">N/A</option>
                     <option value="4000/IMPORTACIÓN DEFINITIVA">4000</option>
-                    <option value="8100/TRÁNSITO HACIA ZOLI ZIP">8100</option>
                     <option value="4600/IMPORTACION DEFINITIVA FAUCA NO CANCELA TITULO">
                       4600
                     </option>
                     <option value="5000/ADMISION TEMP PERFEC ACTIVO CON TRANSFORMACION ZOLI">
                       5000
                     </option>
-                    <option value="5200/ADMISION TEMP0RAL  P/ PERFECC ACTIVO SIN TRANSFOR ZOLI">
-                      5000
+                    <option value="5100/ADMISIÓN TEMPORAL PARA PERFECCIONAMIENTO ACTIVO TRANSFO">
+                      5100
                     </option>
                     <option value="5200/ADMISION TEMP0RAL  P/ PERFECC ACTIVO SIN TRANSFOR ZOLI">
                       5200
                     </option>
+                    <option value="5600/ADM TEMP P/ PERFEC  ACTIVO RIT SIN TRANSFORMACION">
+                      5600
+                    </option>
+                    <option value="8100/TRÁNSITO HACIA ZOLI ZIP">8100</option>
                   </Form.Select>
                 </InputGroup>
               </div>
