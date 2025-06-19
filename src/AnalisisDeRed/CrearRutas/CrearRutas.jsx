@@ -120,7 +120,7 @@ import { RutaSimple } from "./Simple";
     },
     {
       id: "95EF7292-7843-4655-9A4C-205B3143C132",
-      nombre : "AGROLIBANOD"
+      nombre : "AGROLIBANO"
     }
   ];
 
