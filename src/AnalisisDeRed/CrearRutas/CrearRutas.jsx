@@ -118,6 +118,10 @@ import { RutaSimple } from "./Simple";
       id: "32575917-7F9E-4712-832F-0F29BC82BA3D",
       nombre: "MAERSK HONDURAS S.A.",
     },
+    {
+      id: "95EF7292-7843-4655-9A4C-205B3143C132",
+      nombre : "AGROLIBANOD"
+    }
   ];
 
 function CrearRutas() {

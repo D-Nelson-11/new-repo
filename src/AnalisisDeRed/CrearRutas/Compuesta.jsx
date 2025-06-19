@@ -349,7 +349,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
           </div>
           {[...Array(Number(cantidad))].map((_, i) => (
             <>
-              <div key={i} className="col-2 border border-1 gap-1 p-1 me-2">
+              <div key={i} className="col-2 border border-1 gap-1 p-1 me-2 mt-1">
                 <InputGroup size="sm" className="mb-1">
                   <InputGroup.Text id="inputGroup-sizing-sm">
                     Tipo
@@ -494,7 +494,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                     }
                     Nombre={
                       <FaPlaneDeparture
-                        style={{ fontWeight: "bolder", fontSize: "20px" }}
+                        style={{ fontWeight: "bolder", fontSize: "13px" }}
                       />
                     }
                   />
@@ -765,7 +765,7 @@ export function SitiosRutaHija({
                   }
                   Nombre={
                     <FaPlaneDeparture
-                      style={{ fontWeight: "bolder", fontSize: "20px" }}
+                      style={{ fontWeight: "bolder", fontSize: "12px" }}
                     />
                   }
                 />

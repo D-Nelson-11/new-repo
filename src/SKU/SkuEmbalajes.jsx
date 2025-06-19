@@ -31,7 +31,7 @@ function SkuEmbalajes() {
       let jsonTipoEmbalaje = {
         SkuId: id,
         TipoEmbalajeId: values.IdTipoEmbalaje,
-        UnidadMedida: "Kilogramos",
+        UnidadMedida: "MIL (MILÉSIMA DE PULGADA)",
         UnidadesxEmbalaje: 1,
         PesoxPallet: 0,
         PesoxEmbalaje: 0,

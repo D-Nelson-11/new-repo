@@ -10,14 +10,15 @@ import TableRow from "@mui/material/TableRow";
 import axios from "../api/axios";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { FaCheckCircle, FaTimesCircle,FaEye  } from "react-icons/fa";
 
 const columns = [
   { id: "Id", label: "Id", minWidth: 100 },
   { id: "NombreRuta", label: "Nombre", minWidth: 100 },
   { id: "Categoría", label: "Categoría", minWidth: 120, align: "center" },
-  { id: "Eventos", label: "Eventos", minWidth: 120 },
-  { id: "Alertas", label: "Alertas", minWidth: 120 },
+  { id: "Eventos", label: "Eventos", minWidth: 120, align: "center" },
+  { id: "Alertas", label: "Alertas", minWidth: 120, align: "center" },
+
 ];
 
 export default function Tabla({ data }) {
@@ -28,6 +29,8 @@ export default function Tabla({ data }) {
 
   const [showModal, setShowModal] = React.useState(false);
   const [categorias, setCategorias] = React.useState([]);
+  const [eventos, setEventos] = React.useState([]);
+  const [tipoqueVaAModal, setTipoQueVaAModal] = React.useState("");
   const [modalTitle, setModalTitle] = React.useState("");
 
   const handleChangePage = (event, newPage) => setPage(newPage);
@@ -46,16 +49,15 @@ export default function Tabla({ data }) {
     }
   };
 
-  const cargarEventos = async (row) => {
+  const cargarCategorias = async (row) => {
     setModalTitle(`Categorías de ruta: ${row.NombreRuta}`);
     try {
       const res = await axios.post(
         "https://analisisderedapi.vesta-accelerate.com/api/RutaCategoriaCrudApi/GetRutaCaregoriasPorRutaId",
         { RutaId: [row.Id] }
       );
-      console.log(res.data[0]?.Categoria);
-      const categorias = res.data[0]?.Categoria || [];
-      setCategorias(categorias);
+      setTipoQueVaAModal("categorias");
+      setCategorias(res.data[0]?.Categoria || []);
       setShowModal(true);
     } catch (error) {
       console.error("Error cargando eventos", error);
@@ -63,6 +65,47 @@ export default function Tabla({ data }) {
       setShowModal(true);
     }
   };
+
+   const cargarEventos = async (row) => {
+    setModalTitle(`Eventos de ruta: ${row.NombreRuta}`);
+    console.log(row.Id);
+    try {
+      const res = await axios.post(
+        "https://analisisderedapi.vesta-accelerate.com/api/RutaEventoDestinatarioCrudApi/RutaEventoDestinatarioByRutaId",
+        { RutaId: row.Id }
+      );
+      console.log(res.data.RutaEventoDestinatarios);
+      setTipoQueVaAModal("eventos");
+      setEventos(res.data.RutaEventoDestinatarios || []);
+      setShowModal(true);
+    } catch (error) {
+      console.log("Error cargando eventos", error); 
+      setTipoQueVaAModal("eventos");
+      setEventos([]);
+      setShowModal(true);
+    }
+  };
+
+  const cargarAlertas = async (row) => {
+    setModalTitle(`Eventos de ruta: ${row.NombreRuta}`);
+    console.log(row.Id);
+    try {
+      const res = await axios.post(
+        "https://analisisderedapi.vesta-accelerate.com/api/RutaEventoDestinatarioCrudApi/RutaEventoDestinatarioByRutaId",
+        { RutaId: row.Id }
+      );
+      console.log(res.data.RutaEventoDestinatarios);
+      setTipoQueVaAModal("eventos");
+      setEventos(res.data.RutaEventoDestinatarios || []);
+      setShowModal(true);
+    } catch (error) {
+      console.log("Error cargando eventos", error); 
+      setTipoQueVaAModal("eventos");
+      setEventos([]);
+      setShowModal(true);
+    }
+  };
+
 
   if (rows.length === 0) {
     return (
@@ -112,10 +155,19 @@ export default function Tabla({ data }) {
                             key={column.id}
                             align={column.align}
                             sx={{ padding: 1 }}>
-                            {column.id === "Categoría" ? (
-                              row?.Categoria?.length > 0 ? (
-                                <FaCheckCircle
-                                  className="text-success"
+                            {column.id === "Categoría" ? (//***********SECCION CATEGORIA***************/
+                                <FaEye
+                                  style={{
+                                    cursor: "pointer",
+                                    fontSize: "24px",
+                                  }}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    cargarCategorias(row);
+                                  }}
+                                />
+                            ) : column.id === "Eventos" ?  ( //***********SECCION EVENTOS***************/
+                                     <FaEye
                                   style={{
                                     cursor: "pointer",
                                     fontSize: "24px",
@@ -124,32 +176,18 @@ export default function Tabla({ data }) {
                                     e.stopPropagation();
                                     cargarEventos(row);
                                   }}
-                                />
-                              ) : (
-                                <FaTimesCircle
-                                  className="text-danger"
+                                />  
+                            )  : column.id === "Alertas" ? (
+                              <FaEye
                                   style={{
                                     cursor: "pointer",
                                     fontSize: "24px",
                                   }}
-                                />
-                              )
-                            ) : column.id === "Eventos" ? (
-                              <Button
-                                style={{
-                                  backgroundColor: "#4375b4",
-                                  border: "none",
-                                }}>
-                                Categoría
-                              </Button>
-                            ) : column.id === "Alertas" ? (
-                              <Button
-                                style={{
-                                  backgroundColor: "#4375b4",
-                                  border: "none",
-                                }}>
-                                Alertas
-                              </Button>
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    cargarAlertas(row);
+                                  }}
+                                />  
                             ) : (
                               value
                             )}
@@ -187,34 +225,87 @@ export default function Tabla({ data }) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-
-      {/* Modal de Eventos */}
-      <Modal size="lg" show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title style={{ fontSize: "12px" }}>{modalTitle}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {categorias.length === 0 ? (
-            <div className="text-center text-danger">
-              <FaTimesCircle size={50} />
-              <p>No se encontraron categorías.</p>
-            </div>
-          ) : (
-            <div className="card shadow-sm">
-              <div className="card-body">
-                <ul className="list-group list-group-flush">
-                  {categorias.map((categoria, idx) => (
-                    <li className="list-group-item" key={idx}>
-                      <strong>Observación:</strong>{" "}
-                      {categoria.Categoria.Observacion || "Sin observación"}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          )}
-        </Modal.Body>
-      </Modal>
+      <ModalCategorias
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        tipoDescripcion={tipoqueVaAModal === "categorias" ? "categorias" : tipoqueVaAModal === "eventos" ? "eventos" : ""}
+        tipoArray={tipoqueVaAModal === "categorias" ? categorias : tipoqueVaAModal === "eventos" ? eventos : []}
+        title={modalTitle}
+      />
     </>
+  );
+}
+
+function ModalCategorias({ show, onHide, tipoArray, tipoDescripcion, title }) {
+  React.useEffect(()=>{
+    console.log("Tipo Descripcion:", tipoDescripcion);
+    console.log("Tipo Array:", tipoArray);  
+  },[])
+  return (
+    <Modal show={show} onHide={onHide} size="lg">
+      <Modal.Header closeButton>
+        <Modal.Title>{title}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        {tipoDescripcion === "categorias" && (
+          <>
+            {tipoArray.length === 0 ? (
+              <p>No hay categorías disponibles.</p>
+            ) : (
+              <table className="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Observación</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tipoArray.map((categoria, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{categoria.Categoria.Observacion}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </>
+        )}
+
+        {tipoDescripcion === "eventos" && (
+          <>
+            {tipoArray.length === 0 ? (
+              <p>No hay eventos disponibles.</p>
+            ) : (
+              <table className="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Correo</th>
+                    <th>Medio de Notificación</th>
+                    <th>Medio Preferencia</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tipoArray.map((evento, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{evento.Correo}</td>
+                      <td>{evento.MedioNotificacion}</td>
+                      <td>{evento.MedioPreferencia}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </>
+        )}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={onHide}>
+          Cerrar
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 }
