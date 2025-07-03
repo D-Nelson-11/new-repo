@@ -68,7 +68,7 @@ function Segmentos({ Sitio1Id, Sitio2Id, ClienteId }) {
   };
 
   if (loading) {
-    return <div>Calmate, estoy cargando...</div>;
+    return <div>Cargando...</div>;
   }
 
   return (

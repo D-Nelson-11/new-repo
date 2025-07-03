@@ -1,9 +1,10 @@
 import React from "react";
-import { get, set, useForm } from "react-hook-form";
-import { Col, Row, Form, Button, Container } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { Form, Button, Container } from "react-bootstrap";
 import { useState } from "react";
 import { SitiosRutaMadre } from "./Compuesta";
 import { RutaSimple } from "./Simple";
+import { colors } from "../../theme/colors";
 
  export const clientes = [
     {
@@ -121,7 +122,14 @@ import { RutaSimple } from "./Simple";
     {
       id: "95EF7292-7843-4655-9A4C-205B3143C132",
       nombre : "AGROLIBANO"
-    }
+    },
+    {
+      id: "986A2399-BC4A-41E5-94B3-278A432F40FA",
+      nombre : "EMBOTELLADORA NACIONAL, S.A."
+    },
+    {
+      id: "6C4EC06A-5D8E-49CE-8EA2-1BD6C90C68B6",
+      nombre : "COMPAÑIA AGROPECUARIA  EL PORVENIR, S.A. DE  C.V."}
   ];
 
 function CrearRutas() {
@@ -194,7 +202,7 @@ function CrearRutas() {
               }
               setSitios(true);
             }}
-            variant="success"
+            style={{ backgroundColor: colors.colorAzulGeneral, border: "none"}}
             className="w-100 ms-1 h-75"
             disabled={tipoRuta === "" ? true : false}>
             Comenzar

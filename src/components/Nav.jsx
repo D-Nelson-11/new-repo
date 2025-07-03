@@ -2,20 +2,16 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Outlet } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
+import image from '../public/image.png'; // Adjust the path as necessary
+import { colors } from "../theme/colors";
 
 function BarraNavegacion() {
-  const [lgShow, setLgShow] = useState(false);
-  const { handleSubmit, register } = useForm();
-  const [textArea, setTextArea] = useState("");
-
-  const handleTextAreaChange = (event) => {
-    setTextArea(event.target.value);
-  };
   return (
     <>
-      <Navbar bg="dark" data-bs-theme="dark">
+      <Navbar style={{ backgroundColor: colors.colorAzulGeneral }} data-bs-theme="dark">
+        <Navbar.Brand href="/new-repo/#/AnalisisDeRed" className="text-white">
+          <img src={image} alt="Logo" style={{ height: "30px" }} />
+        </Navbar.Brand>
         <Container>
           {/* <Navbar.Brand href="#home">Navbar</Navbar.Brand> */}
           <Nav className="me-auto">

@@ -109,7 +109,7 @@ function SitioAnalisis() {
   };
 
   if (loading) {
-    return <div>Calmate, estoy cargando...</div>;
+    return <div>cargando...</div>;
   }
 
   return (

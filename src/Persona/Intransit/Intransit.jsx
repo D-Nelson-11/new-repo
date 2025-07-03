@@ -2,6 +2,7 @@ import React from "react";
 import { set, useForm } from "react-hook-form";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import { useState } from "react";
+import { colors } from "../../theme/colors";
 import {
   grupoPersona,
   TipoRelacion,
@@ -565,7 +566,7 @@ function Intransit() {
               </Form.Group>
             </Col>
           </Row>
-          <Button type="submit" className="w-100" disabled={disabled}>
+          <Button style={{ backgroundColor: colors.colorAzulGeneral, border:"none"}} className="w-100" disabled={disabled}>
             Generar
           </Button>
         </Form>

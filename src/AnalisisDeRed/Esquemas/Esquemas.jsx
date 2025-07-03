@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 import { useState } from "react";
@@ -11,6 +10,7 @@ import ClientesSelect from "../../components/ClientesSelect";
 import jsonToncontin from "./JSON/Toncontin.json";
 import generales from  "./JSON/generales.json";
 import axios from "../../api/axios";
+import { colors } from "../../theme/colors";
 
 function Esquemas() {
   const { handleSubmit, register, setValue, getValues } = useForm();
@@ -147,8 +147,7 @@ function Esquemas() {
                     alert("errror chele");
                   }
                 }}
-                variant="success"
-                style={{ width: "45%" }}>
+                style={{ width: "45%", backgroundColor: colors.colorAzulGeneral, border:"none"}}>
                 Buscar Sitios
               </Button>
             </div>
@@ -179,7 +178,7 @@ function Esquemas() {
               <option value="FF921408-E3B9-469B-A7DC-24A2B8D3C4F5">Joel</option>
             </Form.Select>
           </Form.Group>
-          <Button type="submit" className="w-100">
+          <Button style={{ backgroundColor: colors.colorAzulGeneral, border:"none"}} className="w-100">
             Generar
           </Button>
           <Button className="mt-1 w-100 bg-success border-0" onClick={async() => {

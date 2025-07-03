@@ -8,6 +8,7 @@ import { TfiReload } from "react-icons/tfi";
 import { useForm } from "react-hook-form";
 import { FaPlaneDeparture } from "react-icons/fa";
 import SearchBar from "../../components/SearchBar";
+import { colors } from "../../theme/colors";
 export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
   let [sitiosAduana, setSitiosAduana] = useState([]);
   let [sitiosCliente, setSitiosCliente] = useState([]);
@@ -102,7 +103,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
         <div className="col-12">
           <h6
             style={{
-              backgroundColor: "#4375b4",
+              backgroundColor: colors.colorAzulGeneral,
               padding: "2px",
               borderRadius: "5px",
               textAlign: "center",
@@ -254,48 +255,57 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                 borderRadius: "5px",
                 border: "none",
                 color: "black",
-                fontSize:"12px"
+                fontSize: "12px",
               }}
               {...register("Clasificacion")}>
               <option value="">--Clasificacion--</option>
               <option value="IB/CPG/MP-Empaque">IB/CPG/MP-Empaque</option>
-              <option value="IB/CPG/MP-Contenerizado">IB/CPG/MP-Contenerizado</option>
-              <option value="IB/CPG/MP-Refrigerado">IB/CPG/MP-Refrigerado</option>
+              <option value="IB/CPG/MP-Contenerizado">
+                IB/CPG/MP-Contenerizado
+              </option>
+              <option value="IB/CPG/MP-Refrigerado">
+                IB/CPG/MP-Refrigerado
+              </option>
               <option value="IB/CPG/PT">IB/CPG/PT</option>
               <option value="IB/CPG/M&P">IB/CPG/M&P</option>
               <option value="IB/RETAIL/PT">IB/RETAIL/PT</option>
               <option value="IB/M&P">IB/M&P</option>
               <option value="IB/LSP">IB/LSP</option>
               <option value="IB/PT">IB/PT</option>
-
             </select>
-             <select
+            <select
               style={{
                 display: "inline-block",
                 marginLeft: "4px",
                 borderRadius: "5px",
                 border: "none",
                 color: "black",
-                fontSize:"12px"
+                fontSize: "12px",
               }}
-              {...register("CreadaPor",{ required: true })}>
+              {...register("CreadaPor", { required: true })}>
               <option value="">--CreadaPor--</option>
-              <option value="F41CE2B9-F392-4198-8E2F-1329C96111C9">Gabriela</option>
-              <option value="C183E6D0-6855-4613-A85D-24F1E30E165E">Fredy</option>
-              <option value="0C3A7B92-34D7-453A-883F-24C15B24FF6A">David</option>
-              <option value="3193F743-6761-45EB-BFED-26A60DD442D5">Nohelia</option>
-
+              <option value="F41CE2B9-F392-4198-8E2F-1329C96111C9">
+                Gabriela
+              </option>
+              <option value="C183E6D0-6855-4613-A85D-24F1E30E165E">
+                Fredy
+              </option>
+              <option value="0C3A7B92-34D7-453A-883F-24C15B24FF6A">
+                David
+              </option>
+              <option value="3193F743-6761-45EB-BFED-26A60DD442D5">
+                Nohelia
+              </option>
             </select>
             <Button
               style={{
                 borderRadius: "5px",
                 border: "none",
-                color: "black",
+                color: "white",
                 marginLeft: "10px",
-                fontWeight: "bolder",
+                backgroundColor: "#c86666",
               }}
-              type="submit"
-              className="bg-warning">
+              type="submit">
               Crear Json Ruta
             </Button>
             {loading && (
@@ -349,7 +359,9 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
           </div>
           {[...Array(Number(cantidad))].map((_, i) => (
             <>
-              <div key={i} className="col-2 border border-1 gap-1 p-1 me-2 mt-1">
+              <div
+                key={i}
+                className="col-2 border border-1 gap-1 p-1 me-2 mt-1">
                 <InputGroup size="sm" className="mb-1">
                   <InputGroup.Text id="inputGroup-sizing-sm">
                     Tipo
@@ -535,7 +547,7 @@ export function SitiosRutaHija({
   sitiosCliente,
   segmentosPorCliente,
   setValue,
-  getValues
+  getValues,
 }) {
   const [tiposSitio, setTiposSitio] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
@@ -596,7 +608,7 @@ export function SitiosRutaHija({
         <div className="col-12">
           <h6
             style={{
-              backgroundColor: "#4375b4",
+              backgroundColor: "#4a5a85",
               padding: "2px",
               borderRadius: "5px",
               textAlign: "center",

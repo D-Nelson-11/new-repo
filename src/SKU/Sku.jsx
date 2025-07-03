@@ -1,9 +1,9 @@
-import React from "react";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
 import axios from "../api/axios";
 import SkuJson from "./json.json";
+import { colors } from "../theme/colors";
 
 export default function Sku() {
   const form1 = useForm();
@@ -50,7 +50,7 @@ export default function Sku() {
   }, []);
 
   if (loading) {
-    return <div>Calmate, estoy cargando los clientes...</div>;
+    return <div>Cragando...</div>;
   }
 
   const handleTextAreaChange = (event) => {
@@ -231,7 +231,7 @@ export default function Sku() {
                   onClick={() => setbBtnForm1(1)}
                   type="submit"
                   style={{
-                    backgroundColor: "#5cb85c",
+                    backgroundColor: colors.colorAzulGeneral,
                     width: "49.5%",
                     borderRadius: "5px",
                     border: "none",
@@ -404,7 +404,7 @@ export default function Sku() {
                   onClick={() => setbBtnForm2(1)}
                   type="submit"
                   style={{
-                    backgroundColor: "#5cb85c",
+                    backgroundColor: colors.colorAzulGeneral,
                     width: "49.5%",
                     borderRadius: "5px",
                     border: "none",
@@ -523,7 +523,7 @@ export default function Sku() {
                   onClick={() => setbBtnForm3(1)}
                   type="submit"
                   style={{
-                    backgroundColor: "#5cb85c",
+                    backgroundColor: colors.colorAzulGeneral,
                     width: "49.5%",
                     borderRadius: "5px",
                     border: "none",
@@ -610,7 +610,7 @@ export default function Sku() {
                   onClick={() => setbBtnForm4(1)}
                   type="submit"
                   style={{
-                    backgroundColor: "#5cb85c",
+                    backgroundColor: colors.colorAzulGeneral,
                     width: "49.5%",
                     borderRadius: "5px",
                     border: "none",
@@ -628,7 +628,7 @@ export default function Sku() {
       </div>
       <div style={{ width: "40%" }} className="d-flex flex-wrap">
         <div className="d-flex flex-wrap w-100 justify-content-between">
-          <Button className="mb-1 w-50" onClick={clearAll}>
+          <Button className="mb-1 w-50" onClick={clearAll} style={{backgroundColor: colors.colorRojoGeneral, border:"none"}}>
             Limpiar todo
           </Button>
           <Form.Select

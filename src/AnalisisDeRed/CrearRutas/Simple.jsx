@@ -102,7 +102,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
         <div className="col-12">
           <h6
             style={{
-              backgroundColor: "#4375b4",
+              backgroundColor: "#4a5a85",
               padding: "2px",
               borderRadius: "5px",
               textAlign: "center",
@@ -260,12 +260,12 @@ export function RutaSimple({ cantidad, IdCliente }) {
               style={{
                 borderRadius: "5px",
                 border: "none",
-                color: "black",
+                color: "white",
                 marginLeft: "10px",
-                fontWeight: "bolder",
+                backgroundColor:"#c86666"
+
               }}
-              type="submit"
-              className="bg-warning">
+              type="submit">
               Crear Json Ruta
             </Button>
             <TfiReload
