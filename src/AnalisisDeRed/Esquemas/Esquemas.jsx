@@ -178,7 +178,7 @@ function Esquemas() {
               <option value="FF921408-E3B9-469B-A7DC-24A2B8D3C4F5">Joel</option>
             </Form.Select>
           </Form.Group>
-          <Button style={{ backgroundColor: colors.colorAzulGeneral, border:"none"}} className="w-100">
+          <Button style={{ backgroundColor: colors.colorAzulGeneral, border:"none"}} className="w-100" type="submit">
             Generar
           </Button>
           <Button className="mt-1 w-100 bg-success border-0" onClick={async() => {
