@@ -566,7 +566,7 @@ function Intransit() {
               </Form.Group>
             </Col>
           </Row>
-          <Button style={{ backgroundColor: colors.colorAzulGeneral, border:"none"}} className="w-100" disabled={disabled}>
+          <Button style={{ backgroundColor: colors.colorAzulGeneral, border:"none"}} className="w-100" disabled={disabled} type="submit">
             Generar
           </Button>
         </Form>
