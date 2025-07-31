@@ -230,7 +230,6 @@ export function RutaSimple({ cantidad, IdCliente }) {
               <option value="IB/M&P">IB/M&P</option>
               <option value="IB/LSP">IB/LSP</option>
               <option value="IB/PT">IB/PT</option>
-
             </select>
             <select
               style={{
@@ -262,8 +261,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
                 border: "none",
                 color: "white",
                 marginLeft: "10px",
-                backgroundColor:"#c86666"
-
+                backgroundColor: "#c86666",
               }}
               type="submit">
               Crear Json Ruta
@@ -310,7 +308,9 @@ export function RutaSimple({ cantidad, IdCliente }) {
           </div>
           {[...Array(Number(cantidad))].map((_, i) => (
             <>
-              <div key={i} className="col-2 border border-1 gap-1 p-1 me-2 mt-1">
+              <div
+                key={i}
+                className="col-2 border border-1 gap-1 p-1 me-2 mt-1">
                 <h6>sitio {i + 1}</h6>
                 <InputGroup size="sm" className="mb-1">
                   <InputGroup.Text id="inputGroup-sizing-sm">
@@ -433,7 +433,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
                     <option value="5000/ADMISION TEMP PERFEC ACTIVO CON TRANSFORMACION ZOLI">
                       5000
                     </option>
-                      <option value="5100/ADMISIÓN TEMPORAL PARA PERFECCIONAMIENTO ACTIVO TRANSFO">
+                    <option value="5100/ADMISIÓN TEMPORAL PARA PERFECCIONAMIENTO ACTIVO TRANSFO">
                       5100
                     </option>
                     <option value="5200/ADMISION TEMP0RAL  P/ PERFECC ACTIVO SIN TRANSFOR ZOLI">
@@ -445,6 +445,13 @@ export function RutaSimple({ cantidad, IdCliente }) {
                     <option value="8100/TRÁNSITO HACIA ZOLI ZIP">8100</option>
                     <option value="TRANSITO ZONA LIBRE NO CANCELA TITULO (FAUCA)">
                       8300
+                    </option>
+                    <option value="ID/IMPORTACION DEFINITIVA">ID</option>
+                    <option value="FI/Formulario Aduanero Unico Centroamericano de Importacion">
+                      FI
+                    </option>
+                    <option value="DI/Extraccion para Importacion Definitiva">
+                      DI
                     </option>
                   </Form.Select>
                 </InputGroup>
