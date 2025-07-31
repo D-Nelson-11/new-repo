@@ -29,7 +29,7 @@ function ClientesSelect({ register }) {
   }, []);
 
   return (
-    <Form.Select {...register("Cliente")}>
+    <Form.Select {...register("IdCliente")}>
       {clientes.map((cliente) => (
         <option key={cliente.Id} value={[cliente.Id, cliente.Nombre]}>
           {cliente.Nombre}

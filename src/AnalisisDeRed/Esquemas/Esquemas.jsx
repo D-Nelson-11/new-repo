@@ -29,9 +29,9 @@ function Esquemas() {
     if (values.esquemaNombre == 1) {
       const updatedEsquemaAmatillo = { ...EsquemaAmatillo };
       updatedEsquemaAmatillo.Esquemas.forEach((esquema) => {
-        esquema.ClienteId = values.Cliente.split(",")[0];
+        esquema.ClienteId = values.IdCliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre = values.Cliente.split(",")[1];
+        esquema.ClienteNombre = values.IdCliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
       });
 
@@ -39,9 +39,9 @@ function Esquemas() {
     } else if (values.esquemaNombre == 3) {
       const updatedEsquemaCortes = { ...EsquemaCortes };
       updatedEsquemaCortes.Esquemas.forEach((esquema) => {
-        esquema.ClienteId = values.Cliente.split(",")[0];
+        esquema.ClienteId = values.IdCliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre = values.Cliente.split(",")[1];
+        esquema.ClienteNombre = values.IdCliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
       });
 
@@ -49,9 +49,9 @@ function Esquemas() {
     } else if (values.esquemaNombre == 4) {
       const updatedEsquemaLaMesa = { ...EsquemaLaMesa };
       updatedEsquemaLaMesa.Esquemas.forEach((esquema) => {
-        esquema.ClienteId = values.Cliente.split(",")[0];
+        esquema.ClienteId = values.IdCliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre = values.Cliente.split(",")[1];
+        esquema.ClienteNombre = values.IdCliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
       });
 
@@ -59,9 +59,9 @@ function Esquemas() {
     } else if (values.esquemaNombre == 5) {
       const updatedEsquemaElPoy = { ...EsquemaElPoy };
       updatedEsquemaElPoy.Esquemas.forEach((esquema) => {
-        esquema.ClienteId = values.Cliente.split(",")[0];
+        esquema.ClienteId = values.IdCliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre = values.Cliente.split(",")[1];
+        esquema.ClienteNombre = values.IdCliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
       });
 
@@ -69,9 +69,9 @@ function Esquemas() {
     } else if (values.esquemaNombre == 2) {
       const updatedEsquemaCastilla = { ...EsquemaCastilla };
       updatedEsquemaCastilla.Esquemas.forEach((esquema) => {
-        esquema.ClienteId = values.Cliente.split(",")[0];
+        esquema.ClienteId = values.IdCliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre = values.Cliente.split(",")[1];
+        esquema.ClienteNombre = values.IdCliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
       });
 
@@ -79,9 +79,9 @@ function Esquemas() {
     } else if (values.esquemaNombre == 6) {
       const updatedEsquemaToncontin = { ...EsquemaToncontin };
       updatedEsquemaToncontin.Esquemas.forEach((esquema) => {
-        esquema.ClienteId = values.Cliente.split(",")[0];
+        esquema.ClienteId = values.IdCliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre = values.Cliente.split(",")[1];
+        esquema.ClienteNombre = values.IdCliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
       });
 
@@ -89,9 +89,9 @@ function Esquemas() {
     } else if (values.esquemaNombre == 7) {
       const updatedEsquemaGenerales = { ...EsquemaGenerales };
       updatedEsquemaGenerales.Esquemas.forEach((esquema) => {
-        esquema.ClienteId = values.Cliente.split(",")[0];
+        esquema.ClienteId = values.IdCliente.split(",")[0];
         esquema.SitioPorRutaId = values.SitioXRuta;
-        esquema.ClienteNombre = values.Cliente.split(",")[1];
+        esquema.ClienteNombre = values.IdCliente.split(",")[1];
         esquema.UsuarioId = values.IdUsuario;
       });
 

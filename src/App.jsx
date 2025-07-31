@@ -12,6 +12,7 @@ const IndexSku = lazy(() => import("./SKU/IndexSku.jsx"));
 const CrearRutas = lazy(() => import("./AnalisisDeRed/CrearRutas/CrearRutas.jsx"));
 const CFO = lazy(() => import("./CFO/Index.jsx"));
 const ValidarRutas = lazy(() => import("./AnalisisDeRed/validar/ValidarRutas.jsx"));
+const Mediciones = lazy(() => import("./Mediciones/Mediciones.jsx"));
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/Rutas" element={<CrearRutas />} />
           <Route path="/Cfo" element={<CFO />} />
           <Route path="/validarR" element={<ValidarRutas />} />
+          <Route path="/Prueba" element={<Mediciones />} />
         </Route>
       </Routes>
     </Suspense>

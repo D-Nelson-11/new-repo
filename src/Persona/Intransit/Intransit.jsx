@@ -409,6 +409,7 @@ function Intransit() {
       console.log(
         "hice el post de RelacionService de la persona: " + (index + 1)
       );
+      console.log(relacion);
       index++;
     }
     console.log("PASO 5 DE 5 EXITOSO ✔");
