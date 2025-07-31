@@ -494,6 +494,13 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                       5600
                     </option>
                     <option value="8100/TRÁNSITO HACIA ZOLI ZIP">8100</option>
+                       <option value="ID/IMPORTACION DEFINITIVA">ID</option>
+                    <option value="FI/Formulario Aduanero Unico Centroamericano de Importacion">
+                      FI
+                    </option>
+                    <option value="DI/Extraccion para Importacion Definitiva">
+                      DI
+                    </option>
                   </Form.Select>
                 </InputGroup>
               </div>
@@ -749,6 +756,13 @@ export function SitiosRutaHija({
                   <option value="5200/ADMISION TEMP0RAL  P/ PERFECC ACTIVO SIN TRANSFOR ZOLI">
                     5200
                   </option>
+                     <option value="ID/IMPORTACION DEFINITIVA">ID</option>
+                    <option value="FI/Formulario Aduanero Unico Centroamericano de Importacion">
+                      FI
+                    </option>
+                    <option value="DI/Extraccion para Importacion Definitiva">
+                      DI
+                    </option>
                 </Form.Select>
               </InputGroup>
             </div>
