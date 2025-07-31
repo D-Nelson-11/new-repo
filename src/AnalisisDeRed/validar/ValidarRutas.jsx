@@ -1,4 +1,4 @@
-import { clientes } from "../CrearRutas/CrearRutas";
+// import { clientes } from "../CrearRutas/CrearRutas";
 import { Container, Form } from "react-bootstrap";
 import Tabla from "../../components/Tabla";
 import axios from "../../api/axios";
@@ -10,7 +10,7 @@ function ValidarRutas() {
   return (
     <Container className="mt-2" fluid>
       <Form>
-        <div className="mb-3 col-2 h-75">
+        {/* <div className="mb-3 col-2 h-75">
           <Form.Select
             onChange={async (e) => {
               setClienteId(e.target.value);
@@ -30,7 +30,7 @@ function ValidarRutas() {
                 </option>
               ))}
           </Form.Select>
-        </div>
+        </div> */}
       </Form>
 
       {clienteId === "" ? (
