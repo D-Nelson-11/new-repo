@@ -3,67 +3,86 @@ import { Form, Button, Container } from "react-bootstrap";
 import { colors } from "../theme/colors";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import {toast} from "sonner";
 
 const Mediciones = () => {
-  const [rutaId, setRutaId] = useState("");
   const { register, handleSubmit } = useForm();
+  const [nombreDeLaRuta, setNombreDeLaRuta] = useState();
+  const [sitiosDeLaRuta, setSitiosDeLaRuta] = useState();
 
   const onSubmit = async (data) => {
-    try {
-      let sitiosRutaMadre = 0;
-      let sitiosRutaHija = 0;
-      let esquemas =[];
-      let sitioConEsquemas = 0;
-      let nombreRutaMadre="";
-      const datosRuta = await axios.post(
-        "https://analisisderedapi.vesta-accelerate.com/api/RutaCrudApi/GetRutaById",
-        { Id: data.ruta }
-      );
-      console.log(data);
+      let confirmarSubmit = confirm("¿Enviar?");
+  if (!confirmarSubmit) return;
+  const proceso = async () => {
+    let sitiosRutaMadre = 0;
+    let sitiosRutaHija = 0;
+    let esquemas = [];
+    let sitioConEsquemas = 0;
+    let nombreRutaMadre = "";
 
-      // const perros = await axios.get("https://seguimientoapi.vesta-accelerate.com/api/EsquemaFlujo/Details/be237a0f-39ae-4aa2-a54a-164158601631");
-      // console.log(perros);
-      // return;
-      sitiosRutaMadre = datosRuta.data.Message.SitiosPorRuta.length;
-      nombreRutaMadre = datosRuta.data.Message.NombreRuta;
+    const datosRuta = await axios.post(
+      "https://analisisderedapi.vesta-accelerate.com/api/RutaCrudApi/GetRutaById",
+      { Id: data.ruta }
+    );
+    if (data.sellosAforo) {
+      data.sellosAforo = "true";
+    }
 
-      for (let i = 0; i < datosRuta.data.Message.SitiosPorRuta.length; i++) { //recorro el array de sitiosPorRuta
-        if (datosRuta.data.Message.SitiosPorRuta[i].Esquemas.length > 0) {//Si uno de esos sitio tiene esquemas, 
-          sitioConEsquemas = datosRuta.data.Message.SitiosPorRuta[i].Orden;
-          for (let j = 0; j < datosRuta.data.Message.SitiosPorRuta[i].Esquemas.length; j++) { //los recorro 
-            if (datosRuta.data.Message.SitiosPorRuta[i].Esquemas[j].Requerido) { //Si el esquema es requerido, lo guardo
-              let perro = await axios.get(`https://seguimientoapi.vesta-accelerate.com/api/EsquemaFlujo/Details/${datosRuta.data.Message.SitiosPorRuta[i].Esquemas[j].EsquemaId}`);
-                for (let k = 0; k < perro.data.Message.EsquemaFlujoDetalles.length; k++){
-                  esquemas.push(perro.data.Message.EsquemaFlujoDetalles[k].EtiquetaDescripcion);
-                }
+    sitiosRutaMadre = datosRuta.data.Message.SitiosPorRuta.length;
+    nombreRutaMadre = datosRuta.data.Message.NombreRuta;
+    setNombreDeLaRuta(nombreRutaMadre);
+    setSitiosDeLaRuta(sitiosRutaMadre);
+
+    for (let i = 0; i < datosRuta.data.Message.SitiosPorRuta.length; i++) {
+      if (datosRuta.data.Message.SitiosPorRuta[i].Esquemas.length > 0) {
+        sitioConEsquemas = datosRuta.data.Message.SitiosPorRuta[i].Orden;
+
+        for (let j = 0; j < datosRuta.data.Message.SitiosPorRuta[i].Esquemas.length; j++) {
+          if (datosRuta.data.Message.SitiosPorRuta[i].Esquemas[j].Requerido) {
+            let perro = await axios.get(
+              `https://seguimientoapi.vesta-accelerate.com/api/EsquemaFlujo/Details/${datosRuta.data.Message.SitiosPorRuta[i].Esquemas[j].EsquemaId}`
+            );
+            for (let k = 0; k < perro.data.Message.EsquemaFlujoDetalles.length; k++) {
+              esquemas.push(perro.data.Message.EsquemaFlujoDetalles[k].EtiquetaDescripcion);
             }
           }
         }
       }
-      console.log(esquemas);
-
-      if (datosRuta.data.Message.RutaCompuesta.length > 0) {
-        sitiosRutaHija = datosRuta.data.Message.RutaCompuesta[0].SitiosPorRuta.length;
-      }
-
-      const res = await fetch(
-        "https://script.google.com/macros/s/AKfycbwIxtcFDJ64ffHjZOmrM4gXvaOrz8fKRopj5MZaJM1j8OnxgF642prcSZKKtY4P6K1YGA/exec",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: new URLSearchParams({...data, sitiosRutaMadre, sitiosRutaHija, nombreRutaMadre, esquemas, sitioConEsquemas }),
-        }
-      );
-
-      const result = await res.json();
-      alert("Formulario enviado: " + result.mensaje);
-    } catch (error) {
-      alert("Error al enviar: " + error.message);
-      console.error("Error al enviar el formulario:", error);
     }
+
+    if (datosRuta.data.Message.RutaCompuesta.length > 0) {
+      sitiosRutaHija = datosRuta.data.Message.RutaCompuesta[0].SitiosPorRuta.length;
+    }
+
+    const res = await fetch(
+      "https://script.google.com/macros/s/AKfycbwIxtcFDJ64ffHjZOmrM4gXvaOrz8fKRopj5MZaJM1j8OnxgF642prcSZKKtY4P6K1YGA/exec",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          ...data,
+          sitiosRutaMadre,
+          sitiosRutaHija,
+          nombreRutaMadre,
+          esquemas,
+          sitioConEsquemas,
+        }),
+      }
+    );
+
+    const result = await res.json();
+    return result.mensaje; // texto para el toast de éxito
   };
+
+  toast.promise(proceso(), {
+    loading: "Enviando... revisa el excel chele",
+    success: (mensaje) => `${mensaje}`,
+    error: (err) => `Error al enviar: ${err.message}`,
+  });
+};
+
 
   return (
     <Container className="mt-4">
@@ -85,13 +104,18 @@ const Mediciones = () => {
             {...register("sellosAforo")}
           />
         </Form.Group>
-
         <Button
           style={{ backgroundColor: colors.colorAzulGeneral, border: "none" }}
           type="submit"
           className="mt-3">
           Enviar
         </Button>
+        {nombreDeLaRuta && (
+          <div className="mt-3">
+            <p> <strong>Ruta:</strong> {nombreDeLaRuta}</p>
+            <p><strong>Cantidad sitios:</strong> {sitiosDeLaRuta}</p>
+          </div>
+        )}
       </Form>
     </Container>
   );

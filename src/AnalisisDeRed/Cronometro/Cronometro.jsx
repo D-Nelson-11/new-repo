@@ -4,7 +4,6 @@ import { Form, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import infoCronometro from "./Cronometro.json";
 import axios from '../../api/axios'
-import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 
 function Cronometro() {
