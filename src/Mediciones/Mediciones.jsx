@@ -34,9 +34,8 @@ const Mediciones = () => {
     setSitiosDeLaRuta(sitiosRutaMadre);
 
     for (let i = 0; i < datosRuta.data.Message.SitiosPorRuta.length; i++) {
-      if (datosRuta.data.Message.SitiosPorRuta[i].Esquemas.length > 0) {
+      if (datosRuta.data.Message.SitiosPorRuta[i].Esquemas.length > 0) {//Si uno de esos sitio tiene esquemas
         sitioConEsquemas = datosRuta.data.Message.SitiosPorRuta[i].Orden;
-
         for (let j = 0; j < datosRuta.data.Message.SitiosPorRuta[i].Esquemas.length; j++) {
           if (datosRuta.data.Message.SitiosPorRuta[i].Esquemas[j].Requerido) {
             let perro = await axios.get(
@@ -48,6 +47,10 @@ const Mediciones = () => {
           }
         }
       }
+    }
+    if (esquemas.length == 0) {
+
+      return new Error("NO SEA PENDEJO PERRO, no hay esquemas");
     }
 
     if (datosRuta.data.Message.RutaCompuesta.length > 0) {
@@ -79,7 +82,7 @@ const Mediciones = () => {
   toast.promise(proceso(), {
     loading: "Enviando... revisa el excel chele",
     success: (mensaje) => `${mensaje}`,
-    error: (err) => `Error al enviar: ${err.message}`,
+    error: (err) => `${err.message}`,
   });
 };
 
