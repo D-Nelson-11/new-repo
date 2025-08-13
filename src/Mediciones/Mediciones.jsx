@@ -49,8 +49,7 @@ const Mediciones = () => {
       }
     }
     if (esquemas.length == 0) {
-
-      return new Error("NO SEA PENDEJO PERRO, no hay esquemas");
+      return new Error("La ruta no tiene esquemas");
     }
 
     if (datosRuta.data.Message.RutaCompuesta.length > 0) {
