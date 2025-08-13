@@ -19,7 +19,7 @@ const Mediciones = () => {
         "https://analisisderedapi.vesta-accelerate.com/api/RutaCrudApi/GetRutaById",
         { Id: data.ruta }
       );
-      console.log(datosRuta.data.Message);
+      console.log(data);
 
       // const perros = await axios.get("https://seguimientoapi.vesta-accelerate.com/api/EsquemaFlujo/Details/be237a0f-39ae-4aa2-a54a-164158601631");
       // console.log(perros);

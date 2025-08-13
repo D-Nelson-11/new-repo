@@ -1,69 +1,14 @@
 [
-  [
-    {
-      "Nombre": "COSCO",
-      "IdProveedor": "04a44cb4-b47b-474b-b6b2-204af8f65304"
-    },
-    {
-      "Nombre": "MSC",
-      "IdProveedor": "cc06ec14-27fe-483a-8717-123392041ee2"
-    },
-    { "Nombre": "DOLE", "IdProveedor": "DF666A1B-C2B7-4C35-9491-1547AF28FDC2" },
-    {
-      "Nombre": "CMA",
-      "IdProveedor": "15F81453-C456-4162-8CA2-1233929D4F81"
-    },
-    {
-      "Nombre": "HAPAG",
-      "IdProveedor": "B07785CF-E447-468D-BD9D-1D931E807BB7"
-    },
-    {
-      "Nombre": "MAERSK",
-      "IdProveedor": "32575917-7f9e-4712-832f-0f29bc82ba3d"
-    },
-    {
-      "Nombre": "ONE",
-      "IdProveedor": "61752EA8-E5F3-4B33-AA2D-2207371D2050"
+  {
+    "TipoSolicitudId": "284dad46-16d2-45ac-8ca7-27a2398fc98c",
+    "TipoSolicitud": "SET FACTURA SNACKS  LAS MANOS",
+    "MetodoNombre": "SetFacturaXlistIds",
+    "JSON": {
+      "Factura": "019-001-01-00197763",
+      "HojaRutaIds": [
+        "28389f98-da44-4cf1-bbfc-29c5aa06504c",
+        "57ccbc3d-9e8d-40c6-b72d-29c5aa06f6cc"
+      ]
     }
-  ],
-  [
-    {
-      "Nombre": "PUERTO CORTES",
-      "IdSitioInicio": "c5ce6823-6ac7-40f2-b892-1712657b1ed7"
-    }
-  ],
-  [
-    {
-      "Nombre": "PLANTA DIXIE",
-      "IdSitioFin": "CDDBB4C7-0C29-4DB8-B73E-170B19303D50"
-    },
-    {
-      "Nombre": "RANSA SPS",
-      "IdSitioFin": "aa5fef6a-2cb6-4a40-9cfb-223e1dc87a77"
-    },
-    {
-      "Nombre": "GLC",
-      "IdSitioFin": "1BB62942-9E84-4D15-8649-223E20E43A96"
-    },
-    {
-      "Nombre": "PROYESA",
-      "IdSitioFin": "28B4E301-14E8-468E-9536-223E26E1CCB6"
-    },
-    {
-      "Nombre": "PLANTA ALIMENTOS",
-      "IdSitioFin": "A96ED5F6-094F-48FD-9BAE-223C57BC2C5B"
-    },
-    {
-      "Nombre": "PLANTA ABUMAR",
-      "IdSitioFin": "9A13FFAA-93A4-44AA-B14F-1CBB5D8EA6B6"
-    },
-    {
-      "Nombre": "CONSOLIDADOS 807, SPS",
-      "IdSitioFin": "5DCE8BC8-C7C7-4C08-B319-228506E67399"
-    },
-    {
-      "Nombre": "CROPA",
-      "IdSitioFin": "1BA78214-43F0-42A8-AE83-223E1C5BE9A3"
-    }
-  ]
+  }
 ]
