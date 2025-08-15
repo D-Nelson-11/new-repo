@@ -8,6 +8,7 @@ import { TfiReload } from "react-icons/tfi";
 import { useForm } from "react-hook-form";
 import { FaPlaneDeparture } from "react-icons/fa";
 import SearchBar from "../../components/SearchBar";
+import { toast } from "sonner";
 
 export function RutaSimple({ cantidad, IdCliente }) {
   let [sitiosAduana, setSitiosAduana] = useState([]);
@@ -277,9 +278,8 @@ export function RutaSimple({ cantidad, IdCliente }) {
                 cursor: "pointer",
               }}
               onClick={async () => {
-                let confirmar = confirm("¿Desea recargar sitios y segmentos?");
-                if (confirmar) {
-                  try {
+                toast.promise(
+                  (async () => {
                     const res = await axios.post(
                       "https://analisisderedapi.vesta-accelerate.com/api/SitioCrudApi/GetSitiosAduanas",
                       {}
@@ -297,12 +297,14 @@ export function RutaSimple({ cantidad, IdCliente }) {
                       { ClienteId: IdCliente.split(",")[0] }
                     );
                     setSegmentosPorCliente(res3.data.Message);
-                    alert("Sitios y segmentos recargados correctamente");
-                  } catch (err) {
-                    alert("Error al recargar sitios y segmentos");
-                    console.log(err);
+                  })(),
+                  {
+                    loading: "Recargando sitios y segmentos...",
+                    success: () =>
+                      "Sitios y segmentos recargados correctamente",
+                    error: () => "Error al recargar sitios y segmentos",
                   }
-                }
+                );
               }}
             />
           </div>

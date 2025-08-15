@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { FaPlaneDeparture } from "react-icons/fa";
 import SearchBar from "../../components/SearchBar";
 import { colors } from "../../theme/colors";
+import { toast } from "sonner";
 export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
   let [sitiosAduana, setSitiosAduana] = useState([]);
   let [sitiosCliente, setSitiosCliente] = useState([]);
@@ -18,7 +19,6 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredSitios, setFilteredSitios] = useState([]);
   const { register, getValues, handleSubmit, setValue } = useForm();
-  const [loading, setLoading] = useState(false);
   let datosFormulario = {};
 
   const handleTipoSitioChange = (index, value) => {
@@ -308,12 +308,6 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
               type="submit">
               Crear Json Ruta
             </Button>
-            {loading && (
-              <p style={{ display: "inline-block", marginLeft: "600px" }}>
-                actualizando...
-              </p>
-            )}
-
             <TfiReload
               style={{
                 fontSize: "35px",
@@ -321,14 +315,12 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                 borderRadius: "5px",
                 color: "white",
                 padding: "2px",
-                marginLeft: !loading ? "700" : "10px",
+                marginLeft: "700",
                 cursor: "pointer",
               }}
               onClick={async () => {
-                let confirmar = confirm("¿Desea recargar sitios y segmentos?");
-                if (confirmar) {
-                  try {
-                    setLoading(true);
+                toast.promise(
+                  (async () => {
                     const res = await axios.post(
                       "https://analisisderedapi.vesta-accelerate.com/api/SitioCrudApi/GetSitiosAduanas",
                       {}
@@ -346,14 +338,14 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                       { ClienteId: IdCliente.split(",")[0] }
                     );
                     setSegmentosPorCliente(res3.data.Message);
-                    setLoading(false);
-                    alert("Sitios y segmentos recargados correctamente");
-                  } catch (err) {
-                    alert("Error al recargar sitios y segmentos");
-                    console.log(err);
-                    setLoading(false);
+                  })(),
+                  {
+                    loading: "Recargando sitios y segmentos...",
+                    success: () =>
+                      "Sitios y segmentos recargados correctamente",
+                    error: () => "Error al recargar sitios y segmentos",
                   }
-                }
+                );
               }}
             />
           </div>
@@ -494,7 +486,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                       5600
                     </option>
                     <option value="8100/TRÁNSITO HACIA ZOLI ZIP">8100</option>
-                       <option value="ID/IMPORTACION DEFINITIVA">ID</option>
+                    <option value="ID/IMPORTACION DEFINITIVA">ID</option>
                     <option value="FI/Formulario Aduanero Unico Centroamericano de Importacion">
                       FI
                     </option>
@@ -756,13 +748,13 @@ export function SitiosRutaHija({
                   <option value="5200/ADMISION TEMP0RAL  P/ PERFECC ACTIVO SIN TRANSFOR ZOLI">
                     5200
                   </option>
-                     <option value="ID/IMPORTACION DEFINITIVA">ID</option>
-                    <option value="FI/Formulario Aduanero Unico Centroamericano de Importacion">
-                      FI
-                    </option>
-                    <option value="DI/Extraccion para Importacion Definitiva">
-                      DI
-                    </option>
+                  <option value="ID/IMPORTACION DEFINITIVA">ID</option>
+                  <option value="FI/Formulario Aduanero Unico Centroamericano de Importacion">
+                    FI
+                  </option>
+                  <option value="DI/Extraccion para Importacion Definitiva">
+                    DI
+                  </option>
                 </Form.Select>
               </InputGroup>
             </div>

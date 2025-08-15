@@ -4,6 +4,7 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 import axios from "../api/axios";
 import SkuJson from "./json.json";
 import { colors } from "../theme/colors";
+import {toast} from 'sonner'
 
 export default function Sku() {
   const form1 = useForm();
@@ -15,7 +16,7 @@ export default function Sku() {
   let [descripcion, setDescripcion] = useState("");
   let [codigo, setCodigo] = useState("");
   let [categoriaVestaId, setCategoriaVestaId] = useState("");
-  let [stage, setStage] = useState(0);
+  let [stage, setStage] = useState(1);
   let [btnForm1, setbBtnForm1] = useState();
   let [btnForm2, setbBtnForm2] = useState();
   let [btnForm3, setbBtnForm3] = useState();
@@ -102,8 +103,10 @@ export default function Sku() {
                         "SkuInboundClienteId",
                         resp.data.Message.Id
                       );
+                      toast.success("Sku Cliente creado exitosamente");
                     } catch (error) {
-                      alert(error.response.data);
+                      console.log(error)
+                      toast.error(`Error, revisa si el código ${values.Codigo} ya existe para este cliente`);
                     }
                   }
                 } else {
@@ -158,7 +161,7 @@ export default function Sku() {
                   Descripcion
                 </label>
                 <Form.Control
-                  placeholder=""
+                  placeholder="Descripción"
                   size="sm"
                   {...form1.register("Descripcion", { required: true })}
                   onChange={(e) => {
@@ -172,7 +175,7 @@ export default function Sku() {
                   Codigo
                 </label>
                 <Form.Control
-                  placeholder=""
+                  placeholder="Código"
                   size="sm"
                   {...form1.register("Codigo", { required: true })}
                   onChange={(e) => {
@@ -205,7 +208,7 @@ export default function Sku() {
                   Presentacion
                 </label>
                 <Form.Control
-                  placeholder=""
+                  placeholder="Presentación"
                   size="sm"
                   {...form1.register("Presentacion")}
                 />
@@ -262,12 +265,17 @@ export default function Sku() {
                         textArea
                       );
                       console.log(resp)
+                      if (resp.data.Message == "Este codigo ya existe para este Proveedor") {
+                        toast.error(`Error, el código ${values.Codigo} ya existe para este proveedor`);
+                        return;
+                      }
 
                       setSkuProveedor(resp.data.Message.Id);
                       form4.setValue("SkuProveedorId", resp.data.Message.Id);
                       form3.setValue("SkuId", resp.data.Message.Id);
+                      toast.success("Sku Proveedor creado exitosamente");
                     } catch (error) {
-                      alert(error);
+                      toast.error(`Error, revisa si el código ${values.Codigo} ya existe para este proveedor`);
                     }
                   }
                 } else {
@@ -295,7 +303,7 @@ export default function Sku() {
                   PersonaProveedorId
                 </label>
                 <Form.Control
-                  placeholder=""
+                  placeholder="PersonaProveedorId"
                   size="sm"
                   {...form2.register("PersonaProveedorId", { required: true })}
                 />
@@ -305,7 +313,7 @@ export default function Sku() {
                   Descripcion
                 </label>
                 <Form.Control
-                  placeholder=""
+                  placeholder="Descripción"
                   size="sm"
                   {...form2.register("Descripcion")}
                   value={descripcion}
@@ -316,7 +324,7 @@ export default function Sku() {
                   Codigo
                 </label>
                 <Form.Control
-                  placeholder=""
+                  placeholder="Código"
                   size="sm"
                   {...form2.register("Codigo")}
                   value={codigo}
@@ -347,7 +355,7 @@ export default function Sku() {
                   CategoriaVestaId
                 </label>
                 <Form.Control
-                  placeholder=""
+                  placeholder="CategoriaVestaId"
                   size="sm"
                   {...form2.register("CategoriaVestaId")}
                   value={categoriaVestaId}
@@ -465,10 +473,10 @@ export default function Sku() {
                         "https://personasapi.vesta-accelerate.com/api/SkuTipoEmbalaje/Create",
                         textArea
                       );
-                      alert("peticion hecha");
+                      toast.success("Embalaje creado exitosamente");
                       console.log(resp);
                     } catch (error) {
-                      alert(error);
+                      toast.error("Error al crear el embalaje");
                       console.log(error);
                     }
                   }
@@ -479,10 +487,10 @@ export default function Sku() {
             <Row>
               <Col>
                 <label htmlFor="" style={{ fontSize: "13px", width: "100%" }}>
-                  SkuId
+                  SkuProveedorId
                 </label>
                 <Form.Control
-                  placeholder=""
+                  placeholder="SkuProveedorId"
                   size="sm"
                   {...form3.register("SkuId", { required: true })}
                   // value={skuProveedor}
@@ -561,9 +569,9 @@ export default function Sku() {
                         textArea
                       );
                       console.log(resp);
-                      alert("peticion hecha");
+                      toast.success("Relación Sku Cliente-Proveedor creado exitosamente");
                     } catch (error) {
-                      alert(error);
+                      toast.error("Error al crear relación Cliente-Proveedor");
                       console.log(resp);
                     }
                   }
@@ -576,7 +584,7 @@ export default function Sku() {
                   SkuInboundClienteId
                 </label>
                 <Form.Control
-                  placeholder=""
+                  placeholder="SkuInboundClienteId"
                   size="sm"
                   {...form4.register("SkuInboundClienteId", { required: true })}
                   // value={skuCliente}
@@ -587,7 +595,7 @@ export default function Sku() {
                   SkuProveedorId
                 </label>
                 <Form.Control
-                  placeholder=""
+                  placeholder="SkuProveedorId"
                   size="sm"
                   {...form4.register("SkuProveedorId", { required: true })}
                   // value={skuProveedor}
@@ -632,20 +640,19 @@ export default function Sku() {
       </div>
       <div style={{ width: "40%" }} className="d-flex flex-wrap">
         <div className="d-flex flex-wrap w-100 justify-content-between">
-          <Button className="mb-1 w-50" onClick={clearAll} style={{backgroundColor: colors.colorRojoGeneral, border:"none"}}>
+          <Button className="mb-1 w-100" onClick={clearAll} style={{backgroundColor: colors.colorRojoGeneral, border:"none"}}>
             Limpiar todo
           </Button>
-          <Form.Select
+          {/* <Form.Select
             aria-label="Default select example"
             className="w-50"
             onChange={(e) => {
               setStage(e.target.value);
             }}>
-            <option value="0">Stage</option>
             <option value="1">Produccion</option>
-          </Form.Select>
+          </Form.Select> */}
         </div>
-        <div style={{ width: "100%", height: "90%" }} className="">
+        <div style={{ width: "100%", height: "100%" }} className="">
           <textarea
             id=""
             style={{ width: "100%", height: "95%" }}

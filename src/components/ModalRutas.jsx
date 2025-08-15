@@ -15,6 +15,7 @@ function ModalRutas({ renderContenido, Nombre }) {
       <Modal
         size="xl"
         show={lgShow}
+        backdrop="static"
         onHide={() => setLgShow(false)}
         aria-labelledby="example-modal-sizes-title-lg">
         <Modal.Header closeButton />
