@@ -79,7 +79,7 @@ const Mediciones = () => {
   };
 
   toast.promise(proceso(), {
-    loading: "Enviando... revisa el excel chele",
+    loading: "Enviando...",
     success: (mensaje) => `${mensaje}`,
     error: (err) => `${err.message}`,
   });
