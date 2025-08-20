@@ -275,7 +275,8 @@ export default function Sku() {
                       form3.setValue("SkuId", resp.data.Message.Id);
                       toast.success("Sku Proveedor creado exitosamente");
                     } catch (error) {
-                      toast.error(`Error, revisa si el código ${values.Codigo} ya existe para este proveedor`);
+                      console.log(error);
+                      toast.error(`Error, revisa la consola chele`);
                     }
                   }
                 } else {

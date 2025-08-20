@@ -193,11 +193,27 @@ function Hr() {
                 <Form.Group
                   className="mb-3"
                   controlId="exampleForm.ControlInput1">
-                  <Form.Label>Nombre Parámetro</Form.Label>
+                  <Form.Label>Aduana</Form.Label>
+                  <Form.Select>
+                    <option value="">--Seleccione--</option>
+                    <option value="1">Puerto Cortés</option>
+                    <option value="2">La Mesa</option>
+                    <option value="3">Las manos</option>
+                    <option value="4">El Florido</option>
+                    <option value="5">Guasaule</option>
+                    <option value="6">Amatillo</option>
+                    <option value="7">Corinto</option>
+                    <option value="8">Toncontín</option>
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>Nombre del componente</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Nombre"
-                    {...register("NombreParametro", { required: true })}
+                    placeholder="ej: DUCA-D/IMPORT/LA MESA/AZN"
+                    {...register("NombreComponente", { required: true })}
                   />
                 </Form.Group>
               </Col>

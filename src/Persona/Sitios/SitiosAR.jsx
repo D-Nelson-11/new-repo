@@ -2,6 +2,7 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 import { set, useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import axios from "../../api/axios";
+import { toast } from "sonner";
 
 function SitioAnalisis() {
   const { handleSubmit, register, getValues, setValue } = useForm();
@@ -19,7 +20,9 @@ function SitioAnalisis() {
           "https://analisisderedapi.vesta-accelerate.com/api/TipoSitioCrudApi/Index",
           {}
         );
-        const resp2 = await axios.get('https://personasapi.vesta-accelerate.com/api/PersonaClienteServiceApi/GetAllClientes');
+        const resp2 = await axios.get(
+          "https://personasapi.vesta-accelerate.com/api/PersonaClienteServiceApi/GetAllClientes"
+        );
         setClientes(
           resp2.data
             .map((cliente) => ({
@@ -28,7 +31,9 @@ function SitioAnalisis() {
             }))
             .sort((a, b) => a.Nombre.localeCompare(b.Nombre)) // Ordenar alfabéticamente
         );
-        setTipoDeSitio(resp.data.Message.sort((a, b) => a.Nombre.localeCompare(b.Nombre)));
+        setTipoDeSitio(
+          resp.data.Message.sort((a, b) => a.Nombre.localeCompare(b.Nombre))
+        );
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -41,34 +46,46 @@ function SitioAnalisis() {
 
   const fetchData = async (sitioPersonaId) => {
     console.log(tipoSitioPersona);
-    if(tipoSitioPersona == "2"){
-    try {
-      const resp = await axios.get(
-        `https://personasapi.vesta-accelerate.com/api/SitioPersonaProveedorApi/Details/${sitioPersonaId}`
-      );
-      setSitioPersona(resp.data[0]);
-      setValue("nombreSitio", resp.data[0].Nombre);  
-    } catch (error) {
-      alert("No se encontró el sitio");
-      console.error(error);
+    if (tipoSitioPersona == "1") {
+      try {
+        const resp = await axios.get(
+          `https://personasapi.vesta-accelerate.com/api/SitioClienteServiceApi/Details/${sitioPersonaId}`
+        );
+        setSitioPersona(resp.data[0]);
+        setValue("nombreSitio", resp.data[0].Nombre);
+      } catch (error) {
+        toast.error("No se encontró el sitio");
+        console.error(error);
+      }
     }
-  }else if(tipoSitioPersona == "3"){
-    try {
-      const resp = await axios.get(
-        `https://personasapi.vesta-accelerate.com/api/SitioVestaServiceApi/Details/${sitioPersonaId}`
-      );
-      setSitioPersona(resp.data[0]);
-      setValue("nombreSitio", resp.data[0].Nombre);  
-    } catch (error) {
-      alert("No se encontró el sitio");
-      console.error(error);
+    if (tipoSitioPersona == "2") {
+      try {
+        const resp = await axios.get(
+          `https://personasapi.vesta-accelerate.com/api/SitioPersonaProveedorApi/Details/${sitioPersonaId}`
+        );
+        setSitioPersona(resp.data[0]);
+        setValue("nombreSitio", resp.data[0].Nombre);
+      } catch (error) {
+        toast.error("No se encontró el sitio");
+        console.error(error);
+      }
+    } else if (tipoSitioPersona == "3") {
+      try {
+        const resp = await axios.get(
+          `https://personasapi.vesta-accelerate.com/api/SitioVestaServiceApi/Details/${sitioPersonaId}`
+        );
+        setSitioPersona(resp.data[0]);
+        setValue("nombreSitio", resp.data[0].Nombre);
+      } catch (error) {
+        toast.error("No se encontró el sitio");
+        console.error(error);
+      }
     }
-
-  }
-};
+  };
 
   const onSubmit = async (values) => {
-    if (tipoSitioPersona =="2") {
+    if (tipoSitioPersona == "2" || tipoSitioPersona == "1") {
+      console.log(sitioPersona);
       let JsonSitioAr = {
         CoordenadaX: sitioPersona?.CoordenadaX,
         CoordenadaY: sitioPersona?.CoordenadaY,
@@ -81,29 +98,35 @@ function SitioAnalisis() {
         PaisId: sitioPersona?.PaisId,
         PaisNombre: sitioPersona?.PaisDescripcion,
         Url: "modelologisticoderedope.vesta-accelerate.com",
-        SitioCodigo: sitioPersona.Nombre[0] + sitioPersona.Nombre[1]+ sitioPersona.Nombre[2],
+        SitioCodigo:
+          sitioPersona.Nombre[0] +
+          sitioPersona.Nombre[1] +
+          sitioPersona.Nombre[2],
         UsuarioAsignadoId: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
       };
-      setValue("json", JSON.stringify(JsonSitioAr,null,2));
+      setValue("json", JSON.stringify(JsonSitioAr, null, 2));
       setDisabled(false);
-    }else{
-      let JsonStioAr={
-        "CoordenadaX": sitioPersona?.CoordenadaX,
-        "CoordenadaY": sitioPersona?.CoordenadaY,
-        "Nombre": sitioPersona?.Nombre,
-        "TipoSitioId": values.tipoDeSitio.split(",")[0],
-        "SitioPersonaId": sitioPersona?.Id,
-        "AduanaId": sitioPersona?.Id,
-        "CreatedBy": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-        "PaisId": sitioPersona?.PaisId,
-        "PaisNombre": sitioPersona?.PaisDescripcion,
+    } else {
+      let JsonStioAr = {
+        CoordenadaX: sitioPersona?.CoordenadaX,
+        CoordenadaY: sitioPersona?.CoordenadaY,
+        Nombre: sitioPersona?.Nombre,
+        TipoSitioId: values.tipoDeSitio.split(",")[0],
+        SitioPersonaId: sitioPersona?.Id,
+        AduanaId: sitioPersona?.Id,
+        CreatedBy: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+        PaisId: sitioPersona?.PaisId,
+        PaisNombre: sitioPersona?.PaisDescripcion,
         Url: "modelologisticoderedope.vesta-accelerate.com",
-        "SitioCodigo": sitioPersona.Nombre[0] + sitioPersona.Nombre[1]+ sitioPersona.Nombre[2],
-        "UsuarioAsignadoId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-        "ParallelCustoms": false,
-        "ActivateIp": false
-      }
-      setValue("json", JSON.stringify(JsonStioAr,null,2));
+        SitioCodigo:
+          sitioPersona.Nombre[0] +
+          sitioPersona.Nombre[1] +
+          sitioPersona.Nombre[2],
+        UsuarioAsignadoId: "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+        ParallelCustoms: false,
+        ActivateIp: false,
+      };
+      setValue("json", JSON.stringify(JsonStioAr, null, 2));
       setDisabled(false);
     }
   };
@@ -117,22 +140,24 @@ function SitioAnalisis() {
       <Col md={6}>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Row>
-          <Col>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Tipo de sitio</Form.Label>
-              <Form.Select {...register("tipoSitioPersona")} onChange={(e) => setTipoSitioPersona(e.target.value)}>
+            <Col>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Tipo de sitio</Form.Label>
+                <Form.Select
+                  {...register("tipoSitioPersona")}
+                  onChange={(e) => setTipoSitioPersona(e.target.value)}>
                   <option>Seleccione</option>
                   <option value="1">Sitio Cliente</option>
                   <option value="2">Sitio Proveedor</option>
                   <option value="3">Sitio Vesta</option>
-              </Form.Select>
+                </Form.Select>
               </Form.Group>
             </Col>
           </Row>
           <Row>
             <Col className="col-9">
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>SitioPersonaProveedorId</Form.Label>
+                <Form.Label>SitioPersonaId</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="SitioPersonaId"
@@ -154,7 +179,7 @@ function SitioAnalisis() {
           </Row>
           <Row>
             <Col>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Nombre</Form.Label>
                 <Form.Control
                   type="text"
@@ -165,22 +190,25 @@ function SitioAnalisis() {
               </Form.Group>
             </Col>
           </Row>
-          {tipoSitioPersona == "2" &&(
-          <Row>
-            <Col>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Cliente</Form.Label>
-                <Form.Select {...register("Cliente")}>
-                  {clientes.map((cliente) => (
-                    <option key={cliente.Id} value={[cliente.Id, cliente.Nombre]}>
-                      {cliente.Nombre}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-            </Col>
-          </Row>
-          )}
+          {tipoSitioPersona == "2" ||
+            (tipoSitioPersona == "1" && (
+              <Row>
+                <Col>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Cliente</Form.Label>
+                    <Form.Select {...register("Cliente")}>
+                      {clientes.map((cliente) => (
+                        <option
+                          key={cliente.Id}
+                          value={[cliente.Id, cliente.Nombre]}>
+                          {cliente.Nombre}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+              </Row>
+            ))}
           <Row>
             <Col>
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -202,32 +230,48 @@ function SitioAnalisis() {
               </Button>
             </Col>
             <Col>
-              <Button className="w-100" variant="success" disabled={disabled} onClick={async()=>{
-                if (tipoSitioPersona =="2") {
-                  try {
-                    const confirmar = confirm('¿Está seguro de crear el sitio?');
-                    if (!confirmar) return;
-                    const resp = await axios.post('https://analisisderedapi.vesta-accelerate.com/api/SitioCrudApi/Create',JSON.parse(getValues('json')));
-                    alert (resp.data.Message.Id); 
-                    console.log(resp);  
-                    alert('Sitio creado correctamente');
-                  } catch (error) {
-                    alert('Error al crear el sitio');
-                  }
-                }else{
-                  try {
-                    const confirmar = confirm('¿Está seguro de crear el sitio aduana?');
-                    if (!confirmar) return;
-                    const resp = await axios.post('https://analisisderedapi.vesta-accelerate.com/api/SitioCrudApi/CrearSitioAduana',JSON.parse(getValues('json')));
-                    alert (resp.data.Message.Id); 
-                    console.log(resp);  
-                    alert('Sitio creado correctamente');
-                  } catch (error) {
-                    alert('Error al crear el sitio');
-                  }
+              <Button
+                className="w-100"
+                variant="success"
+                disabled={disabled}
+                onClick={async () => {
+                  if (tipoSitioPersona == "2" || tipoSitioPersona == "1") {
+                      const confirmar = confirm("¿Está seguro de crear el sitioooo?");
+                      if (!confirmar) return;
+                       toast.promise(
+                        (async () => {
+                          const resp = await axios.post("https://analisisderedapi.vesta-accelerate.com/api/SitioCrudApi/Create",JSON.parse(getValues("json")));
+                          console.log(resp)
 
-                }
-              }}>
+                          if (resp.data.Message ==="Ya existe un sitio con ese código de sitio.") {
+                            throw new Error("Ya existe un sitio con ese código de sitio.");
+                          }
+                          return resp;
+                        })(),
+                        {
+                          loading: "Creando sitio...",
+                          success: () => "Sitio creado correctamente",
+                          error: (err) => err.response?.data?.Exception?.Message || "Error, puede ser que el código de sitio ya exista o tenes malo el JSON",
+                        }
+                      );
+                  } else {
+                    try {
+                      const confirmar = confirm(
+                        "¿Está seguro de crear el sitio aduana?"
+                      );
+                      if (!confirmar) return;
+                      const resp = await axios.post(
+                        "https://analisisderedapi.vesta-accelerate.com/api/SitioCrudApi/CrearSitioAduana",
+                        JSON.parse(getValues("json"))
+                      );
+                      alert(resp.data.Message.Id);
+                      console.log(resp);
+                      alert("Sitio creado correctamente");
+                    } catch (error) {
+                      alert("Error al crear el sitio");
+                    }
+                  }
+                }}>
                 Crear
               </Button>
             </Col>
@@ -237,7 +281,7 @@ function SitioAnalisis() {
       <Col md={6}>
         <Form.Group className="mb-3" controlId="formTextarea">
           <Form.Label>JSON</Form.Label>
-          <Form.Control as="textarea" rows={16} {...register('json')} />
+          <Form.Control as="textarea" rows={16} {...register("json")} />
         </Form.Group>
       </Col>
     </Row>
