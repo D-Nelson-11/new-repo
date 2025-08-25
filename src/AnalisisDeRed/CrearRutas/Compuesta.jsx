@@ -296,6 +296,9 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
               <option value="3193F743-6761-45EB-BFED-26A60DD442D5">
                 Nohelia
               </option>
+                 <option value="F92928DC-1CDA-436C-8ECE-254FC151469C">
+                Sandra
+              </option>
             </select>
             <Button
               style={{
