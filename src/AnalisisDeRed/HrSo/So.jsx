@@ -95,6 +95,7 @@ function So() {
           console.log("CriterioAnalisisEncabezadoId: " + resp6.data.Id);
 
           if (parametros) {
+            
             for (let i = 0; i < parametrosSO.length; i++) {
               if (i == data.Aduana) {
                 let json = {
