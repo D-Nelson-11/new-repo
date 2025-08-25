@@ -190,8 +190,7 @@ function SitioAnalisis() {
               </Form.Group>
             </Col>
           </Row>
-          {tipoSitioPersona == "2" ||
-            (tipoSitioPersona == "1" && (
+          {tipoSitioPersona == "2" || tipoSitioPersona == "1" ? (
               <Row>
                 <Col>
                   <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -208,7 +207,7 @@ function SitioAnalisis() {
                   </Form.Group>
                 </Col>
               </Row>
-            ))}
+            ):null}
           <Row>
             <Col>
               <Form.Group className="mb-3" controlId="formBasicEmail">

@@ -212,7 +212,7 @@ export let parametrosSO = [
     ],
 
     //8.TONCONTIN
-   [
+    [
         '99536CF7-183C-45AF-BE1F-1F900FBD15E9',
         '1DFA47D3-8E4B-44B2-B2CC-1F8768BFBBD0',
         'D43CBC26-66B5-47B0-87E2-20946CCE21B0',
@@ -240,4 +240,18 @@ export let parametrosSO = [
         'c412a11b-3004-4376-930a-2543831491cf',
         'A89A593A-4A26-4589-8904-1B825BDB1691',
     ]
+]
+
+export const segmentosSo = [ //posicion 4 = DUCA-D, 6 = IMPORT, 8 = LA MESA, 10 = EXP
+    { "TipoParametro": 7, "Descripcion": "Segmentos", "CreatedBy": "0C3A7B92-34D7-453A-883F-24C15B24FF6A", "IsComplex": false, "Fixed": true, "EsArray": true, "IsGraph": true, "InGroup": false, "NombreParametroJson": "Segmentos" },
+    { "TipoParametro": 7, "Descripcion": "Id", "CreatedBy": "0C3A7B92-34D7-453A-883F-24C15B24FF6A", "IsComplex": false, "Fixed": false, "EsArray": false, "IsGraph": false, "InGroup": false, "NombreParametroJson": "Id", "ValorDefecto": "05AB7933-C80F-4211-8FC6-1382F79F12C8", "ParametroPadreId": " 0f7987a1-8efe-4e5c-b09b-26e0bb88fad3" },
+    { "TipoParametro": 7, "Descripcion": "Criterios", "CreatedBy": "0C3A7B92-34D7-453A-883F-24C15B24FF6A", "IsComplex": false, "Fixed": false, "EsArray": true, "IsGraph": false, "InGroup": false, "NombreParametroJson": "Criterios", "ParametroPadreId": " 0f7987a1-8efe-4e5c-b09b-26e0bb88fad3" },
+    { "TipoParametro": 7, "Descripcion": "EtiquetaDisplayName", "CreatedBy": "0C3A7B92-34D7-453A-883F-24C15B24FF6A", "IsComplex": true, "Fixed": false, "EsArray": false, "IsGraph": false, "InGroup": true, "NumeroGroup": 1, "NombreParametroJson": "EtiquetaDisplayName", "ValorDefecto": "Declaración", "ParametroPadreId": " a9686991-0922-43eb-b3f9-26e0bbeba67b" },
+    { "TipoParametro": 7, "Descripcion": "Descripcion", "CreatedBy": "0C3A7B92-34D7-453A-883F-24C15B24FF6A", "IsComplex": true, "Fixed": false, "EsArray": false, "IsGraph": false, "InGroup": true, "NumeroGroup": 1, "NombreParametroJson": "Descripcion", "ValorDefecto": "", "ParametroPadreId": " a9686991-0922-43eb-b3f9-26e0bbeba67b" },
+    { "TipoParametro": 7, "Descripcion": "EtiquetaDisplayName", "CreatedBy": "0C3A7B92-34D7-453A-883F-24C15B24FF6A", "IsComplex": true, "Fixed": false, "EsArray": false, "IsGraph": false, "InGroup": true, "NumeroGroup": 2, "NombreParametroJson": "EtiquetaDisplayName", "ValorDefecto": "Tipo de Servicio", "ParametroPadreId": " a9686991-0922-43eb-b3f9-26e0bbeba67b" },
+    { "TipoParametro": 7, "Descripcion": "Descripcion", "CreatedBy": "0C3A7B92-34D7-453A-883F-24C15B24FF6A", "IsComplex": true, "Fixed": false, "EsArray": false, "IsGraph": false, "InGroup": true, "NumeroGroup": 2, "NombreParametroJson": "Descripcion", "ValorDefecto": "", "ParametroPadreId": " a9686991-0922-43eb-b3f9-26e0bbeba67b" },
+    { "TipoParametro": 7, "Descripcion": "EtiquetaDisplayName", "CreatedBy": "0C3A7B92-34D7-453A-883F-24C15B24FF6A", "IsComplex": true, "Fixed": false, "EsArray": false, "IsGraph": false, "InGroup": true, "NumeroGroup": 3, "NombreParametroJson": "EtiquetaDisplayName", "ValorDefecto": "Aduana", "ParametroPadreId": " a9686991-0922-43eb-b3f9-26e0bbeba67b" },
+    { "TipoParametro": 7, "Descripcion": "Descripcion", "CreatedBy": "0C3A7B92-34D7-453A-883F-24C15B24FF6A", "IsComplex": true, "Fixed": false, "EsArray": false, "IsGraph": false, "InGroup": true, "NumeroGroup": 3, "NombreParametroJson": "Descripcion", "ValorDefecto": "", "ParametroPadreId": " a9686991-0922-43eb-b3f9-26e0bbeba67b" },
+    { "TipoParametro": 7, "Descripcion": "EtiquetaDisplayName", "CreatedBy": "0C3A7B92-34D7-453A-883F-24C15B24FF6A", "IsComplex": true, "Fixed": false, "EsArray": false, "IsGraph": false, "InGroup": true, "NumeroGroup": 4, "NombreParametroJson": "EtiquetaDisplayName", "ValorDefecto": "Codigo", "ParametroPadreId": " a9686991-0922-43eb-b3f9-26e0bbeba67b" },
+    { "TipoParametro": 7, "Descripcion": "Descripcion", "CreatedBy": "0C3A7B92-34D7-453A-883F-24C15B24FF6A", "IsComplex": true, "Fixed": false, "EsArray": false, "IsGraph": false, "InGroup": true, "NumeroGroup": 4, "NombreParametroJson": "Descripcion", "ValorDefecto": "", "ParametroPadreId": " a9686991-0922-43eb-b3f9-26e0bbeba67b" }
 ]
