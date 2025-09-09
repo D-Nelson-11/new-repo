@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav"; // este puede quedarse porque probablemente siempre se carga
 import { Toaster } from "sonner";
+import { OtherUserNav } from "./components/OtherUserNav.jsx";
 
 // Lazy-loaded components
 const IndexAR = lazy(() => import("./AnalisisDeRed/Index"));
@@ -10,14 +11,11 @@ const Intransit = lazy(() => import("./Persona/Intransit/Intransit.jsx"));
 const Matriz = lazy(() => import("./Matriz/Matriz.jsx"));
 const Sku = lazy(() => import("./SKU/Sku.jsx"));
 const IndexSku = lazy(() => import("./SKU/IndexSku.jsx"));
-const CrearRutas = lazy(() =>
-  import("./AnalisisDeRed/CrearRutas/CrearRutas.jsx")
-);
+const CrearRutas = lazy(() =>import("./AnalisisDeRed/CrearRutas/CrearRutas.jsx"));
 const CFO = lazy(() => import("./CFO/Index.jsx"));
-const ValidarRutas = lazy(() =>
-  import("./AnalisisDeRed/validar/ValidarRutas.jsx")
-);
+const ValidarRutas = lazy(() =>import("./AnalisisDeRed/validar/ValidarRutas.jsx"));
 const Mediciones = lazy(() => import("./Mediciones/Mediciones.jsx"));
+const ModificarSitioVesta = lazy(() => import("./Persona/sitioVesta/ModificarSitioVesta.jsx"));
 
 function App() {
   return (
@@ -34,6 +32,9 @@ function App() {
           <Route path="/Cfo" element={<CFO />} />
           <Route path="/validarR" element={<ValidarRutas />} />
           <Route path="/Prueba" element={<Mediciones />} />
+        </Route>
+        <Route element={<OtherUserNav />}>
+          <Route path="/ModificarSitioVesta" element={<ModificarSitioVesta />} />
         </Route>
       </Routes>
 
