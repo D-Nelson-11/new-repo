@@ -61,9 +61,33 @@
       "TipoEventoId": ""
     },
     {
-      "EsquemaId": "ADD1E48B-03C6-44FB-9E9A-14F5BDA29BBE",
+      "EsquemaId": "A41549C1-EDBC-4DE2-B4DA-14F5BC0BC7D1",
       "SitioPorRutaId": "",
       "Orden": 5,
+      "ClienteId": "8092E57D-03A5-44D3-B271-0F27EBF3D818",
+      "ClienteNombre": "CORPORACION DINANT SA DE CV",
+      "Descripcion": "Discrepancia",
+      "Requerido": false,
+      "UsuarioId": " cf458fe5-2384-4199-a6a1-23a2078e51aa",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+     {
+      "EsquemaId": "1B894327-01DE-4F3D-ABB5-1641544D66E0",
+      "SitioPorRutaId": "",
+      "Orden": 6,
+      "ClienteId": "8092E57D-03A5-44D3-B271-0F27EBF3D818",
+      "ClienteNombre": "CORPORACION DINANT SA DE CV",
+      "Descripcion": "Liberación Post Revisión",
+      "Requerido": false,
+      "UsuarioId": " cf458fe5-2384-4199-a6a1-23a2078e51aa",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+     {
+      "EsquemaId": "ADD1E48B-03C6-44FB-9E9A-14F5BDA29BBE",
+      "SitioPorRutaId": "",
+      "Orden": 7,
       "ClienteId": "8092E57D-03A5-44D3-B271-0F27EBF3D818",
       "ClienteNombre": "CORPORACION DINANT SA DE CV",
       "Descripcion": "Despacho",

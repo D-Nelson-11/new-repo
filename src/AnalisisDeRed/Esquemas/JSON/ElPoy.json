@@ -37,45 +37,21 @@
       "TipoEventoId": ""
     },
     {
-      "EsquemaId": "694153C9-869E-4127-AE18-220714274189",
+      "EsquemaId": "ADD1E48B-03C6-44FB-9E9A-14F5BDA29BBE",
       "SitioPorRutaId": "70BCE888-0532-490F-AC4D-24DDE85743E1",
       "Orden": 3,
       "ClienteId": "91EF67A2-4F50-44EE-B0E5-0F27E8DFB778",
       "ClienteNombre": "CERVECERIA HONDUREÑA SA DE CV",
-      "Descripcion": "Diagnostico",
-      "Requerido": false,
-      "UsuarioId": "FF921408-E3B9-469B-A7DC-24A2B8D3C4F5",
-      "EsquemaTramitador": false,
-      "TipoEventoId": ""
-    },
-    {
-      "EsquemaId": "A3D8514E-C2C4-4959-9C5B-25353243D75E",
-      "SitioPorRutaId": "70BCE888-0532-490F-AC4D-24DDE85743E1",
-      "Orden": 4,
-      "ClienteId": "91EF67A2-4F50-44EE-B0E5-0F27E8DFB778",
-      "ClienteNombre": "CERVECERIA HONDUREÑA SA DE CV",
-      "Descripcion": "Liberacion",
-      "Requerido": false,
-      "UsuarioId": "FF921408-E3B9-469B-A7DC-24A2B8D3C4F5",
-      "EsquemaTramitador": false,
-      "TipoEventoId": ""
-    },
-    {
-      "EsquemaId": "ADD1E48B-03C6-44FB-9E9A-14F5BDA29BBE",
-      "SitioPorRutaId": "70BCE888-0532-490F-AC4D-24DDE85743E1",
-      "Orden": 5,
-      "ClienteId": "91EF67A2-4F50-44EE-B0E5-0F27E8DFB778",
-      "ClienteNombre": "CERVECERIA HONDUREÑA SA DE CV",
-      "Descripcion": "Aduana",
+      "Descripcion": "Despacho",
       "Requerido": true,
       "UsuarioId": "FF921408-E3B9-469B-A7DC-24A2B8D3C4F5",
       "EsquemaTramitador": false,
       "TipoEventoId": ""
     },
-    {
-      "EsquemaId": "AC1B37AF-7B96-4DEB-BCFE-2207157EA847",
+     {
+      "EsquemaId": "AA0A700B-3EDD-4E01-8AEF-2418B34D82D7",
       "SitioPorRutaId": "70BCE888-0532-490F-AC4D-24DDE85743E1",
-      "Orden": 6,
+      "Orden": 1,
       "ClienteId": "91EF67A2-4F50-44EE-B0E5-0F27E8DFB778",
       "ClienteNombre": "CERVECERIA HONDUREÑA SA DE CV",
       "Descripcion": "Despacho",

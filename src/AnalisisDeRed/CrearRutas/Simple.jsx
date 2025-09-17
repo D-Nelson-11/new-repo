@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { FaPlaneDeparture } from "react-icons/fa";
 import SearchBar from "../../components/SearchBar";
 import { toast } from "sonner";
+import CreatedBy from "../../components/CreatedBy";
 
 export function RutaSimple({ cantidad, IdCliente }) {
   let [sitiosAduana, setSitiosAduana] = useState([]);
@@ -232,33 +233,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
               <option value="IB/LSP">IB/LSP</option>
               <option value="IB/PT">IB/PT</option>
             </select>
-            <select
-              style={{
-                display: "inline-block",
-                marginLeft: "4px",
-                borderRadius: "5px",
-                border: "none",
-                color: "black",
-                fontSize: "12px",
-              }}
-              {...register("CreadaPor", { required: true })}>
-              <option value="">--CreadaPor--</option>
-              <option value="F41CE2B9-F392-4198-8E2F-1329C96111C9">
-                Gabriela
-              </option>
-              <option value="C183E6D0-6855-4613-A85D-24F1E30E165E">
-                Fredy
-              </option>
-              <option value="0C3A7B92-34D7-453A-883F-24C15B24FF6A">
-                David
-              </option>
-              <option value="3193F743-6761-45EB-BFED-26A60DD442D5">
-                Nohelia
-              </option>
-                 <option value="F92928DC-1CDA-436C-8ECE-254FC151469C">
-                Sandra
-              </option>
-            </select>
+           <CreatedBy register={register} />
             <Button
               style={{
                 borderRadius: "5px",

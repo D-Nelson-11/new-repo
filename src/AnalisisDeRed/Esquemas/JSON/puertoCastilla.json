@@ -1,77 +1,100 @@
 {
-    "Esquemas":[
-        {
-            "EsquemaId": "BE237A0F-39AE-4AA2-A54A-164158601631",
-            "SitioPorRutaId": "a",
-            "Orden": 1,
-            "ClienteId": "a",
-            "ClienteNombre": "a",
-            "Descripcion": "Inicio de Tramitador ",
-            "Requerido": true,
-            "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-            "EsquemaTramitador": true,
-            "TipoEventoId": ""
-          },
-          {
-            "EsquemaId": "4D708BF5-9D3E-48E9-AB7C-14F5B438B360",
-            "SitioPorRutaId": "a",
-            "Orden": 2,
-            "ClienteId": "a",
-            "ClienteNombre": "a",
-            "Descripcion": "Presentación",
-            "Requerido": true,
-            "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-            "EsquemaTramitador": false,
-            "TipoEventoId": ""
-          },
-          {
-            "EsquemaId": "FE61D350-A95D-4855-97A6-231A07B4D111",
-            "SitioPorRutaId": "a",
-            "Orden": 3,
-            "ClienteId": "a",
-            "ClienteNombre": "a",
-            "Descripcion": "Cita de Revisión",
-            "Requerido": true,
-            "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-            "EsquemaTramitador": false,
-            "TipoEventoId": ""
-          },
-          {
-            "EsquemaId": "D95046C5-F686-4395-87CC-14F5B68FEDBE",
-            "SitioPorRutaId": "a",
-            "Orden":4,
-            "ClienteId": "a",
-            "ClienteNombre": "a",
-            "Descripcion": "Revision",
-            "Requerido": false,
-            "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-            "EsquemaTramitador": false,
-            "TipoEventoId": ""
-          },
-          {
-            "EsquemaId": "19083163-A403-4FB8-8DD5-215C4C4BEFCC",
-            "SitioPorRutaId": "a",
-            "Orden": 5,
-            "ClienteId": "a",
-            "ClienteNombre": "a",
-            "Descripcion": "Liberacion Aduana",
-            "Requerido": false,
-            "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-            "EsquemaTramitador": false,
-            "TipoEventoId": ""
-          },
-          {
-            "EsquemaId": "ADD1E48B-03C6-44FB-9E9A-14F5BDA29BBE",
-            "SitioPorRutaId": "a",
-            "Orden": 6,
-            "ClienteId": "a",
-            "ClienteNombre": "a",
-            "Descripcion": "Despacho",
-            "Requerido": true,
-            "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
-            "EsquemaTramitador": false,
-            "TipoEventoId": ""
-          }
+  "Esquemas": [
+    {
+      "EsquemaId": "BE237A0F-39AE-4AA2-A54A-164158601631",
+      "SitioPorRutaId": "a",
+      "Orden": 1,
+      "ClienteId": "a",
+      "ClienteNombre": "a",
+      "Descripcion": "Inicio Tramitador ",
+      "Requerido": true,
+      "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+      "EsquemaTramitador": true,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "4D708BF5-9D3E-48E9-AB7C-14F5B438B360",
+      "SitioPorRutaId": "a",
+      "Orden": 1,
+      "ClienteId": "a",
+      "ClienteNombre": "a",
+      "Descripcion": "Presentación",
+      "Requerido": true,
+      "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "D95046C5-F686-4395-87CC-14F5B68FEDBE",
+      "SitioPorRutaId": "a",
+      "Orden": 2,
+      "ClienteId": "a",
+      "ClienteNombre": "a",
+      "Descripcion": "Revisión",
+      "Requerido": false,
+      "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "A41549C1-EDBC-4DE2-B4DA-14F5BC0BC7D1",
+      "SitioPorRutaId": "a",
+      "Orden": 3,
+      "ClienteId": "a",
+      "ClienteNombre": "a",
+      "Descripcion": "Discrepancia",
+      "Requerido": false,
+      "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "C21D210D-3E76-43E0-8805-224A3EC2D776",
+      "SitioPorRutaId": "a",
+      "Orden": 4,
+      "ClienteId": "a",
+      "ClienteNombre": "a",
+      "Descripcion": "Cita 1",
+      "Requerido": false,
+      "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "694153C9-869E-4127-AE18-220714274189",
+      "SitioPorRutaId": "a",
+      "Orden": 5,
+      "ClienteId": "a",
+      "ClienteNombre": "a",
+      "Descripcion": "Diagnóstico de Plaga",
+      "Requerido": false,
+      "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+       {
+      "EsquemaId": "19083163-A403-4FB8-8DD5-215C4C4BEFCC",
+      "SitioPorRutaId": "a",
+      "Orden": 6,
+      "ClienteId": "a",
+      "ClienteNombre": "a",
+      "Descripcion": "Liberacion Aduana",
+      "Requerido": true,
+      "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+       {
+      "EsquemaId": "C360E3E8-7463-451B-B5A7-215C4E617B03",
+      "SitioPorRutaId": "a",
+      "Orden": 7,
+      "ClienteId": "a",
+      "ClienteNombre": "a",
+      "Descripcion": "Despacho",
+      "Requerido": true,
+      "UsuarioId": "0C3A7B92-34D7-453A-883F-24C15B24FF6A",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    }
   ]
-  }
-  
+}

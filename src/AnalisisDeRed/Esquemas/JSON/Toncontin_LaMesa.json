@@ -1,0 +1,54 @@
+{
+    "Esquemas":[
+    {
+      "EsquemaId": "BE237A0F-39AE-4AA2-A54A-164158601631",
+      "SitioPorRutaId": "764E934E-7B16-4045-855C-24B70B9AD162",
+      "Orden": 1,
+      "ClienteId": "E1AF4FA8-8246-4EE6-B13F-0F29BE44BAC6",
+      "ClienteNombre": "CROWLEY LOGISTICS INC",
+      "Descripcion": "Inicio de Tramitador",
+      "Requerido": true,
+      "UsuarioId": "3791EBFC-253A-4928-9E3C-24A4978C19C4",
+      "EsquemaTramitador": true,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "4D708BF5-9D3E-48E9-AB7C-14F5B438B360",
+      "SitioPorRutaId": "764E934E-7B16-4045-855C-24B70B9AD162",
+      "Orden": 1,
+      "ClienteId": "E1AF4FA8-8246-4EE6-B13F-0F29BE44BAC6",
+      "ClienteNombre": "CROWLEY LOGISTICS INC",
+      "Descripcion": "Presentación",
+      "Requerido": true,
+      "UsuarioId": "3791EBFC-253A-4928-9E3C-24A4978C19C5",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "D95046C5-F686-4395-87CC-14F5B68FEDBE",
+      "SitioPorRutaId": "764E934E-7B16-4045-855C-24B70B9AD162",
+      "Orden": 2,
+      "ClienteId": "E1AF4FA8-8246-4EE6-B13F-0F29BE44BAC6",
+      "ClienteNombre": "CROWLEY LOGISTICS INC",
+      "Descripcion": "Revisión",
+      "Requerido": false,
+      "UsuarioId": "3791EBFC-253A-4928-9E3C-24A4978C19C6",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+ 
+    {
+      "EsquemaId": "AC1B37AF-7B96-4DEB-BCFE-2207157EA847",
+      "SitioPorRutaId": "764E934E-7B16-4045-855C-24B70B9AD162",
+      "Orden": 3,
+      "ClienteId": "E1AF4FA8-8246-4EE6-B13F-0F29BE44BAC6",
+      "ClienteNombre": "CROWLEY LOGISTICS INC",
+      "Descripcion": "Despacho",
+      "Requerido": true,
+      "UsuarioId": "3791EBFC-253A-4928-9E3C-24A4978C19C9",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    }
+  ]
+  }
+  
