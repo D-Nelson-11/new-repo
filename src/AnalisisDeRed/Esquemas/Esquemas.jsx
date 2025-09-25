@@ -13,6 +13,7 @@ import jsonPalmerola from "./JSON/Palmerola.json";
 import jsonCastilla from "./JSON/puertoCastilla.json";
 import ClientesSelect from "../../components/ClientesSelect";
 import jsonToncontin from "./JSON/Toncontin_LaMesa.json";
+import jsonHenecan from "./JSON/Henecan.json";
 // import jsonToncontin from "./JSON/Toncontin.json";
 import generales from "./JSON/generales.json";
 import axios from "../../api/axios";
@@ -31,6 +32,7 @@ function Esquemas() {
   const [EsquemaCastilla, setEsquemaCastilla] = useState(jsonCastilla);
   const [EsquemaToncontin, setEsquemaToncontin] = useState(jsonToncontin);
   const [EsquemaGenerales, setEsquemaGenerales] = useState(generales);
+  const [EsquemaHenecan, setEsquemaHenecan] = useState(jsonHenecan);
   const [sitiosPorRuta, setSitiosPorRuta] = useState([]);
   const [textAreaValue, setTextAreaValue] = useState("");
 
@@ -107,7 +109,7 @@ function Esquemas() {
         esquema.UsuarioId = values.IdUsuario;
       });
       setTextAreaValue(JSON.stringify(updatedEsquemaCastilla, null, 2));
-    }else if (values.esquemaNombre == 9) {
+    } else if (values.esquemaNombre == 9) {
       const updatedEsquemaGenerales = { ...EsquemaGenerales };
       updatedEsquemaGenerales.Esquemas.forEach((esquema) => {
         esquema.ClienteId = values.IdCliente.split(",")[0];
@@ -116,7 +118,7 @@ function Esquemas() {
         esquema.UsuarioId = values.IdUsuario;
       });
       setTextAreaValue(JSON.stringify(updatedEsquemaGenerales, null, 2));
-    }else if (values.esquemaNombre == 10) {
+    } else if (values.esquemaNombre == 10) {
       const updatedEsquemaCortes = { ...EsquemaCortes };
       updatedEsquemaCortes.Esquemas.forEach((esquema) => {
         esquema.ClienteId = values.IdCliente.split(",")[0];
@@ -125,7 +127,7 @@ function Esquemas() {
         esquema.UsuarioId = values.IdUsuario;
       });
       setTextAreaValue(JSON.stringify(updatedEsquemaCortes, null, 2));
-    }else if (values.esquemaNombre == 11) {
+    } else if (values.esquemaNombre == 11) {
       const updatedEsquemaToncontin = { ...EsquemaToncontin };
       updatedEsquemaToncontin.Esquemas.forEach((esquema) => {
         esquema.ClienteId = values.IdCliente.split(",")[0];
@@ -134,6 +136,15 @@ function Esquemas() {
         esquema.UsuarioId = values.IdUsuario;
       });
       setTextAreaValue(JSON.stringify(updatedEsquemaToncontin, null, 2));
+    } else if (values.esquemaNombre == 12) {
+      const updatedEsquemaHenecan = { ...EsquemaHenecan };
+      updatedEsquemaHenecan.Esquemas.forEach((esquema) => {
+        esquema.ClienteId = values.IdCliente.split(",")[0];
+        esquema.SitioPorRutaId = values.SitioXRuta;
+        esquema.ClienteNombre = values.IdCliente.split(",")[1];
+        esquema.UsuarioId = values.IdUsuario;
+      });
+      setTextAreaValue(JSON.stringify(updatedEsquemaHenecan, null, 2));
     }
   };
 
@@ -158,6 +169,7 @@ function Esquemas() {
               <option value="9">Generales</option>
               <option value="10">Puerto Cortes</option>
               <option value="11">Toncontin - La Mesa</option>
+              <option value="12">Henecan(San Lorenzo)</option>
             </Form.Select>
           </Form.Group>
 

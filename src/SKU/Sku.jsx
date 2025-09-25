@@ -51,7 +51,7 @@ export default function Sku() {
   }, []);
 
   if (loading) {
-    return <div>Cragando...</div>;
+    return <div>Cargando...</div>;
   }
 
   const handleTextAreaChange = (event) => {

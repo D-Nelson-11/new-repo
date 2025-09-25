@@ -255,6 +255,9 @@ function So() {
                     <option value="6">Corinto</option>
                     <option value="7">Toncontín</option>
                     <option value="8">El Poy</option>
+                    <option value="9">Henecan</option>
+                    <option value="10">Puerto Quetzal</option>
+
                   </Form.Select>
                 </Form.Group>
               </Col>

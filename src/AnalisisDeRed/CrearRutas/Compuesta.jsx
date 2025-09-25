@@ -11,6 +11,7 @@ import SearchBar from "../../components/SearchBar";
 import { colors } from "../../theme/colors";
 import { toast } from "sonner";
 import CreatedBy from "../../components/CreatedBy";
+import { Modal } from "react-bootstrap";
 
 export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
   let [sitiosAduana, setSitiosAduana] = useState([]);
@@ -21,6 +22,13 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredSitios, setFilteredSitios] = useState([]);
   const { register, getValues, handleSubmit, setValue } = useForm();
+  const [showModal, setShowModal] = useState(false);
+  const [textAreaValue, setTextAreaValue] = useState("");
+  const form2 = useForm();
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
   let datosFormulario = {};
 
   const handleTipoSitioChange = (index, value) => {
@@ -114,6 +122,65 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
             Sitios ruta madre
           </h6>
         </div>
+        <Modal
+          show={showModal}
+          onHide={handleClose}
+          size="xl"
+          centered
+          backdrop="static">
+          <Modal.Header closeButton></Modal.Header>
+          <Form
+            onSubmit={form2.handleSubmit(async (data) => {
+              toast("¿Está seguro de crear la ruta?", {
+                action: {
+                  label: "Crear",
+                  onClick: () => {
+                    toast.promise(
+                      axios.post(
+                        "https://analisisderedapi.vesta-accelerate.com/api/RutaCrudApi/Create",
+                        JSON.parse(textAreaValue)
+                      ),
+                      {
+                        loading: "Creando ruta...",
+                        success: (resp) => {
+                          console.log(resp);
+                          return `RutaPadreId: ${resp.data.Message.Id}`;
+                        },
+                        error: (err) => {
+                          console.log(err);
+                          return "Error de red o inesperado";
+                        },
+                        duration: 20000,
+                      }
+                    );
+                  },
+                },
+                cancel: {
+                  label: "Cancelar",
+                },
+                duration: 20000,
+                position: "top-center",
+              });
+            })}>
+            <Modal.Body>
+              <Form.Control
+                as="textarea"
+                rows={15}
+                value={textAreaValue}
+                onChange={(e) => setTextAreaValue(e.target.value)}
+                style={{ height: "550px" }}
+              />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="success" type="submit">
+                Crear Ruta
+              </Button>
+              <Button variant="danger" onClick={handleClose}>
+                Cerrar
+              </Button>
+            </Modal.Footer>
+          </Form>
+        </Modal>
         <Form
           onSubmit={handleSubmit((data) => {
             const sitioSeleccionado = sitiosSeleccionados;
@@ -189,6 +256,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                   Clasificacion: datosFormulario.Clasificacion,
                 },
               ],
+              LineaProducto: "Inbound",
               CreatedBy: datosFormulario.CreadaPor,
               ClienteId: IdCliente.split(",")[0],
               ClienteNombre: IdCliente.split(",")[1],
@@ -196,41 +264,8 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
               AforoRuta: datosFormulario.aforo,
               Clasificacion: datosFormulario.Clasificacion,
             };
-            console.log(json);
-            // Abrir nueva ventana
-            const newWindow = window.open("", "_blank");
-
-            // Agregar HTML y estilos
-            newWindow.document.write(`
-    <html>
-      <head>
-        <title>JSON Generado</title>
-        <style>
-          body { font-family: Arial, sans-serif; padding: 20px; background: #f4f4f4; }
-          .container { max-width: 700px; margin: auto; background: white; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
-          pre { background: #272822; color: #f8f8f2; padding: 15px; border-radius: 5px; overflow-x: auto; overflow-y: auto; max-height: 500px; }
-          button { background: #a4a4a4; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; }
-          button:hover { background: #0056b3; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <button onclick="copyToClipboard()">Copiar JSON</button>
-          <pre id="json">${JSON.stringify(json, null, 2)}</pre>
-        </div>
-        <script>
-          function copyToClipboard() {
-            const jsonText = document.getElementById("json").innerText;
-            navigator.clipboard.writeText(jsonText).then(() => {
-              alert("JSON copiado al portapapeles!");
-            });
-          }
-        </script>
-      </body>
-    </html>
-  `);
-
-            newWindow.document.close();
+            setTextAreaValue(JSON.stringify(json, null, 2));
+            handleShow(); // abrir modal
           })}
           className="d-flex flex-wrap w-100 mt-2">
           <div className="col-12 mb-1">
@@ -252,7 +287,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
             />
             <CreatedBy register={register} />
 
-              <select
+            <select
               style={{
                 display: "inline-block",
                 marginLeft: "4px",

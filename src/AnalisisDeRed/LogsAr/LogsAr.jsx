@@ -49,7 +49,6 @@ const LogTable = () => {
   return (
     <Container className="mt-4">
       <h2>Logs</h2>
-
       <Form className="mb-3 d-flex gap-2 align-items-end">
         <Form.Group>
           <Form.Label>Fecha Inicio</Form.Label>
@@ -103,8 +102,7 @@ const LogTable = () => {
                     <Button
                       variant="info"
                       size="sm"
-                      onClick={() => handleShowModal(log.Entrada)}
-                    >
+                      onClick={() => handleShowModal(log.Entrada)}>
                       Ver JSON
                     </Button>
                   </td>

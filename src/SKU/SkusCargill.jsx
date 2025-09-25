@@ -170,8 +170,8 @@ function SkusCargill() {
               <Form.Select
                 {...register("CategoriaVestaId")}
                 onChange={(e) => {
-                  setCategoriaVestaId(e.target.value.split(",")[0]);
-                  setValue("CategoriaVestaId", e.target.value.split(",")[0]);
+                  console.log(e.target.value);
+                  setValue("CategoriaVestaId", e.target.value);
                 }}>
                 <option value="">--Seleccione--</option>
                 {categorias.length > 0 &&
@@ -218,6 +218,9 @@ function SkusCargill() {
                 </option>
                 <option value="da934b3c-50f6-40b6-8b67-24b2c757f3bc">
                   Flexitanque
+                </option>
+                  <option value="4ded203a-af72-4219-a2ee-1dbd8dbd2626">
+                  Piezas
                 </option>
               </Form.Select>
             </Col>
