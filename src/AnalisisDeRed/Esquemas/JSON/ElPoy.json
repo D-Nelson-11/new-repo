@@ -47,18 +47,6 @@
       "UsuarioId": "FF921408-E3B9-469B-A7DC-24A2B8D3C4F5",
       "EsquemaTramitador": false,
       "TipoEventoId": ""
-    },
-     {
-      "EsquemaId": "AA0A700B-3EDD-4E01-8AEF-2418B34D82D7",
-      "SitioPorRutaId": "70BCE888-0532-490F-AC4D-24DDE85743E1",
-      "Orden": 1,
-      "ClienteId": "91EF67A2-4F50-44EE-B0E5-0F27E8DFB778",
-      "ClienteNombre": "CERVECERIA HONDUREÑA SA DE CV",
-      "Descripcion": "Despacho",
-      "Requerido": true,
-      "UsuarioId": "FF921408-E3B9-469B-A7DC-24A2B8D3C4F5",
-      "EsquemaTramitador": false,
-      "TipoEventoId": ""
     }
   ]
 }
