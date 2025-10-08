@@ -9,7 +9,7 @@ import {
   Modal,
 } from "react-bootstrap";
 import axios from "axios";
-
+import ExportExcelButton from "./ExportExcel";
 const LogTable = () => {
   const [fechaInicio, setFechaInicio] = useState("2025-09-22");
   const [fechaFin, setFechaFin] = useState("2025-09-23");
@@ -28,7 +28,7 @@ const LogTable = () => {
         "https://analisisderedapi.vesta-accelerate.com/api/LogGestionCrud/GetLogByRangoFechas",
         { params: { FechaInicio: fechaInicio, FechaFin: fechaFin } }
       );
-      setData(response.data);
+      setData(response.data.filter((log) => log.Detalle?.includes("EDI")));
     } catch (err) {
       setError("Error al cargar los datos");
     } finally {
@@ -48,10 +48,9 @@ const LogTable = () => {
 
   return (
     <Container className="mt-4">
-      <h2>Logs</h2>
       <Form className="mb-3 d-flex gap-2 align-items-end">
         <Form.Group>
-          <Form.Label>Fecha Inicio</Form.Label>
+          <Form.Label>Desde</Form.Label>
           <Form.Control
             type="date"
             value={fechaInicio}
@@ -60,7 +59,7 @@ const LogTable = () => {
         </Form.Group>
 
         <Form.Group>
-          <Form.Label>Fecha Fin</Form.Label>
+          <Form.Label>Hasta</Form.Label>
           <Form.Control
             type="date"
             value={fechaFin}
@@ -71,6 +70,7 @@ const LogTable = () => {
         <Button onClick={fetchData} variant="primary">
           {loading ? <Spinner animation="border" size="sm" /> : "Buscar"}
         </Button>
+        <ExportExcelButton data={data} />
       </Form>
 
       {error && <Alert variant="danger">{error}</Alert>}
@@ -78,6 +78,7 @@ const LogTable = () => {
       <Table striped bordered hover responsive>
         <thead>
           <tr>
+            <th>N°</th>
             <th>CodigoGestión</th>
             <th>Detalle</th>
             <th>Entrada</th>
@@ -92,23 +93,22 @@ const LogTable = () => {
               </td>
             </tr>
           ) : (
-            data
-              .filter((log) => log.Detalle?.includes("Sinay"))
-              .map((log) => (
-                <tr key={log.id}>
-                  <td>{log.CodigoGestion}</td>
-                  <td>{log.Detalle}</td>
-                  <td>
-                    <Button
-                      variant="info"
-                      size="sm"
-                      onClick={() => handleShowModal(log.Entrada)}>
-                      Ver JSON
-                    </Button>
-                  </td>
-                  <td>{log.CreatedDate}</td>
-                </tr>
-              ))
+            data.map((log, index) => (
+              <tr key={log.Id}>
+                <td>{index + 1}</td>
+                <td>{log.CodigoGestion}</td>
+                <td>{log.Detalle}</td>
+                <td>
+                  <Button
+                    variant="info"
+                    size="sm"
+                    onClick={() => handleShowModal(log.Entrada)}>
+                    Ver JSON
+                  </Button>
+                </td>
+                <td>{new Date(log.CreatedDate).toLocaleString()}</td>
+              </tr>
+            ))
           )}
         </tbody>
       </Table>
