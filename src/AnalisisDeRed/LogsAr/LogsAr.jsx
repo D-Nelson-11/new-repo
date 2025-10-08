@@ -75,43 +75,45 @@ const LogTable = () => {
 
       {error && <Alert variant="danger">{error}</Alert>}
 
-      <Table striped bordered hover responsive>
-        <thead>
-          <tr>
-            <th>N°</th>
-            <th>CodigoGestión</th>
-            <th>Detalle</th>
-            <th>Entrada</th>
-            <th>FechaCreación</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.length === 0 ? (
+      <div style={{ maxHeight: "500px", overflowY: "auto" }}>
+        <Table striped bordered hover responsive>
+          <thead>
             <tr>
-              <td colSpan="4" className="text-center">
-                {loading ? "Cargando..." : "No hay datos"}
-              </td>
+              <th>N°</th>
+              <th>CodigoGestión</th>
+              <th>Detalle</th>
+              <th>Entrada</th>
+              <th>FechaCreación</th>
             </tr>
-          ) : (
-            data.map((log, index) => (
-              <tr key={log.Id}>
-                <td>{index + 1}</td>
-                <td>{log.CodigoGestion}</td>
-                <td>{log.Detalle}</td>
-                <td>
-                  <Button
-                    variant="info"
-                    size="sm"
-                    onClick={() => handleShowModal(log.Entrada)}>
-                    Ver JSON
-                  </Button>
+          </thead>
+          <tbody>
+            {data.length === 0 ? (
+              <tr>
+                <td colSpan="5" className="text-center">
+                  {loading ? "Cargando..." : "No hay datos"}
                 </td>
-                <td>{new Date(log.CreatedDate).toLocaleString()}</td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </Table>
+            ) : (
+              data.map((log, index) => (
+                <tr key={log.Id}>
+                  <td>{index + 1}</td>
+                  <td>{log.CodigoGestion}</td>
+                  <td>{log.Detalle}</td>
+                  <td>
+                    <Button
+                      variant="info"
+                      size="sm"
+                      onClick={() => handleShowModal(log.Entrada)}>
+                      Ver JSON
+                    </Button>
+                  </td>
+                  <td>{new Date(log.CreatedDate).toLocaleString()}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </Table>
+      </div>
 
       <Modal show={showModal} onHide={handleCloseModal} size="lg">
         <Modal.Header closeButton>

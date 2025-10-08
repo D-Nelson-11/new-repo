@@ -9,13 +9,12 @@ const ExportExcelButton = ({ data }) => {
     }
 
     // Mapear datos para solo incluir las columnas que queremos
-    const exportData = data
-      .map((log) => ({
-        CodigoGestion: log.CodigoGestion,
-        Detalle: log.Detalle,
-        Entrada: log.Entrada,
-        CreatedDate: new Date(log.CreatedDate).toLocaleString(),
-      }));
+    const exportData = data.map((log) => ({
+      CodigoGestion: log.CodigoGestion,
+      Detalle: log.Detalle,
+      Entrada: log.Entrada ? log.Entrada.slice(0, 500) + "..." : "",
+      CreatedDate: new Date(log.CreatedDate).toLocaleString(),
+    }));
 
     // Crear hoja de Excel
     const ws = XLSX.utils.json_to_sheet(exportData);
