@@ -225,6 +225,7 @@ function Esquemas() {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Usuario</Form.Label>
             <Form.Select {...register("IdUsuario", { required: true })}>
+              <option value="">-Selecione-</option>
               <option value="D7CCF64B-4700-4FF7-B0A7-246A08B41246">
                 Gabriela
               </option>
