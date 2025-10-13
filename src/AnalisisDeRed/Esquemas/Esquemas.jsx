@@ -225,10 +225,19 @@ function Esquemas() {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Usuario</Form.Label>
             <Form.Select {...register("IdUsuario", { required: true })}>
+              <option value="D7CCF64B-4700-4FF7-B0A7-246A08B41246">
+                Gabriela
+              </option>
+              <option value="C183E6D0-6855-4613-A85D-24F1E30E165E">
+                Fredy
+              </option>
               <option value="0C3A7B92-34D7-453A-883F-24C15B24FF6A">
                 David
               </option>
-              <option value="FF921408-E3B9-469B-A7DC-24A2B8D3C4F5">Joel</option>
+              <option value="3EF3F051-7D5D-436A-8118-22AFD860662B">Dany</option>
+              <option value="F92928DC-1CDA-436C-8ECE-254FC151469C">
+                Sandra
+              </option>
             </Form.Select>
           </Form.Group>
           <Button

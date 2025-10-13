@@ -122,6 +122,8 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
             Sitios ruta madre
           </h6>
         </div>
+        <ModalC ContenidoModal={<CrearSitios />} Nombre={"Crear Sitio"} />
+
         <Modal
           show={showModal}
           onHide={handleClose}
@@ -144,7 +146,7 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
                         loading: "Creando ruta...",
                         success: (resp) => {
                           console.log(resp);
-                          return `RutaPadreId: ${resp.data.Message.Id}`;
+                          return `${resp.data.Message.Id}`;
                         },
                         error: (err) => {
                           console.log(err);
@@ -268,7 +270,6 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
           })}
           className="d-flex flex-wrap w-100 mt-2">
           <div className="col-12 mb-1">
-            <ModalC ContenidoModal={<CrearSitios />} Nombre={"Crear Sitio"} />
             {/* <ModalC ContenidoModal={<Segmentos />} Nombre={"Crear Segmento"} /> */}
             <Form.Check // prettier-ignore
               type={"checkbox"}

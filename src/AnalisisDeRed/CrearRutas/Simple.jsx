@@ -145,7 +145,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
                         loading: "Creando ruta...",
                         success: (resp) => {
                           console.log(resp);
-                          return `RutaId: ${resp.data.Message.Id}`;
+                          return `${resp.data.Message.Id}`;
                         },
                         error: (err) => {
                           console.log(err);
