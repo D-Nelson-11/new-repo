@@ -14,6 +14,7 @@ import jsonCastilla from "./JSON/puertoCastilla.json";
 import ClientesSelect from "../../components/ClientesSelect";
 import jsonToncontin from "./JSON/Toncontin_LaMesa.json";
 import jsonHenecan from "./JSON/Henecan.json";
+import diex from "./JSON/diex.json";
 // import jsonToncontin from "./JSON/Toncontin.json";
 import generales from "./JSON/generales.json";
 import axios from "../../api/axios";
@@ -33,6 +34,7 @@ function Esquemas() {
   const [EsquemaToncontin, setEsquemaToncontin] = useState(jsonToncontin);
   const [EsquemaGenerales, setEsquemaGenerales] = useState(generales);
   const [EsquemaHenecan, setEsquemaHenecan] = useState(jsonHenecan);
+  const [EsquemaDiex, setEsquemaDiex] = useState(diex);
   const [sitiosPorRuta, setSitiosPorRuta] = useState([]);
   const [textAreaValue, setTextAreaValue] = useState("");
 
@@ -145,6 +147,15 @@ function Esquemas() {
         esquema.UsuarioId = values.IdUsuario;
       });
       setTextAreaValue(JSON.stringify(updatedEsquemaHenecan, null, 2));
+    } else if (values.esquemaNombre == 13) {
+      const updatedEsquemaDiex = { ...EsquemaDiex };
+      updatedEsquemaDiex.Esquemas.forEach((esquema) => {
+        esquema.ClienteId = values.IdCliente.split(",")[0];
+        esquema.SitioPorRutaId = values.SitioXRuta;
+        esquema.ClienteNombre = values.IdCliente.split(",")[1];
+        esquema.UsuarioId = values.IdUsuario;
+      });
+      setTextAreaValue(JSON.stringify(updatedEsquemaDiex, null, 2));
     }
   };
 
@@ -170,6 +181,7 @@ function Esquemas() {
               <option value="10">Puerto Cortes</option>
               <option value="11">Toncontin - La Mesa</option>
               <option value="12">Henecan(San Lorenzo)</option>
+              <option value="13">Diex</option>
             </Form.Select>
           </Form.Group>
 

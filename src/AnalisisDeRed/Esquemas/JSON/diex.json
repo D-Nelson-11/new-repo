@@ -1,0 +1,64 @@
+{
+  "Esquemas": [
+    {
+      "EsquemaId": "BE237A0F-39AE-4AA2-A54A-164158601631",
+      "SitioPorRutaId": "39525C68-18C9-4E08-814F-286C2FA4D8FA",
+      "Orden": 1,
+      "ClienteId": "CF884F18-6C35-4703-A48B-21FD0680B2CE",
+      "ClienteNombre": "DINANT EXPORTS SA DE CV",
+      "Descripcion": "Inicio de Tramitador",
+      "Requerido": true,
+      "UsuarioId": "C183E6D0-6855-4613-A85D-24F1E30E165E",
+      "EsquemaTramitador": true,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "f8da126c-14f7-4eb8-9010-2840ddc1f9af",
+      "SitioPorRutaId": "39525C68-18C9-4E08-814F-286C2FA4D8FA",
+      "Orden": 2,
+      "ClienteId": "CF884F18-6C35-4703-A48B-21FD0680B2CE",
+      "ClienteNombre": "DINANT EXPORTS SA DE CV",
+      "Descripcion": "Revisión ZOLI",
+      "Requerido": true,
+      "UsuarioId": "C183E6D0-6855-4613-A85D-24F1E30E165E",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "02D21AD5-CE24-4B76-9C1A-14F5B946CEDA",
+      "SitioPorRutaId": "39525C68-18C9-4E08-814F-286C2FA4D8FA",
+      "Orden": 3,
+      "ClienteId": "CF884F18-6C35-4703-A48B-21FD0680B2CE",
+      "ClienteNombre": "DINANT EXPORTS SA DE CV",
+      "Descripcion": "Diagnóstico Plaga",
+      "Requerido": false,
+      "UsuarioId": "C183E6D0-6855-4613-A85D-24F1E30E165E",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "B8582140-AD20-42B7-9C99-164152AAA61C",
+      "SitioPorRutaId": "39525C68-18C9-4E08-814F-286C2FA4D8FA",
+      "Orden": 4,
+      "ClienteId": "CF884F18-6C35-4703-A48B-21FD0680B2CE",
+      "ClienteNombre": "DINANT EXPORTS SA DE CV",
+      "Descripcion": "Plaga",
+      "Requerido": false,
+      "UsuarioId": "C183E6D0-6855-4613-A85D-24F1E30E165E",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    },
+    {
+      "EsquemaId": "AC1B37AF-7B96-4DEB-BCFE-2207157EA847",
+      "SitioPorRutaId": "39525C68-18C9-4E08-814F-286C2FA4D8FA",
+      "Orden": 5,
+      "ClienteId": "CF884F18-6C35-4703-A48B-21FD0680B2CE",
+      "ClienteNombre": "DINANT EXPORTS SA DE CV",
+      "Descripcion": "Despacho",
+      "Requerido": true,
+      "UsuarioId": "C183E6D0-6855-4613-A85D-24F1E30E165E",
+      "EsquemaTramitador": false,
+      "TipoEventoId": ""
+    }
+  ]
+}
