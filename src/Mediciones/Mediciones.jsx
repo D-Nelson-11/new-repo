@@ -1,124 +1,179 @@
 import { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
+import ClientesSelect from "../components/ClientesSelect";
 import { colors } from "../theme/colors";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import {toast} from "sonner";
+import axios from "../api/axios";
+import { toast } from "sonner";
 
 const Mediciones = () => {
   const { register, handleSubmit } = useForm();
-  const [nombreDeLaRuta, setNombreDeLaRuta] = useState();
-  const [sitiosDeLaRuta, setSitiosDeLaRuta] = useState();
-
-  const onSubmit = async (data) => {
-      let confirmarSubmit = confirm("¿Enviar?");
-  if (!confirmarSubmit) return;
-  const proceso = async () => {
-    let sitiosRutaMadre = 0;
-    let sitiosRutaHija = 0;
-    let esquemas = [];
-    let sitioConEsquemas = 0;
-    let nombreRutaMadre = "";
-
-    const datosRuta = await axios.post(
-      "https://analisisderedapi.vesta-accelerate.com/api/RutaCrudApi/GetRutaById",
-      { Id: data.ruta }
-    );
-    if (data.sellosAforo) {
-      data.sellosAforo = "true";
-    }
-
-    sitiosRutaMadre = datosRuta.data.Message.SitiosPorRuta.length;
-    nombreRutaMadre = datosRuta.data.Message.NombreRuta;
-    setNombreDeLaRuta(nombreRutaMadre);
-    setSitiosDeLaRuta(sitiosRutaMadre);
-
-    for (let i = 0; i < datosRuta.data.Message.SitiosPorRuta.length; i++) {
-      if (datosRuta.data.Message.SitiosPorRuta[i].Esquemas.length > 0) {//Si uno de esos sitio tiene esquemas
-        sitioConEsquemas = datosRuta.data.Message.SitiosPorRuta[i].Orden;
-        for (let j = 0; j < datosRuta.data.Message.SitiosPorRuta[i].Esquemas.length; j++) {
-          if (datosRuta.data.Message.SitiosPorRuta[i].Esquemas[j].Requerido) {
-            let perro = await axios.get(
-              `https://seguimientoapi.vesta-accelerate.com/api/EsquemaFlujo/Details/${datosRuta.data.Message.SitiosPorRuta[i].Esquemas[j].EsquemaId}`
-            );
-            for (let k = 0; k < perro.data.Message.EsquemaFlujoDetalles.length; k++) {
-              esquemas.push(perro.data.Message.EsquemaFlujoDetalles[k].EtiquetaDescripcion);
-            }
-          }
-        }
-      }
-    }
-    if (esquemas.length == 0) {
-      return new Error("La ruta no tiene esquemas");
-    }
-
-    if (datosRuta.data.Message.RutaCompuesta.length > 0) {
-      sitiosRutaHija = datosRuta.data.Message.RutaCompuesta[0].SitiosPorRuta.length;
-    }
-
-    const res = await fetch(
-      "https://script.google.com/macros/s/AKfycbwIxtcFDJ64ffHjZOmrM4gXvaOrz8fKRopj5MZaJM1j8OnxgF642prcSZKKtY4P6K1YGA/exec",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          ...data,
-          sitiosRutaMadre,
-          sitiosRutaHija,
-          nombreRutaMadre,
-          esquemas,
-          sitioConEsquemas,
-        }),
-      }
-    );
-
-    const result = await res.json();
-    return result.mensaje; // texto para el toast de éxito
-  };
-
-  toast.promise(proceso(), {
-    loading: "Enviando...",
-    success: (mensaje) => `${mensaje}`,
-    error: (err) => `${err.message}`,
-  });
-};
-
+  const [clientes, setClientes] = useState([]);
+  const [cantidadIds, setCantidadIds] = useState(0);
+  const [rutasFaltantes, setRutasFaltantes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   return (
     <Container className="mt-4">
-      <Form
-        onSubmit={handleSubmit(onSubmit)}
-        className="bg-white rounded p-4 shadow">
-        <Form.Group controlId="formRutaId">
-          <Form.Label>RutaId</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Ruta Id"
-            {...register("ruta", { required: true })}
-          />
-        </Form.Group>
-        <Form.Group controlId="formCheck">
-          <Form.Check
-            type="checkbox"
-            label="Sellos de aforo"
-            {...register("sellosAforo")}
-          />
-        </Form.Group>
-        <Button
-          style={{ backgroundColor: colors.colorAzulGeneral, border: "none" }}
-          type="submit"
-          className="mt-3">
-          Enviar
-        </Button>
-        {nombreDeLaRuta && (
-          <div className="mt-3">
-            <p> <strong>Ruta:</strong> {nombreDeLaRuta}</p>
-            <p><strong>Cantidad sitios:</strong> {sitiosDeLaRuta}</p>
+      <h3 style={{ color: colors.primary }}>Mediciones</h3>
+      <hr />
+      <div className="d-flex">
+        <div
+          style={{
+            width: "30%",
+            borderRight: "1px solid #ccc",
+            paddingRight: "20px",
+          }}>
+          <Form
+            onSubmit={handleSubmit(async (data) => {
+              try {
+                if (data.rutasIds == ""){
+                  toast.error("No hay Ids en el textarea");
+                  return;
+                }
+                setLoading(true);
+                const resp = await axios.post(
+                  "https://analisisderedapi.vesta-accelerate.com/api/RutaCrudApi/Index",
+                  { ClienteId: data.IdCliente.split(",")[0] }
+                );
+                const idsTextarea = data.rutasIds
+                  .split(/\s|,|\n/)
+                  .map((id) => id.trim().toLowerCase()); // <- normalizamos
+
+                if (idsTextarea.length === 0) {
+                  toast.error("No hay Ids en el textarea");
+                  return;
+                }
+
+                const array = resp.data.Message.map((r) =>
+                  r.Id.trim().toLowerCase()
+                ); // <- normalizamos
+
+                const faltantes = array.filter(
+                  (id) => !idsTextarea.includes(id)
+                );
+
+                const resp2 = await axios.post(
+                  "https://analisisderedapi.vesta-accelerate.com/api/RutaCrudApi/GetRutaByListId",
+                  { Ids: faltantes }
+                );
+                console.log(resp2);
+                setRutasFaltantes(
+                  resp2.data.Message.map((ruta) => {
+                    const sitioConEsquema = ruta.SitiosPorRuta?.find(
+                      (sitio) => sitio.Esquemas && sitio.Esquemas.length > 0
+                    );
+
+                    return {
+                      Id: ruta.Id,
+                      NombreRuta: ruta.NombreRuta,
+                      esRutaHija: ruta.RutaPadreId === null ? "No" : "Sí",
+                      sitiosPorRuta: ruta.SitiosPorRuta
+                        ? ruta.SitiosPorRuta.length
+                        : 0,
+                      RutaPadre: ruta.RutaPadreId ? ruta.RutaPadreId : "N/A",
+                      Aduana: sitioConEsquema?.Sitio?.Nombre || "N/A",
+                    };
+                  })
+                );
+              } catch (error) {
+                console.log(error);
+                setLoading(false);
+                toast.error("Error al obtener las rutas faltantes");
+              } finally {
+                setLoading(false);
+              }
+
+              // setRutasFaltantes(faltantes.map((ruta)=>{
+              //   return ()
+              // }));
+            })}>
+            <Form.Group className="mb-3" controlId="formCliente">
+              <Form.Label>Cliente</Form.Label>
+              <ClientesSelect register={register} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formCliente">
+              <Form.Label>RutasId</Form.Label>
+              <textarea
+                style={{ width: "100%", height: "300px" }}
+                {...register("rutasIds")}
+                onChange={(e) => {
+                  if (e.target.value === "") {
+                    setCantidadIds(0);
+                    return;
+                  }
+                  const value = e.target.value;
+                  setCantidadIds(value.split("\n").length);
+                }}></textarea>
+            </Form.Group>
+            <p>Cantidad de Ids: {cantidadIds}</p>
+            <Button variant="success" type="submit" style={{ width: "100%" }}>
+              Enviar
+            </Button>
+          </Form>
+        </div>
+        <div style={{ width: "70%", marginLeft: "20px" }}>
+          <div
+            className="table-responsive"
+            style={{
+              maxHeight: "500px",
+              overflowX: "auto",
+              overflowY: "auto",
+            }}>
+            <table
+              className="table table-sm"
+              style={{
+                minWidth: 1200 /* ajustar según columnas */,
+                tableLayout: "auto",
+              }}>
+              <thead
+                className="table-light"
+                style={{ position: "sticky", top: 0, zIndex: 1 }}>
+                <tr>
+                  <th style={{ width: "20px" }}>N°</th>
+                  <th style={{ width: "290px" }}>RutaId</th>
+                  <th style={{ width: "90px" }}>Esquema</th>
+                  <th style={{ width: "250px" }}>Aduana</th>
+                  <th style={{ width: "80px" }}>Es Hija</th>
+                  <th style={{ width: "150px" }}>Ruta Padre</th>
+                  <th style={{ width: "20px" }}>SxR</th>
+                </tr>
+              </thead>
+              <tbody>
+                {loading ? (
+                  <tr>
+                    <td colSpan={7} className="text-center">
+                      Cargando rutas...
+                    </td>
+                  </tr>
+                ) : rutasFaltantes.length > 0 ? (
+                  rutasFaltantes.map((ruta, i) => (
+                    <tr key={ruta.Id}>
+                      <td style={{ whiteSpace: "nowrap" }}>{i + 1}</td>
+                      <td>{ruta.Id}</td>
+                      <td>{ruta.Esquema}</td>
+                      <td>{ruta.Aduana}</td>
+                      <td style={{ whiteSpace: "nowrap" }}>
+                        {ruta.esRutaHija}
+                      </td>
+                      <td style={{ whiteSpace: "nowrap" }}>{ruta.RutaPadre}</td>
+                      <td style={{ whiteSpace: "nowrap" }}>
+                        {ruta.sitiosPorRuta}
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={7} className="text-center">
+                      No hay rutas faltantes
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
-        )}
-      </Form>
+        </div>
+      </div>
     </Container>
   );
 };

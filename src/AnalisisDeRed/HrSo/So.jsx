@@ -257,7 +257,10 @@ function So() {
                     <option value="8">El Poy</option>
                     <option value="9">Henecan</option>
                     <option value="10">Puerto Quetzal</option>
-
+                    <option value="11">Corinto GT</option>
+                    <option value="12">Palmerola</option>
+                    <option value="13">Santo Tomas Castilla</option>
+                    <option value="14">Puerto Barrios</option>
                   </Form.Select>
                 </Form.Group>
               </Col>

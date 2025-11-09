@@ -30,6 +30,7 @@ function ClientesSelect({ register }) {
 
   return (
     <Form.Select {...register("IdCliente")}>
+      <option value="">--Seleccione--</option>
       {clientes.map((cliente) => (
         <option key={cliente.Id} value={[cliente.Id, cliente.Nombre]}>
           {cliente.Nombre}

@@ -13,10 +13,11 @@ const Sku = lazy(() => import("./SKU/Sku.jsx"));
 const IndexSku = lazy(() => import("./SKU/IndexSku.jsx"));
 const CrearRutas = lazy(() =>import("./AnalisisDeRed/CrearRutas/CrearRutas.jsx"));
 const CFO = lazy(() => import("./CFO/Index.jsx"));
-const ValidarRutas = lazy(() =>import("./AnalisisDeRed/validar/ValidarRutas.jsx"));
 const Mediciones = lazy(() => import("./Mediciones/Mediciones.jsx"));
 const ModificarSitioVesta = lazy(() => import("./Persona/sitioVesta/ModificarSitioVesta.jsx"));
 const LogTable = lazy(() => import("./AnalisisDeRed/LogsAr/LogsAr.jsx"));
+const Tab = lazy(() => import("./AnalisisDeRed/CrearRutas/Tab.jsx"));
+const CrearProveedor = lazy(() => import("./Persona/Proveedor/CrearProveedor.jsx"));
 
 function App() {
   return (
@@ -29,10 +30,10 @@ function App() {
           <Route path="/Intransit" element={<Intransit />} />
           <Route path="/Matriz" element={<Matriz />} />
           <Route path="/Sku" element={<IndexSku />} />
-          <Route path="/Rutas" element={<CrearRutas />} />
+          <Route path="/Rutas" element={<Tab />} />
           <Route path="/Cfo" element={<CFO />} />
-          <Route path="/validarR" element={<ValidarRutas />} />
           <Route path="/Prueba" element={<Mediciones />} />
+          <Route path="/CrearProveedor" element={<CrearProveedor />} />
         </Route>
         <Route element={<OtherUserNav />}>
           <Route path="/ModificarSitioVesta" element={<ModificarSitioVesta />} />

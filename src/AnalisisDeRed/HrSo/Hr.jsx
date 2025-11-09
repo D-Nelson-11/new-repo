@@ -215,6 +215,7 @@ function Hr() {
                     <option value="0">Amatillo</option>
                     <option value="1">El Poy</option>
                     <option value="2">Puerto Cortés</option>
+                    <option value="3">Palmerola</option>
                   </Form.Select>
                 </Form.Group>
               </Col>
