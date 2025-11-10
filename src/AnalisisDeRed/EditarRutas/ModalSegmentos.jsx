@@ -47,10 +47,10 @@ export function TimelineModalSegmentos({
         ) : (
           <>
             <div style={{ marginBottom: "5px" }}>
-              <strong>De:</strong> {segmento.Segmento?.Sitio1?.Nombre || "N/A"}
+              <strong>Sitio1Id:</strong> {segmento.Segmento?.Sitio1?.Id || "N/A"}
             </div>
             <div style={{ marginBottom: "5px" }}>
-              <strong>A:</strong> {segmento.Segmento?.Sitio2?.Nombre || "N/A"}
+              <strong>Sitio2Id:</strong> {segmento.Segmento?.Sitio2?.Id || "N/A"}
             </div>
             <div>
               <strong>ID:</strong> {segmento.Segmento?.Id || "N/A"} <br />

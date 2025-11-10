@@ -112,6 +112,7 @@ export function TimeLine({ items, segmentos, rutaId }) {
 
               setData(resp2.data.Message.SitiosPorRuta);
               setEditing(false);
+              setShowModal(false);
             },
             {
               loading: "Editando sitio...",
