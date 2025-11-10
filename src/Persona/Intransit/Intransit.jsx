@@ -413,7 +413,7 @@ function Intransit() {
       index++;
     }
     console.log("PASO 5 DE 5 EXITOSO ✔");
-    setTextAreaValue("RELACIONES FINALIZADAS, TODO CHEQUE CHELE ✔");
+    setTextAreaValue("RELACIONES FINALIZADAS ✔");
     setDisabled(false);
 
 

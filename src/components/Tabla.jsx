@@ -8,15 +8,20 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { useState, useEffect } from "react";
+import { MdModeEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+import axios from "../api/axios";
+import { toast } from "sonner";
 
-export default function Tabla({ rows, columns }) {
+export default function Tabla({ rows, columns, titulo }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(100);
   const [expandedRowId, setExpandedRowId] = React.useState(null);
+  const [rowsData, setData] = useState(rows);
 
   useEffect(() => {
-    console.log(rows);
-  }, []);
+    setData(rows);
+  }, [rows]);
 
   const handleChangePage = (event, newPage) => setPage(newPage);
   const handleChangeRowsPerPage = (event) => {
@@ -30,18 +35,57 @@ export default function Tabla({ rows, columns }) {
     }
   };
 
-  if (rows.length === 0) {
-    return (
-      <div className="d-flex justify-content-center align-items-center h-100">
-        <h3>Cargando...</h3>
-      </div>
-    );
-  }
+  const handleDelete = async (material) => {
+    try {
+      console.log(material);
+      if (material.IdMatValor) {
+        toast("¿Desea eliminar el material del componente?", {
+          action: {
+            label: "Eliminar",
+          onClick: () => {
+              toast.promise(
+                async () => {
+                  const response = await axios.delete(
+                    `http://localhost:4000/api/deleteMaterialFlatFromComponente/${material.IdMatValor}`
+                  );
+                  const dataActualizada = await axios.get(`http://localhost:4000/api/getComponenteById/${material.ComponenteId}`);
+                  console.log(dataActualizada.data);
+                  return dataActualizada.data[0];
+                },
+                {
+                  loading: "Eliminando...",
+                  success: (data) => {
+                    setData(data);
+                    return `Material eliminado correctamente.`;
+                  },
+                  error: (error) => {
+                    console.log(error)
+                    return `Error al eliminar el material.`;},
+                }
+              );
+            },
+          },
+          cancel: {
+            label: "Cancelar",
+          },
+          duration: 20000,
+          position: "top-center",
+        });
+      } else {
+        let resp = await axios.delete(
+          `/deleteMaterialFromComponente/${material.MaterialVariableValorId}`
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
+        <p style={{ textAlign: "center" }}>{titulo}</p>
+        <TableContainer sx={{ maxHeight: 300 }}>
           <Table
             stickyHeader
             aria-label="sticky table"
@@ -58,7 +102,7 @@ export default function Tabla({ rows, columns }) {
                 color: "#fff", // texto blanco
                 textAlign: "left", // alinear a la izquierda
               },
-              boxShadow: "0px 10px 5px rgba(0, 0,0, 0.5)",
+              boxShadow: "0px 10px 5px rgba(0, 0,0, 1)",
             }}>
             <TableHead>
               <TableRow>
@@ -73,7 +117,7 @@ export default function Tabla({ rows, columns }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
+              {rowsData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
                   <React.Fragment key={row.Id}>
@@ -91,6 +135,27 @@ export default function Tabla({ rows, columns }) {
                             {column.format && typeof value === "number"
                               ? column.format(value)
                               : value}
+                            {column.id === "Opciones" && (
+                              <>
+                                <MdModeEdit
+                                  style={{
+                                    fontSize: "20px",
+                                    color: "green",
+                                    cursor: "pointer",
+                                  }}
+                                  title="editar"
+                                />
+                                <MdDelete
+                                  style={{
+                                    fontSize: "20px",
+                                    color: "#AB4152",
+                                    cursor: "pointer",
+                                  }}
+                                  title="eliminar"
+                                  onClick={() => handleDelete(row)}
+                                />
+                              </>
+                            )}
                           </TableCell>
                         );
                       })}

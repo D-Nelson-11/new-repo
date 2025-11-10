@@ -5,7 +5,7 @@ import Componentes from "./Componentes";
 
 function Index() {
   return (
-    <Container className="mt-5 d-flex">
+    <Container className="mt-5 d-flex" fluid={true}> 
         <Componentes/>
     </Container>
   );

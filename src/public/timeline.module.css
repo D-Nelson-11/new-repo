@@ -5,6 +5,7 @@
     /* usamos margen en línea */
     min-width: 600px;
     padding: 0 1rem;
+    flex-wrap: wrap;
 }
 
 .timeline_item {
@@ -72,15 +73,37 @@
     text-overflow: ellipsis;
 }
 
+.subtitleSegmento {
+    position: relative; /* mantener en flujo normal */
+    margin-top: 5px;    /* separación debajo del círculo */
+    text-align: left;   /* alineación a la izquierda */
+    font-size: 0.75rem;
+    color: #666;
+    white-space: nowrap;
+    display: inline-block; /* ajusta ancho al contenido */
+    margin-left: -30px;
+}
+
+
+
+.lineSegmento {
+    flex: 0 0 100px;
+    /* ancho fijo 100px, no cambia */
+    height: 3px;
+    background-color: #ccc;
+    border-radius: 2px;
+    z-index: 1;
+}
+
 
 
 /* acciones ocultas por default */
 .actions {
     position: absolute;
+    display: flex;
     top: 45px;
     left: 50%;
     transform: translateX(-50%);
-    flex-direction: column;
     gap: 4px;
     background: white;
     border: 1px solid #ccc;

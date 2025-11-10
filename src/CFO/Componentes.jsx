@@ -18,25 +18,34 @@ function Componentes() {
 
   const columns = [
     { id: "IdMatValor", label: "IdValor", minWidth: 100, align: "left" },
+    { id: "materialsegmento", label: "MaterialSegmentoId", minWidth: 100, align: "left" },
     { id: "Descripcion", label: "Componente", minWidth: 100, align: "left" },
     { id: "MatDesc", label: "Material", minWidth: 100, align: "left" },
-    {
-      id: "materialsegmento",
-      label: "MaterialSegmentoId",
-      minWidth: 100,
-      align: "left",
-    },
     { id: "valor", label: "Valor", minWidth: 100, align: "left" },
     { id: "costo", label: "Costo", minWidth: 100, align: "left" },
     { id: "CodigoErp", label: "Codigo", minWidth: 100, align: "left" },
     { id: "Moneda", label: "Moneda", minWidth: 100, align: "left" },
     // { id: "IndicadorImpuestoMaterial", label: "Imp", minWidth: 100, align:"left" },
-    { id: "SEGMENTO", label: "Segmento", minWidth: 100, align: "left" },
+    // { id: "SEGMENTO", label: "Segmento", minWidth: 100, align: "left" },
+    { id: "Opciones", label: "Opciones", minWidth: 80, align: "left" },
+
   ];
 
-  // useEffect(() => {
-  //   console.log(ValorCliente);
-  // }, []);
+  const columnsVariables = [
+  { id: "MaterialVariableValorId", label: "MaterialVarValorId", minWidth: 100, align: "left" },
+  { id: "materialsegmentoId", label: "MaterialSegmentoId", minWidth: 100, align: "left" },
+  { id: "componente", label: "Componente", minWidth: 100, align: "left" },
+  { id: "Descripcion", label: "Descripción", minWidth: 100, align: "left" },
+  { id: "valor", label: "Valor", minWidth: 100, align: "left" },
+  { id: "costo", label: "Costo", minWidth: 100, align: "left" },
+  { id: "CodigoErp", label: "Codigo", minWidth: 100, align: "left" },
+  { id: "Currency_value", label: "Moneda", minWidth: 100, align: "left" },
+  { id: "tipo", label: "Tipo", minWidth: 100, align: "left" },
+  // { id: "ID", label: "Segmento", minWidth: 100, align: "left" },
+  // { id: "Marca", label: "Marca", minWidth: 100, align: "left" },
+  { id: "Opciones", label: "Opciones", minWidth: 80, align: "left" },
+]
+
 
   const handleInputChange = (index, value, id) => {
     setParametros((prev) => ({ ...prev, [index]: value, id }));
@@ -123,18 +132,6 @@ function Componentes() {
             }
           );
           }
-          // console.log(data);
-          // const response = await axios.get(
-          //   `http://localhost:4000/api/getComponenteById/${data.Id}`,
-          //   data
-          // );
-          // if (response.data[0].length === 0 && response.data[1].length === 0) {
-          //   toast.error("No tiene materiales.");
-          //   return;
-          // }
-          // setData(response.data);
-          // console.log(response.data);
-    
         })}>
         <Row>
           <Col className="col-2">
@@ -244,172 +241,15 @@ function Componentes() {
               </Button>
             </Col>
           )}
-          {/* <Col className="col-4">
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>ComponenteId</Form.Label>
-              <Form.Control type="text" placeholder="Id" {...register("Id")} />
-            </Form.Group>
-          </Col>
-          <Col className="col-4">
-            <Button
-              style={{ marginTop: "33px" }}
-              variant="primary"
-              type="submit">
-              Buscar
-            </Button>
-          </Col> */}
         </Row>
       </Form>
 
-      <Row className="mt-2">
-        <h5 className="text-center">Flats</h5>
-        {data.length > 0 && <Tabla columns={columns} rows={data[0]} />}
-        {/* <table className="table table-striped table-bordered table-responsive">
-          <thead>
-            <tr>
-              <th>IdValor</th>
-              <th>Material</th>
-              <th>Componente</th>
-              <th>MaterialSegmentoId</th>
-              <th>Valor</th>
-              <th>Costo</th>
-              <th>Codigo</th>
-              <th>Moneda</th>
-              <th>Imp</th>
-              <th>Segmento</th>
-            </tr>
-          </thead>
-          <tbody style={{ fontSize: "10px" }}>
-            {data.length > 0 &&
-              data[0].map((item, i) => (
-                <tr key={i}>
-                  <td>{item.IdMatValor}</td>
-                  <td>{item.MatDesc}</td>
-                  <td>{item.Descripcion}</td>
-                  <td>{item.materialsegmento}</td>
-                  <td>{item.valor}</td>
-                  <td>{item.costo}</td>
-                  <td>{item.CodigoErp}</td>
-                  <td>{item.Moneda}</td>
-                  <td>{item.IndicadorImpuestoMaterial}</td>
-                  <td>{item.SEGMENTO}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table> */}
+      <Row className="mt-2 p-3">
+        {data.length > 0 && <Tabla columns={columns} rows={data[0]} titulo ={"Flat"} />}
       </Row>
 
-      <Row>
-        <h5 className="text-center">Variables</h5>
-        <table className="table table-striped table-bordered table-responsive">
-          <thead>
-            <tr>
-              <th>MaterialVarValorId</th>
-              <th>Descripción</th>
-              <th>Componente</th>
-              <th>MaterialSegmentoId</th>
-              <th>Valor</th>
-              <th>Costo</th>
-              <th>Codigo</th>
-              <th>Moneda</th>
-              <th>Tipo</th>
-              <th>Segmento</th>
-              <th>Marca</th>
-            </tr>
-          </thead>
-          <tbody style={{ fontSize: "10px" }}>
-            {data.length > 0 &&
-              data[1].map((item, i) => (
-                <>
-                  {/* Fila principal */}
-                  <tr
-                    key={i}
-                    onClick={() => toggleRow(i, item.MaterialVariableValorId)}
-                    style={{ cursor: "pointer" }}>
-                    <td>{item.MaterialVariableValorId}</td>
-                    <td>{item.Descripcion}</td>
-                    <td>{item.componente}</td>
-                    <td>{item.materialsegmentoId}</td>
-                    <td>{item.valor}</td>
-                    <td>{item.costo}</td>
-                    <td>{item.CodigoErp}</td>
-                    <td>{item.Currency_value}</td>
-                    <td>{item.tipo}</td>
-                    <td>{item.ID}</td>
-                    <td>{item.Marca}</td>
-                  </tr>
-
-                  {/* Fila desplegable */}
-                  {expandedRow === i && (
-                    <tr>
-                      <td
-                        colSpan="11"
-                        style={{ background: "#f9f9f9", padding: "10px" }}>
-                        <div className="d-flex">
-                          {escalas.map((escalas, index) => {
-                            return (
-                              <div
-                                key={index}
-                                className="me-2 border border-2 rounded-2 p-2">
-                                <p>
-                                  {" "}
-                                  <strong>Orden:</strong> {escalas.Orden}
-                                </p>
-                                {/* <p>si parámetro {escalas.Operador} {escalas.Cota} y tipoCalculo = {escalas.TipoDeCalculo} entonces valor = {escalas.Valor} si tipoCalculo = </p> */}
-                                <p style={{ marginTop: "-12px" }}>
-                                  {" "}
-                                  <strong>Operador:</strong> {escalas.Operador}{" "}
-                                </p>
-                                <p style={{ marginTop: "-12px" }}>
-                                  <strong>Cota:</strong> {escalas.Cota}
-                                </p>
-                                <p style={{ marginTop: "-12px" }}>
-                                  {" "}
-                                  <strong>Tipo Cálculo:</strong>{" "}
-                                  {escalas.TipoDeCalculo == 1 ? "=" : "*"}
-                                </p>
-                                <p style={{ marginTop: "-12px" }}>
-                                  <strong>Valor:</strong> {escalas.Valor}
-                                </p>
-                                <input
-                                  type="text"
-                                  style={{
-                                    width: "50px",
-                                    borderRadius: "3px",
-                                    border: "none",
-                                  }}
-                                  placeholder="parametro"
-                                  value={parametros[index] || ""}
-                                  onChange={(e) =>
-                                    handleInputChange(
-                                      index,
-                                      e.target.value,
-                                      escalas.MaterialVariableValorId
-                                    )
-                                  }
-                                />
-
-                                <button
-                                  style={{
-                                    border: "none",
-                                    backgroundColor: "#3b8d51",
-                                    color: "#fff",
-                                    borderRadius: "5px",
-                                  }}
-                                  onClick={() => handleProbarClick(index)}>
-                                  probar
-                                </button>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </td>
-                    </tr>
-                  )}
-                </>
-              ))}
-          </tbody>
-        </table>
+      <Row className="mt-2 p-3">
+        {data.length > 0 && <Tabla columns={columnsVariables} rows={data[1]} titulo={"Variable"} />}
       </Row>
     </div>
   );
