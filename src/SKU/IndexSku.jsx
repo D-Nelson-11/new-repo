@@ -10,7 +10,7 @@ function IndexSku() {
     <Container className="mt-5 d-flex">
       <Cardss subModulo={"Sku-Inbound"} Contenido={<Sku/>} Nombre="Crear" />
       <Cardss subModulo={"Sku-Embalajes"} Contenido={<SkuEmbalajes/>} Nombre="Crear" />
-      <Cardss subModulo={"Sku-Cargill"} Contenido={<SkusCargill/>} Nombre="Crear" />
+      <Cardss subModulo={"Sku´s-Masivo"} Contenido={<SkusCargill/>} Nombre="Crear" />
     </Container>
   );
 }
