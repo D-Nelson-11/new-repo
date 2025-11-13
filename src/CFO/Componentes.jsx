@@ -5,6 +5,7 @@ import axios from "../api/axios";
 import { toast } from "sonner";
 import ClientesSelect from "../components/ClientesSelect";
 import Tabla from "../components/Tabla";
+import FormEdit from "./FormEdit";
 
 function Componentes() {
   const { register, handleSubmit, getValues } = useForm();
@@ -245,11 +246,12 @@ function Componentes() {
       </Form>
 
       <Row className="mt-2 p-3">
-        {data.length > 0 && <Tabla columns={columns} rows={data[0]} titulo ={"Flat"} />}
+        {/* //el set es para actualizar la tabla despues de editar */}
+        {data.length > 0 && <Tabla columns={columns} rows={data[0]} titulo ={"Flat"} ContenidoModalEditar={(data, set) => <FormEdit datos={data} setDatos={set} />} />} 
       </Row>
 
       <Row className="mt-2 p-3">
-        {data.length > 0 && <Tabla columns={columnsVariables} rows={data[1]} titulo={"Variable"} />}
+        {data.length > 0 && <Tabla columns={columnsVariables} rows={data[1]} titulo={"Variable"} ContenidoModalEditar={(data, set) => <FormEdit datos={data} setDatos={set} />} />}
       </Row>
     </div>
   );

@@ -12,8 +12,9 @@ import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import axios from "../api/axios";
 import { toast } from "sonner";
+import ModalC from "../components/ModalC";
 
-export default function Tabla({ rows, columns, titulo }) {
+export default function Tabla({ rows, columns, titulo, ContenidoModalEditar }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(100);
   const [expandedRowId, setExpandedRowId] = React.useState(null);
@@ -42,13 +43,21 @@ export default function Tabla({ rows, columns, titulo }) {
         toast("¿Desea eliminar el material del componente?", {
           action: {
             label: "Eliminar",
-          onClick: () => {
+            onClick: () => {
               toast.promise(
                 async () => {
-                  const response = await axios.delete(
-                    `http://localhost:4000/api/deleteMaterialFlatFromComponente/${material.IdMatValor}`
+                  if (material.IdMatValor) {
+                    const response = await axios.delete(
+                      `http://localhost:4000/api/deleteMaterialFlatFromComponente/${material.IdMatValor}`
+                    );
+                  } else {
+                    let response = await axios.delete(
+                      `/deleteMaterialFromComponente/${material.MaterialVariableValorId}`
+                    );
+                  }
+                  const dataActualizada = await axios.get(
+                    `http://localhost:4000/api/deleteMaterialVariableFromComponente/${material.ComponenteId}`
                   );
-                  const dataActualizada = await axios.get(`http://localhost:4000/api/getComponenteById/${material.ComponenteId}`);
                   console.log(dataActualizada.data);
                   return dataActualizada.data[0];
                 },
@@ -59,8 +68,9 @@ export default function Tabla({ rows, columns, titulo }) {
                     return `Material eliminado correctamente.`;
                   },
                   error: (error) => {
-                    console.log(error)
-                    return `Error al eliminar el material.`;},
+                    console.log(error);
+                    return `Error al eliminar el material.`;
+                  },
                 }
               );
             },
@@ -72,9 +82,6 @@ export default function Tabla({ rows, columns, titulo }) {
           position: "top-center",
         });
       } else {
-        let resp = await axios.delete(
-          `/deleteMaterialFromComponente/${material.MaterialVariableValorId}`
-        );
       }
     } catch (error) {
       console.log(error);
@@ -120,7 +127,7 @@ export default function Tabla({ rows, columns, titulo }) {
               {rowsData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
-                  <React.Fragment key={row.Id}>
+                  <React.Fragment key={`${row.Id} ${Math.random()}`}>
                     <TableRow
                       hover
                       tabIndex={-1}
@@ -137,14 +144,19 @@ export default function Tabla({ rows, columns, titulo }) {
                               : value}
                             {column.id === "Opciones" && (
                               <>
-                                <MdModeEdit
+                                {/* <MdModeEdit
                                   style={{
                                     fontSize: "20px",
                                     color: "green",
                                     cursor: "pointer",
                                   }}
                                   title="editar"
+                                /> */}
+                                <ModalC
+                                  ContenidoModal={ContenidoModalEditar(row, setData)}
+                                  Nombre="Editar"
                                 />
+
                                 <MdDelete
                                   style={{
                                     fontSize: "20px",

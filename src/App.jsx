@@ -8,7 +8,7 @@ import { OtherUserNav } from "./components/OtherUserNav.jsx";
 const IndexAR = lazy(() => import("./AnalisisDeRed/Index"));
 const IndexP = lazy(() => import("./Persona/Index.jsx"));
 const Intransit = lazy(() => import("./Persona/Intransit/Intransit.jsx"));
-const Matriz = lazy(() => import("./Matriz/Matriz.jsx"));
+const Cronometros = lazy(() => import("./AnalisisDeRed/Cronometro/Cronometro.jsx"));
 const Sku = lazy(() => import("./SKU/Sku.jsx"));
 const IndexSku = lazy(() => import("./SKU/IndexSku.jsx"));
 const CrearRutas = lazy(() =>import("./AnalisisDeRed/CrearRutas/CrearRutas.jsx"));
@@ -28,7 +28,7 @@ function App() {
           <Route path="/AnalisisDeRed" element={<IndexAR />} />
           <Route path="/Personas" element={<IndexP />} />
           <Route path="/Intransit" element={<Intransit />} />
-          <Route path="/Matriz" element={<Matriz />} />
+          <Route path="/Cronometros" element={<Cronometros />} />
           <Route path="/Sku" element={<IndexSku />} />
           <Route path="/Rutas" element={<Tab />} />
           <Route path="/Cfo" element={<CFO />} />

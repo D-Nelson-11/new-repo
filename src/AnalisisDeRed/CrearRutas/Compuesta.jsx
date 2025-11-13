@@ -285,7 +285,19 @@ export function SitiosRutaMadre({ cantidad, IdCliente, cantidadHija }) {
               style={{ display: "inline-block", marginLeft: "2px" }}
               {...register("docc")}
             />
-            <CreatedBy register={register} />
+            <CreatedBy
+              register={register}
+              estilos={{
+                display: "inline-block",
+                width: "120px",
+                marginLeft: "4px",
+                borderRadius: "5px",
+                border: "none",
+                color: "black",
+                fontSize: "12px",
+                padding: "1px",
+              }}
+            />
 
             <select
               style={{

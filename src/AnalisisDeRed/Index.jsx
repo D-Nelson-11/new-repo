@@ -14,6 +14,7 @@ function Index() {
       <Cardss subModulo={"Crear HR"} Contenido={<Hr/>} Nombre="Crear" />
       <Cardss subModulo={"Crear SO"} Contenido={<So/>} Nombre="Crear" />
       <Cardss subModulo={"Crear SA"} Contenido={<Sa/>} Nombre="Crear" />
+      <Cardss subModulo={"Cronometros"} Contenido={<Cronometro/>} Nombre="Crear." />
       {/* <Cardss subModulo={"Cronometro"} Contenido={<Cronometro/>} Nombre="Crear" /> */}
 
 

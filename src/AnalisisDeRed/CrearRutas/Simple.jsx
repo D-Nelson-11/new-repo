@@ -128,8 +128,7 @@ export function RutaSimple({ cantidad, IdCliente }) {
           size="xl"
           centered
           backdrop="static">
-          <Modal.Header closeButton>
-          </Modal.Header>
+          <Modal.Header closeButton></Modal.Header>
           <Form
             onSubmit={form2.handleSubmit(async (data) => {
               toast("¿Está seguro de crear la ruta?", {
@@ -268,7 +267,19 @@ export function RutaSimple({ cantidad, IdCliente }) {
               <option value="IB/LSP">IB/LSP</option>
               <option value="IB/PT">IB/PT</option>
             </select>
-            <CreatedBy register={register} />
+            <CreatedBy
+              register={register}
+              estilos={{
+                display: "inline-block",
+                width: "120px",
+                marginLeft: "4px",
+                borderRadius: "5px",
+                border: "none",
+                color: "black",
+                fontSize: "12px",
+                padding: "1px",
+              }}
+            />
             <Button
               style={{
                 borderRadius: "5px",
